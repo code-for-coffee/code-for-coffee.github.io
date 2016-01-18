@@ -85,6 +85,13 @@
   src: url("../fonts/josefinsans-thinitalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/josefinsans-thinitalic-webfont.woff2") format("woff2"), url("../fonts/josefinsans-thinitalic-webfont.woff") format("woff"), url("../fonts/josefinsans-thinitalic-webfont.ttf") format("truetype"), url("../fonts/josefinsans-thinitalic-webfont.svg#josefin_sansthin_italic") format("svg");
   font-weight: normal;
   font-style: normal; }
+input {
+  border-radius: .85em;
+  height: 2em;
+  outline: 2px solid rust; }
+  input :active {
+    outline: 2px solid #8f1f1f; }
+
 .wrapper {
   width: 90%;
   margin: 15px auto; }
