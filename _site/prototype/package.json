@@ -1,6 +1,6 @@
 {
-  "name": "codeforcoffee.org",
-  "version": "5.0.0",
+  "name": "express-materialize-starter",
+  "version": "0.0.0",
   "private": true,
   "engines": {
     "node": "6.0.0",
