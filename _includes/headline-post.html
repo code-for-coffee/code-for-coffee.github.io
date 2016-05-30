@@ -1,0 +1,9 @@
+<h2 class="header center red-text text-darken-4">{{ headline_post.title }}</h2>
+<em class="center">Posted on {{ headline_post.date | date: "%b %-d, %Y" }}{% if headline_post.author %} • {{ headline_post.author }}{% endif %}{% if headline_post.meta %} • {{ headline_post.meta }}{% endif %}</em>
+<h6 class="header center red-text text-darken-3">{{ headline_post.description }}</h6>
+
+<article class="post-content">
+  <div class="row">
+    {{ headline_content }}
+  </div>
+</article>
