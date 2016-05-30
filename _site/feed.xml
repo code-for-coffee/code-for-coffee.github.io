@@ -6,52 +6,628 @@
 </description>
     <link>https://code-for-coffee.github.io/</link>
     <atom:link href="https://code-for-coffee.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 30 May 2016 00:00:34 -0500</pubDate>
-    <lastBuildDate>Mon, 30 May 2016 00:00:34 -0500</lastBuildDate>
+    <pubDate>Mon, 30 May 2016 00:19:04 -0500</pubDate>
+    <lastBuildDate>Mon, 30 May 2016 00:19:04 -0500</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
-        <title>Your portfolio</title>
-        <description>&lt;h2 id=&quot;welcome-to-your-portfolio&quot;&gt;Welcome to your portfolio!&lt;/h2&gt;
+        <title>Review Visual Studio 2013 Cookbook</title>
+        <description>&lt;p&gt;Visual Studio has made a significant amount of changes in 2010 and 2012; 2013 is no different. Learning all of the new features from version to version isn’t always straightforward. It can also be a daunting task to learn the IDE in and out for new users. &lt;a href=&quot;http://www.packtpub.com/visual-studio-2013-cookbook/book&quot;&gt;Visual Studio 2013 Cookbook&lt;/a&gt; by Jeff Martin and Richard Banks is a great bridge to new users and experienced users alike to the features of Visual Studio’s latest release, 2013. Don’t be fooled by the name - the book also covers ASP.NET MVC5, Windows Store Apps, Async code, and .NET Platform 4.5.1.&lt;/p&gt;
 
-&lt;p&gt;Add some &lt;em&gt;content&lt;/em&gt; and &lt;strong&gt;awesomeness&lt;/strong&gt; using &lt;code class=&quot;highlighter-rouge&quot;&gt;markdown&lt;/code&gt;!&lt;/p&gt;
+&lt;p&gt;I primarily focus on the web development aspect of ASP.NET (MVC, Web API) and this book’s coverage of the platform’s latest technology is great. It covers MVC5 fairly well - from getting started to the base template changes with Bootstrap. It also covers Microsoft’s support for viewing your page in multiple browsers (hooray). There is also a solid introduction to HTML5/CSS3 as well as how to use Javascript Intellisense (yay). There’s also a solid overview of the System.Web.Optimization framework (Bundling and Minification). The introduction to TypeScript is great (mainly because TypeScript is awesome - writing ES6 strictly typed code that compiles into Javascript).&lt;/p&gt;
+
+&lt;p&gt;Two chapters that really stood out were the ones that covered how to use the Visual Studio debugger (this is great for new developers) and Team Foundation Server. Knowing how to use the debugging tools in Visual Studio gives you complete insight into bug-fixing and is in my opinion one of the most important tools a developer can have. In regards to the TFS coverage, I’ve used Subversion and Git in the past but recently began to use TFS. The tutorials had me up to speed in no time using TFS (even though I still prefer Git as my choice of source control).&lt;/p&gt;
+
+&lt;p&gt;The Windows Store tutorials will get you started on Microsoft’s modern UI in no time; if you’re interested in designing tablet/Windows Phone apps, you’ll be pleasantly surprised. The chapters covering the new platform changes with ASP.NET are solid, also (such as the C# Async code examples). For those of you who develop Python on Windows (or are curious), there is a great introduction to IronPython.&lt;/p&gt;
+
+&lt;p&gt;So, here is my verdict: this is the Visual Studio book that I wish I had available when I started programming using Visual Studio. The topics covered are better written than the Microsoft examples, the screenshots and figures are easy to read, and the amount of topics covered introduce you to new concepts and features in the Microsoft ecosystem. It also serves as a nice upgrade guide to users who may be using Web Forms, Windows Forms, and older versions of ASP.NET MVC. If you have recently upgraded from Visual Studio 2010 or older (and even 2012), this book will help you get accustomed to the new tools available to you.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 05 Jun 2015 05:34:07 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/portfolio/update/2015/06/05/portfolio.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/portfolio/update/2015/06/05/portfolio.html</guid>
+        <pubDate>Mon, 28 Jul 2014 00:00:00 -0500</pubDate>
+        <link>https://code-for-coffee.github.io/2014/07/28/Review-Visual-Studio-2013-Cookbook.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/07/28/Review-Visual-Studio-2013-Cookbook.html</guid>
         
-        
-        <category>portfolio</category>
-        
-        <category>update</category>
         
       </item>
     
       <item>
-        <title>Welcome to Jekyll!</title>
-        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+        <title>Binding parameters to Web API controller with Backbone.js</title>
+        <description>&lt;p&gt;This is a really quick write-up of an issue that isn’t well documented. One of our work related projects uses Backbone.js on the front end to handle models and collections and is powered by ASP.NET Web API 2.0. I ran into an issue regarding using the built in model functions &lt;strong&gt;.save()&lt;/strong&gt; and &lt;strong&gt;.fetch()&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
-
-&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://github.com/jekyll/jekyll-help&quot;&gt;Jekyll’s dedicated Help repository&lt;/a&gt;.&lt;/p&gt;
-
+&lt;p&gt;I found that to pass parameters in (either from a model or somewhere else) when making a &lt;strong&gt;GET&lt;/strong&gt; request (such as the &lt;strong&gt;model.fetch()&lt;/strong&gt; method) to the controller, you needed to declare the model/parameter with the &lt;strong&gt;[FromUri]&lt;/strong&gt; attribute. Example:&lt;/p&gt;
+&lt;pre&gt;public testSampleModel Get([FromUri]testSampleModel  model) { ... }&lt;/pre&gt;
+&lt;p&gt;How to send in a parameter on a &lt;strong&gt;.fetch()&lt;/strong&gt;? Good question - here’s the answer (using jQuery):&lt;/p&gt;
+&lt;pre&gt;myModel.fetch({ data: $.param({ paramName: &quot;foobar&quot;}) });&lt;/pre&gt;
+&lt;p&gt;To pass parameters/model when making a POST request (such as model.save()), I found that you must declare the model/parameter as either [FromBody] or without an attribute at all. Example:&lt;/p&gt;
+&lt;pre&gt;public testSampleModel Get([FromBody]testSampleModel  model) { ... }&lt;/pre&gt;
+&lt;p&gt;That’s it - just a quick, informative post.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 01 Jun 2015 05:34:07 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/jekyll/update/2015/06/01/welcome-to-jekyll.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/jekyll/update/2015/06/01/welcome-to-jekyll.html</guid>
+        <pubDate>Tue, 24 Jun 2014 00:00:00 -0500</pubDate>
+        <link>https://code-for-coffee.github.io/2014/06/24/Binding-parameters-to-Web-API-controllers-with-Backbone.js.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/06/24/Binding-parameters-to-Web-API-controllers-with-Backbone.js.html</guid>
         
         
-        <category>jekyll</category>
+      </item>
+    
+      <item>
+        <title>Setting up AngularJS, Jasmine, and Karma in Visual Studio</title>
+        <description>&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I’ve recently been tasked to research &lt;strong&gt;AngularJS&lt;/strong&gt; to use on top of Visual Studio. After reading the official tutorial, unofficial tutorials, and Manning’s early access &lt;strong&gt;AngularJS in Action &lt;/strong&gt;and &lt;strong&gt;Getting MEAN &lt;/strong&gt;(which stands for mongoDB/Express/AngularJS/Node.js), I found that there are too few guides for Windows users. If you’re like me, you probably are running into issues installing and running &lt;strong&gt;karma&lt;/strong&gt;, would like to run Javascript tests in the convenience of the Test Explorer (or Resharper), and want to let NuGet handle all of your package updating (bower is great, but not for .NET environments). Well, this tutorial is here to help! We’ll get you up and running with AngularJS, Jasmine, and Karma.&lt;/p&gt;
+
+&lt;p&gt;All of this has been setup/tested on:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;Windows 8.1 x64 Pro&lt;/li&gt;
+	&lt;li&gt;Visual Studio 2013 Professional&lt;/li&gt;
+	&lt;li&gt;Google Chrome&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Getting Started&lt;/h2&gt;
+&lt;p&gt;Go ahead and install the following software:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; (Windows installer) - &lt;em&gt;install everything!&lt;/em&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://visualstudiogallery.msdn.microsoft.com/f8741f04-bae4-4900-81c7-7c9bfb9ed1fe&quot;&gt;Chutzpah Test Adapter for Visual Studio&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://visualstudiogallery.msdn.microsoft.com/71a4e9bd-f660-448f-bd92-f5a65d39b7f0&quot;&gt;Chutzpah Test Runner Context Menu for Visual Studio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Once all of that is setup it is time to set up our project environment. Go ahead and create a new Visual Studio project - you can choose any project you wish; this tutorial will use ASP.NET MVC 5 (by selecting ASP.NET Web Application). &lt;strong&gt;Select MVC&lt;/strong&gt;  and &lt;strong&gt;Add unit tests&lt;/strong&gt;. We’re going to use a traditional view to power our SPA (though, you could easily create a Web API project instead - just make sure that you set your routes up to point to an index.html page instead of an ASPX/Razor view).&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2014/04/angular.png&quot;&gt;&lt;img class=&quot;alignnone wp-image-162 size-medium&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2014/04/angular-300x211.png&quot; alt=&quot;Visual Studio project screen&quot; width=&quot;300&quot; height=&quot;211&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, we need to grab a few Javascript libraries from (hint: if you prefer, you can grab these from NuGet): &lt;a href=&quot;https://angularjs.org/&quot;&gt;AngularJS&lt;/a&gt; (I recommend grabbing the entire ZIP that includes all libraries) and &lt;a href=&quot;https://github.com/pivotal/jasmine&quot;&gt;Jasmine&lt;/a&gt; (you can use another testing framework if you prefer but the official AngularJS examples/tutorials use Jasmine).&lt;/p&gt;
+
+&lt;p&gt;Okay - you have all of the tools either installed (or about to be).&lt;/p&gt;
+&lt;h2&gt;Setting up the project folder&lt;/h2&gt;
+&lt;p&gt;You should have two projects: Your ASP.NET MVC/Web API project and your Tests project. Inside of the ASP.NET project, we’re going to add the following folders: &lt;strong&gt;ng-views&lt;/strong&gt; and &lt;strong&gt;ng-scripts&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The ng-views folder will contain all of your Angular-specific views. The ng-scripts folder will contain your controllers, models, directives, and so forth. In the &lt;strong&gt;Tests&lt;/strong&gt; project, create an &lt;strong&gt;ng-tests&lt;/strong&gt; project. &lt;em&gt;If you installed Angular and Jasmine via NuGet you should be able to skip to the next paragraph. &lt;/em&gt;Now, extract your AngularJS archive and copy &lt;strong&gt;all &lt;/strong&gt;of the scripts to the ~/&lt;strong&gt;Scripts/Angular/&lt;/strong&gt; folder (you’ll need to create the subfolder). Unarchive Jasmine and copy the contents of the &lt;strong&gt;lib&lt;/strong&gt; folder to &lt;strong&gt;~/Scripts/Jasmine/&lt;/strong&gt;. You’ll need to update your &lt;strong&gt;/App_Start/BundleConfig.cs&lt;/strong&gt; file - do that now by adding the following lines to the RegisterBundles method:&lt;/p&gt;
+&lt;pre class=&quot;prettyprint prettyprinted&quot; style=&quot;color: #222222;&quot;&gt;&lt;span class=&quot;pln&quot; style=&quot;color: #000000;&quot;&gt;bundles&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: #000000;&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: #2b91af;&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: #000000;&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot; style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: #2b91af;&quot;&gt;ScriptBundle&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: #000000;&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: #a31515;&quot;&gt;&quot;~/Scripts/Angular&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: #000000;&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: #2b91af;&quot;&gt;IncludeDirectory&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: #000000;&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: #a31515;&quot;&gt;&quot;~/Scripts/Angular&quot;,&quot;*.js&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot; style=&quot;color: #000000;&quot;&gt;));
+&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class=&quot;prettyprint prettyprinted&quot; style=&quot;color: #222222;&quot;&gt;&lt;span class=&quot;pln&quot;&gt;bundles&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: #2b91af;&quot;&gt;Add&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kwd&quot; style=&quot;color: #0000ff;&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: #2b91af;&quot;&gt;ScriptBundle&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: #a31515;&quot;&gt;&quot;~/Scripts/Jasmine&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;typ&quot; style=&quot;color: #2b91af;&quot;&gt;IncludeDirectory&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;str&quot; style=&quot;color: #a31515;&quot;&gt;&quot;~/Scripts/Jasmine&quot;,&quot;*.js&quot;&lt;/span&gt;&lt;span class=&quot;pun&quot;&gt;));&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Go ahead and right click on the ng-tests folder - you’ll notice that you can run tests using Chutzpah from the context menu - one will load tests into the Test Explorer and the other option will load a static browser instance version of Jasmine.&lt;/p&gt;
+
+&lt;p&gt;Finally, if you love IntelliSense (who doesn’t), you’ll want to create a &lt;strong&gt;_references.js&lt;/strong&gt; script in both your ASP.NET project and your Test project. Create a blank Javascript file in both projects, select &lt;strong&gt;all&lt;/strong&gt; of your Javascript files, and drag/drop them into both blank files (or you can also build out the file yourself - up to you). Your _references.js file should look like:&lt;/p&gt;
+&lt;pre&gt;/// &amp;lt;reference path=&quot;modernizr-2.6.2.js&quot; /&amp;gt;
+/// &amp;lt;reference path=&quot;jquery-1.10.2.js&quot; /&amp;gt;
+/// &amp;lt;reference path=&quot;bootstrap.js&quot; /&amp;gt;
+/// &amp;lt;reference path=&quot;respond.js&quot; /&amp;gt;
+/// &amp;lt;reference path=&quot;jquery.validate.js&quot; /&amp;gt;
+/// &amp;lt;reference path=&quot;jquery.validate.unobtrusive.js&quot; /&amp;gt;
+/// &amp;lt;reference path=&quot;../Scripts/angular.js&quot; /&amp;gt;
+/// etc..&lt;/pre&gt;
+&lt;p&gt;Now, with any new Javascript file you create, do the same thing with just the &lt;strong&gt;_references.js&lt;/strong&gt; file to first line of every project. Go ahead and create some baseline files for you &lt;strong&gt;ng-scripts&lt;/strong&gt; and &lt;strong&gt;ng-tests&lt;/strong&gt;; something like the following will do (this will assist in the next step) - if the code you see is foreign to you don’t fret, any tutorial (links to some at the end of this post) will explain them later:&lt;/p&gt;
+
+&lt;p&gt;In &lt;strong&gt;/TestProject/ng-tests/MainCtrlSpec.js&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre id=&quot;LC1&quot; class=&quot;line&quot;&gt;describe(&#39;Controller: MainCtrl&#39;, function() {
+    beforeEach(module(&#39;MyApp&#39;));
+    var MainCtrl, scope;
+    beforeEach(inject(function($controller) {
+        scope = {};
+        MainCtrl = $controller(&#39;MainCtrl&#39;, {
+            $scope: scope
+        });
+    }));
+    it(&#39;should have scope defined&#39;, function () {
+        expect(scope).toBeDefined();
+    });
+});&lt;/pre&gt;
+&lt;p class=&quot;line&quot;&gt;In &lt;strong&gt;/ASPNETProject/ng-scripts/MainCtrl.js&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre class=&quot;line&quot;&gt;var myModule = angular.module(&#39;MyApp&#39;, []);
+myModule.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;,
+ function ($scope) {
+ // I&#39;m a lonely controller :(
+ }
+]);&lt;/pre&gt;
+&lt;p class=&quot;line&quot;&gt;Okay, so now we have everything in Visual Studio up ready for AngularJS. Now, on to the fun part.&lt;/p&gt;
+
+&lt;h2&gt;Installing Karma on Windows&lt;/h2&gt;
+&lt;p&gt;Now, we need to install Karma (which is used for end-to-end/integration testing). To do this, open up the DOS prompt (as an adminstrator). Browse to the base of your project directory (where both of your projects are located). Now, run the following commands:&lt;/p&gt;
+&lt;pre&gt;npm install -g karma
+npm install -g karma-cli&lt;/pre&gt;
+&lt;p&gt;This will install Karma to your global PATH (so you can access it anywhere on the OS - such as in other projects and so forth). Now, you need to configure Karma for your project. To do so, just type in:&lt;/p&gt;
+&lt;pre&gt;karma init&lt;/pre&gt;
+&lt;p&gt;You’ll now be prompted to select your testing framework (Jasmine is the default), if you’d like to install Require.js (no is the default), which browser to run the tests in (Chrome is the default), the location of your scripts (see the example below - you’ll want to point them to the &lt;strong&gt;/ng-scripts/&lt;/strong&gt; and &lt;strong&gt;/ng-tests/&lt;/strong&gt; folder while selecting all Javascript files (&lt;strong&gt;**.js&lt;/strong&gt;), the location/file types to exclude (empty by default), and if you’d like Karma to actively watch for changes to your files (yes!) so it can re-run them as needed. Your command line output should look like:&lt;/p&gt;
+&lt;pre&gt;Which testing framework do you want to use ?
+Press tab to list possible options. Enter to move to the next question.
+&amp;gt; &lt;strong&gt;jasmine&lt;/strong&gt;
+Do you want to use Require.js ?
+This will add Require.js plugin.
+Press tab to list possible options. Enter to move to the next question.
+&amp;gt; &lt;strong&gt;no&lt;/strong&gt;
+Do you want to capture any browsers automatically ?
+Press tab to list possible options. Enter empty string to move to the next question.
+&amp;gt; &lt;strong&gt;Chrome&lt;/strong&gt;
+&amp;gt;
+What is the location of your source and test files ?
+You can use glob patterns, eg. &quot;js/*.js&quot; or &quot;test/**/*Spec.js&quot;.
+Enter empty string to move to the next question.
+&amp;gt; &lt;strong&gt;AngularJumpstart/ng-scripts/**.js&lt;/strong&gt;
+&amp;gt; &lt;strong&gt;AngularJumpstart.Tests/ng-tests/**.js&lt;/strong&gt;
+Should any of the files included by the previous patterns be excluded ?
+You can use glob patterns, eg. &quot;**/*.swp&quot;.
+Enter empty string to move to the next question.
+&amp;gt;
+Do you want Karma to watch all the files and run the tests on change ?
+Press tab to list possible options.
+&amp;gt; &lt;strong&gt;yes&lt;/strong&gt;
+Config file generated at &quot;../path/to/your/project/karma.conf.js&quot;.&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;: if you don’t have valid Javascript files in the ng-scripts and ng-tests folders, you’ll get an error when trying to create the config file. Make sure you have at least an empty js file in each folder.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, before moving on we need to make sure that Angular is references in the &lt;strong&gt;karma.conf.js&lt;/strong&gt; file. Open it up and make sure that &lt;strong&gt;angular.js&lt;/strong&gt; and &lt;strong&gt;angular-mock.js&lt;/strong&gt; are included (you may need to add other files as time goes on, too). Look for the &lt;strong&gt;files&lt;/strong&gt; array:&lt;/p&gt;
+&lt;pre id=&quot;LC16&quot; class=&quot;line&quot;&gt;// list of files / patterns to load in the browser
+    files: [
+      &#39;AngularJumpstart/Scripts/Angular/angular.js&#39;,
+      &#39;AngularJumpstart/Scripts/Angular/angular-mocks.js&#39;,
+      &#39;AngularJumpstart/ng-scripts/**.js&#39;,
+      &#39;AngularJumpstart.Tests/ng-tests/**.js&#39;
+    ],&lt;/pre&gt;
+&lt;p&gt;Once you’ve saved that, all you need to do is run karma:&lt;/p&gt;
+&lt;pre&gt;karma start&lt;/pre&gt;
+&lt;p&gt;You’ll see the application initialize and an instance of your browser run. Every time you change any of the files that Karma is monitoring the tests will re-run (and show if they’re successful or if they fail). If you’d like to familiarize yourself with how Karma configurations work, please view the &lt;a href=&quot;http://karma-runner.github.io/0.8/intro/configuration.html&quot;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Wrap-Up&lt;/h2&gt;
+&lt;p&gt;Well, now you have everything set up to start your AngularJS project. If you’re new to the AngularJS world, here are a few places to get started:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;a href=&quot;https://docs.angularjs.org/tutorial&quot;&gt;Official AngularJS Tutorial&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.syncfusion.com/resources/techportal/ebooks/angularjs&quot;&gt;AngularJS Succinctly&lt;/a&gt; (a great pocket-reference sort of guide)&lt;/li&gt;
+	&lt;li&gt;&lt;a href=&quot;http://www.manning.com/bford/&quot;&gt;AngularJS in Action&lt;/a&gt; (pre-release book)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you see any errors feel free to comment and I’ll take care of them. Thanks for reading!&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+&lt;pre&gt;&lt;/pre&gt;
+&lt;div id=&quot;LC1&quot; class=&quot;line&quot;&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 24 Apr 2014 00:00:00 -0500</pubDate>
+        <link>https://code-for-coffee.github.io/2014/04/24/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/04/24/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio.html</guid>
         
-        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>ASP.NET MVC: Intro to MVC Binding JSON objects to Models</title>
+        <description>&lt;p&gt;This post is designed to assist in jump-starting your MVC (model-view-control) project binding JSON to models (using Ajax posts). I feel that this is a vital skill to any journeyman ASP.NET MVC developer. The sample project (available on &lt;a href=&quot;https://github.com/code-for-coffee/mvcBindingJson&quot;&gt;Github&lt;/a&gt;) has been tested in Visual Studio 2012 and Xamarin on OS X.&lt;/p&gt;
+
+&lt;p&gt;If you’re new to MVC, here is a brief explanation: this design pattern is designed to keep your code into specific parts dedicated for specific usage. Models are designed to represent your data objects. The controller works with/manipulates models (backend, server side code). It then generates a View (rendered HTML) that is presented to the user on their web browser. The Model and Controller are written in C# for this project. The View is rendered in pure HTML with Javascript.&lt;/p&gt;
+
+&lt;p&gt;This tutorial will walk you through creating a project from start to finish. You’ll also be introduced to a cast of squirrels (such as &lt;a href=&quot;https://twitter.com/acommonsquirrel&quot;&gt;@acommonsquirrel&lt;/a&gt; and &lt;a href=&quot;http://illwillpress.com/vault.html&quot;&gt;Foamy the Squirrel&lt;/a&gt;). To get started, create a new MVC project and call it “&lt;strong&gt;bindingJSON&lt;/strong&gt;” (using the standard, no authentication). Now, inspect the object you need to model. Using an object oriented approach, how would you create your item? We’ll use a common squirrel as our object; so, create a new Model in your ASP.NET project called “&lt;strong&gt;Squirrel.cs&lt;/strong&gt;”. A squirrel has a few properties, such as:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;&lt;strong&gt;name&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;age&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;acorns&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;gender&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;hobby&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;So, inside of your model you’ll have the following class:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;using System;&lt;/pre&gt;
+&lt;pre&gt;namespace bindingJSON
+{
+ public class Squirrel
+ {
+ public string Name { get; set; }
+ public int? Age { get; set; } // squirrels aren&#39;t required tell us their age
+ public int Acorns { get; set; }
+ public char Gender { get; set; }
+ public string Hobby { get; set; }
+ }
+}&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Next, we’ll build out a simple controller. This controller will contain an ActionResult and a JsonResult method. This will be our “&lt;strong&gt;HomeController.cs&lt;/strong&gt;”. The thing to note is the use of the JsonResult. A JsonResult allows you receive an &lt;strong&gt;XmlHttpRequest&lt;/strong&gt; (in Javascript) that will send JSON objects. You can send any object you want; we’re going to expect a &lt;strong&gt;Squirrel&lt;/strong&gt; - incomingSquirrel. It’ll call a private function (just an example of what you can do with the object).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;&lt;/pre&gt;
+&lt;pre&gt;namespace bindingJSON.Controllers
+{
+ public class HomeController : Controller
+ {
+ public ActionResult Index()
+ {
+ // Initial View
+ return View();
+ }&lt;/pre&gt;
+&lt;pre&gt;[HttpPost]
+ public JsonResult PostSquirrel(Squirrel incomingSquirrel)
+ {
+ string status = null;
+ try { 
+ saveSquirrel(incomingSquirrel);
+ status = &quot;If you don&#39;t see this, something went wrong.&quot;;
+ } catch (Exception e) {
+ status = e;
+ }
+ return Json(status);
+ }&lt;/pre&gt;
+&lt;pre&gt;#region privateHelpers
+ private Boolean saveSquirrel(Squirrel incomingSquirrel) 
+ {
+ return false;
+ }
+ #endregion
+ }
+}&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Okay, so we have the model and controller built out. Now, we need to put together our view. We’ll call it “&lt;strong&gt;Home/Index.cshtml&lt;/strong&gt;”. Inside, we’re going to have just a few small parts. For sake of simplicity, I won’t be using partial views to keep the project small. The view will put together a page that sends form data to the server (using Javascript and the JSONResult in your controller). In the view, we’ll have a simple &lt;strong&gt;$.ajax&lt;/strong&gt; method (via the jQuery library) that fetches the current values of each input, places them into a JSON object, and then sends it to our server. Note that on success of the ajax call you’ll see a message in the error log. If you receive a server error (such as 500) then your model and JSON have errors (such as case sensitivity errors). Also note that you could send a Javascript array of JSON objects and have them bound on the server side using a List&amp;lt;Squirrel&amp;gt;() (ie: public ActionResult HiSquirrels(List&amp;lt;Squirrel&amp;gt; aTonOfSquirrels){}).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;pre&gt;@model bindingJSON.Squirrel&lt;/pre&gt;
+&lt;pre&gt;@{
+ Layout = null;
+}&lt;/pre&gt;
+&lt;pre&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&quot;en&quot;&amp;gt;
+&amp;lt;head&amp;gt;
+ &amp;lt;title&amp;gt;Index&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;script type=&quot;text/javascript&quot; src=&quot;https://code.jquery.com/ui/1.10.4/jquery-ui.min.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;script type=&quot;text/javascript&quot;&amp;gt;
+ $(document).ready(function() {
+ // when the DOM has fully loaded...
+ $(&quot;#btnSubmit&quot;).bind(&quot;click&quot;, function() {
+ var onEventLaunchSquirrel = new postSquirrel();
+ onEventLaunchSquirrel.launchSquirrel();
+ });
+ });
+ function postSquirrel() {
+ this.launchSquirrel = function() {
+ 
+ // fetch values from input
+ var name = $(&quot;Name&quot;).val();
+ var age = $(&quot;Age&quot;).val();
+ var acorns = $(&quot;Acorns&quot;).val();
+ var gender = $(&quot;Gender&quot;).val();
+ var hobby = $(&quot;Hobby&quot;).val();
+ 
+ // build json object
+ var squirrel = {
+ Name: name,
+ Age: age,
+ Acorns: acorns,
+ Gender: gender,
+ Hobby: hobby
+ };&lt;/pre&gt;
+&lt;pre&gt;$.ajax({
+ type: &quot;POST&quot;,
+ url: &quot;home/PostSquirrel&quot;,
+ traditional: true,
+ contentType: &#39;application/json; charset=utf-8&#39;,
+ data: JSON.stringify(squirrel),
+ success: function (data) { console.log(data) },
+ error: function (data) { console.log(data) } 
+ });
+ 
+ }
+ }
+ 
+&amp;lt;/script&amp;gt;
+&amp;lt;body&amp;gt;&lt;/pre&gt;
+&lt;pre&gt;&amp;lt;header&amp;gt;
+ &amp;lt;hgroup&amp;gt;
+ &amp;lt;h1&amp;gt;oh hey, a squirrel!&amp;lt;/h1&amp;gt;
+ &amp;lt;h3&amp;gt;we should interview it!&amp;lt;/h3&amp;gt;
+ &amp;lt;/hgroup&amp;gt;
+&amp;lt;/header&amp;gt;&lt;/pre&gt;
+&lt;pre&gt;&amp;lt;section&amp;gt;
+ &amp;lt;p&amp;gt;If the squirrel cooperates, record their information and send it to our server.&amp;lt;/p&amp;gt;
+ 
+ &amp;lt;p&amp;gt;&amp;lt;input type=&quot;text&quot; required=&quot;required&quot; id=&quot;Name&quot; placeholder=&quot;Enter the squirrel&#39;s name&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ &amp;lt;p&amp;gt;&amp;lt;input type=&quot;number&quot; id=&quot;Age&quot; placeholder=&quot;squirrel&#39;s age (optional)&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ &amp;lt;p&amp;gt;&amp;lt;input type=&quot;number&quot; required=&quot;required&quot; id=&quot;Name&quot; placeholder=&quot;How many acorns do they own?&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ &amp;lt;p&amp;gt;&amp;lt;input type=&quot;number&quot; required=&quot;required&quot; id=&quot;Name&quot; placeholder=&quot;M or F? (single letter only)&quot; size=&quot;1&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ &amp;lt;p&amp;gt;&amp;lt;input type=&quot;string&quot; required=&quot;required&quot; id=&quot;Hobby&quot; placeholder=&quot;How many acorns do they own?&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ 
+ &amp;lt;p&amp;gt;&amp;lt;input id=&quot;btnSubmit&quot; type=&quot;button&quot; value=&quot;launch the squirrel through the internet!&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ 
+ &amp;lt;div id=&quot;status&quot;&amp;gt;&amp;lt;/div&amp;gt;&lt;/pre&gt;
+&lt;pre&gt;&amp;lt;/section&amp;gt;&lt;/pre&gt;
+&lt;pre&gt;&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;&lt;/pre&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;So, now you have your full MVC application built (well, sort of). Once you submit the form the JSON object will be send to the JSONResult method on the server side and you can do whatever you need with it.&lt;/p&gt;
+
+&lt;p&gt;That’s it! If you have any questions or spot any errors let me know. If anyone has problems with this working in Visual Studio I’ll put together a project in 2013.&lt;/p&gt;
+
+&lt;p&gt;You can grab the source code here: &lt;a href=&quot;https://github.com/code-for-coffee/mvcBindingJson&quot;&gt;https://github.com/code-for-coffee/mvcBindingJson&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+
+&lt;p&gt; &lt;/p&gt;
+</description>
+        <pubDate>Wed, 16 Apr 2014 00:00:00 -0500</pubDate>
+        <link>https://code-for-coffee.github.io/2014/04/16/ASP.NET-MVC-Intro-to-Binding-JSON-objects-to-models.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/04/16/ASP.NET-MVC-Intro-to-Binding-JSON-objects-to-models.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Visual Studio MVC4 HTML5 Boilerplate Template</title>
+        <description>&lt;p&gt;I’ve been working with &lt;strong&gt;ASP.NET MVC4&lt;/strong&gt; lately and decided to throw together a template for Visual Studio. This template works with Visual Studio 2010, 2012, and 2013. It provides a great quick start to any web application and includes the following based on &lt;a href=&quot;http://www.initializr.com/&quot;&gt;Initializr’s&lt;/a&gt; HTML5 boilerplate generator:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;Mobile first, responsive (via normalize.css)&lt;/li&gt;
+	&lt;li&gt;Modernizr (2.6.2)&lt;/li&gt;
+	&lt;li&gt;Minified jQuery (1.10.1)&lt;/li&gt;
+	&lt;li&gt;IE Classes&lt;/li&gt;
+	&lt;li&gt;Chrome Frame support (until Google kills it off)&lt;/li&gt;
+	&lt;li&gt;Favicon&lt;/li&gt;
+	&lt;li&gt;Apple Touch Icons&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can grab the code on &lt;a href=&quot;https://github.com/code-for-coffee/visualstudio-mvc4-html5-boilerplate-template/&quot;&gt;github&lt;/a&gt;. Install it by placing the contents in your &lt;em&gt;C:\Users\username\Documents\Visual Studio 20xx\Templates\ProjectTemplates\Visual C#&amp;lt;/em&amp;gt; directory.  To get started with the template please take a look at how all of the views are setup.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Please feel free to report anything that doesn’t work here or on the &lt;a href=&quot;https://github.com/code-for-coffee/visualstudio-mvc4-html5-boilerplate-template/issues&quot;&gt;github issues page&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 17 Jan 2014 00:00:00 -0600</pubDate>
+        <link>https://code-for-coffee.github.io/2014/01/17/Visual-Studio-MVC5-HTML5-Boilerplate-Template.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/01/17/Visual-Studio-MVC5-HTML5-Boilerplate-Template.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>MVC4 AJAX uploads using HTML5/Javascript</title>
+        <description>&lt;p&gt;This is a quick walkthrough showcasing how to use ASP.NET MVC4 to upload files via AJAX. You can take a look at the code on &lt;a href=&quot;https://github.com/code-for-coffee/mvc4-html5-ajax-upload&quot;&gt;github&lt;/a&gt;. This functionality requires a current version of Firefox, Chrome, or Internet Explorer 10+.&lt;/p&gt;
+
+&lt;p&gt;We’ll begin with the controller. Your &lt;code&gt;controller.cs&lt;/code&gt; file should have a new &lt;strong&gt;JsonResult&lt;/strong&gt; to receive whatever you’re uploading. Inside, you’ll iterate through each Request.File sent to the server using the  &lt;a href=&quot;http://msdn.microsoft.com/en-us/library/system.web.httppostedfile&quot;&gt;HttpPostedFileBase&lt;/a&gt; class.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;[HttpPost]
+public JsonResult Upload()
+{
+for (int i = 0; i &amp;lt; Request.Files.Count; i++) {
+// for each file being sent over…
+HttpPostedFileBase file = Request.Files[i];&lt;/p&gt;
+
+&lt;p&gt;// Example of gathering information from each file
+int fileSize = file.ContentLength;
+string fileName = file.FileName;
+string mimeType = file.ContentType;&lt;/p&gt;
+
+&lt;p&gt;// Open input stream
+System.IO.Stream fileContent = file.InputStream;&lt;/p&gt;
+
+&lt;p&gt;// do stuff here
+// do.stuff.huzzah&lt;/p&gt;
+
+&lt;p&gt;}
+// Return JSON
+return Json(“Uploaded “ + Request.Files.Count + “ file(s)”);
+}&lt;/p&gt;
+
+&lt;p&gt;&amp;lt;/code&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;Now, the fun part: the HTML5. First, you need to create a new &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/FormData&quot;&gt;FormData&lt;/a&gt; object.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+var formdata = new FormData();
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Next, you’ll iterate through each file.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;for (i = 0; i &amp;lt; uploadedFiles.files.length; i++) {
+}
+&lt;/code&gt;
+Inside of your loop, you can append each file to the FormData object.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;formdata.append(uploadedFiles.files[i].name, uploadedFiles.files[i]);
+&amp;lt;/code&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, you can send the files over via a traditional Ajax call.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+var xhr = new XMLHttpRequest();
+xhr.open(&#39;POST&#39;, ajaxPostPath);
+xhr.send(formdata);
+xhr.onreadystatechange = function () {
+if (xhr.readyState == 4 &amp;amp;&amp;amp; xhr.status == 200) {
+document.getElementById(idToPlaceResponseText).innerHTML = xhr.responseText;
+}
+&lt;/code&gt;
+That’s it! Obviously, you can do some nifty stuff with the files if they’re supported. The code on the github project is designed to upload only files that are an Image MIME type and display a preview inside of an &amp;lt;code&amp;gt;id&amp;lt;/code&amp;gt;.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 14 Dec 2013 00:00:00 -0600</pubDate>
+        <link>https://code-for-coffee.github.io/2013/12/14/MVC4-Ajax-Uploads-using-HTML5-and-Javascript.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/12/14/MVC4-Ajax-Uploads-using-HTML5-and-Javascript.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Locking down OS X Workstations (and LogMeIn)</title>
+        <description>&lt;p style=&quot;text-align: left;&quot;&gt;One of the great things about Mac OS X is Darwin, the Unix back-end of the OS. This article discusses a variety of shell (Terminal) commands and tricks that you can use to lock an account&#39;s abilities/actions. Finally, the source code can be viewed/forked on &lt;a href=&quot;https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;. Now, go ahead and open Terminal on a test account.&lt;/p&gt;
+&lt;p style=&quot;text-align: left;&quot;&gt;Disable use of Dashboard&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.dashboard mcx-disabled -bool true&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;p style=&quot;text-align: left;&quot;&gt;Disable Dock manipulation (adding/removing items)&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.dock contents-immutable -bool true&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;p style=&quot;text-align: left;&quot;&gt;Disable Dock manipulation (adding/removing items)&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.dock contents-immutable -bool true&lt;/em&gt;
+
+&lt;em&gt;killall dock #kills the dock; changes will take effect upon reload&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
+
+&lt;p style=&quot;text-align: left;&quot;&gt;Hide System Files&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.finder AppleShowAllFiles FALSE # TRUE will show System files.&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
+
+&lt;p style=&quot;text-align: left;&quot;&gt;Run Simple Finder&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.finder InterfaceLevel simple&lt;br /&gt;
+killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
+
+&lt;h3&gt;LogMeIn&lt;/h3&gt;
+&lt;p&gt;If you use LogMeIn for remote administration, you will notice that the application will load in your Dock when running. This causes a slight security risk due to how this will show end users some account information. To rid ourselves of this problem, we can remove the following line /Applications/LogMeIn.app/info.plist (right-click the application and select “Show Contents”). You will need to add the &lt;a href=&quot;https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts/blob/master/logmeinRevision.xml&quot; target=&quot;_blank&quot;&gt;these lines&lt;/a&gt; to the first child element in the XML file.&lt;/p&gt;
+
+&lt;p&gt;You can also remove MenuBar.app from /applicationsupport/launchagents/logmein/ - this will remove the Menu Bar icon.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 29 Nov 2013 00:00:00 -0600</pubDate>
+        <link>https://code-for-coffee.github.io/2013/11/29/Locking-down-OSX-Worksations-and-LogMeIn.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/11/29/Locking-down-OSX-Worksations-and-LogMeIn.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Adobe Edge Code review (aka Brackets): I want to believe</title>
+        <description>&lt;p&gt;WYSIWYG editors: if not for them, I may have never become interested in development at all. As a kid, I tinkered with Visual Basic 3.0, Netscape’s Composer, and eventually Macromedia Dreamweaver. After years of exposure to various projects, languages, and environments I all but abandoned these types of editors and eventually fell into love with &lt;a href=&quot;http://www.sublimetext.com/&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Sublime Text&lt;/strong&gt;&lt;/a&gt;. Recently, I became aware of Adobe’s new Edge set of tools - more importantly, &lt;a href=&quot;https://creative.adobe.com/products/code?promoid=KFKML&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Edge Code&lt;/strong&gt;&lt;/a&gt; (which happens to be based off an open source project called Brackets that is written in Javascript). Wait, Adobe + Open Source? I was intrigued. This review is based on the Adobe Creative Cloud version of Edge Code and not Brackets itself.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Installation is annoying&lt;/strong&gt;. If you don’t have an Adobe Creative Cloud account, get the open source version of &lt;strong&gt;&lt;a href=&quot;http://brackets.io/&quot; target=&quot;_blank&quot;&gt;Brackets&lt;/a&gt;&lt;/strong&gt;. Creating a Creative Cloud trial account in itself requires having to register, then downloading followed by updating the Creative Cloud client, and then installing Edge Code itself. Brackets is pretty straightforward: download and install. Once up and running however the editor looks semi clean.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;One of the best features of Edge Code&lt;/strong&gt; is the working sidebar; you select a folder and you can edit the files directly from the folder. Color coding for markup is clean and neat. You’re greeted with a quick tutorial of how the editor works. The first feature that you’re alerted to in the quick tutorial is the ability to edit CSS directly in the editor. To me, this feature seems &lt;em&gt;amazing&lt;/em&gt; - sort of like the Chrome Developer Tools/Firebug merged into a text editor. So, I give it a shot and select the H3 tag and in the editor and select CTRl+E as the editor suggests. Bam, there’s the CSS for the element. Sounds too good to be true? It sort of is - as I learned when I tried to edit the paragraph tag, nothing happens. If your linked CSS file(s) do not define an element then nothing happens. So, if you pre-define all of your CSS styles out this feature is amazing. Arguably, perhaps I should be doing this for all projects but there are many times where I just begin coding and adding CSS in later.&lt;/p&gt;
+
+&lt;p&gt;[caption id=”attachment_81” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code1.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-81&quot; alt=&quot;Editing CSS in-line is awesome.. if only it always worked&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code1-300x124.png&quot; width=&quot;300&quot; height=&quot;124&quot; /&gt;&lt;/a&gt; Editing CSS in-line is awesome.. if only it always worked[/caption]&lt;/p&gt;
+
+&lt;p&gt;Next up, &lt;b&gt;live editing (CTRL+ALT+P). &lt;/b&gt;This feature allows you to directly launch into Google Chrome (and only Chrome at this time) and reflects changes that you make in the editor live. Works similarly to Chrome Developer Tools/Firebug, but this allows you to test CSS changes real time from your editor. Adobe intends to update this in the future. There also is the ability to edit colors in the same manner as CSS by right clicking on any color value and selecting edit. This is a pretty nice feature for on-the-fly editing for those of us who aren’t designers.&lt;/p&gt;
+
+&lt;p&gt;[caption id=”attachment_82” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-82&quot; alt=&quot;Edge Code&#39;s color editor&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2-300x136.png&quot; width=&quot;300&quot; height=&quot;136&quot; /&gt;&lt;/a&gt; Edge Code’s color editor[/caption]&lt;/p&gt;
+
+&lt;p&gt;In the end, I feel like Fox Mulder: &lt;em&gt;I want to believe&lt;/em&gt;. Edge Code seems like a great tool in the making. For making edits to CSS I’d certainly use it if it were fully baked. As for now, I cannot see it replacing Sublime Text for every coding. However, I do see it as a useful tool for making quick edits when finalizing a page (especially if the CSS is fully designed or if I need a color tweak here/there). I’ll certainly keep my eye on the project and hope for the best.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 06 Jul 2013 00:00:00 -0500</pubDate>
+        <link>https://code-for-coffee.github.io/2013/07/06/Adobe-Edge-Code-aka-Brackets.io.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/07/06/Adobe-Edge-Code-aka-Brackets.io.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Windows 8.1 Preview - new Features, Group Policy, &amp; Thoughts</title>
+        <description>&lt;p&gt;Last Wednesday Microsoft released the Windows 8.1 Preview for those who felt ambitious enough to try it out. I immediately created a Windows 8 virtual machine and downloaded the update. The following article covers some of the new features, new Group Policy additions, and my thoughts on it as a whole.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Quick Notes: &lt;/b&gt;&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;The Windows 8.1 Update requires 2.44GB of storage.&lt;/li&gt;
+	&lt;li&gt;Estimated release date: August, 2013&lt;/li&gt;
+	&lt;li&gt;Installed through Windows Store (not Windows Update)&lt;/li&gt;
+	&lt;li&gt;Install time: 45-60 minutes&lt;/li&gt;
+	&lt;li&gt;Return of the “Start” Icon (sends you to the Metro screen)&lt;/li&gt;
+	&lt;li&gt;Group Policy allows you to manipulate the Start Screen&lt;/li&gt;
+	&lt;li&gt;Boot-to-desktop (bypass Start Screen)&lt;/li&gt;
+	&lt;li&gt;Still no Group Policy security for Metro Apps without &lt;b&gt;AppLocker&lt;/b&gt; (&lt;a href=&quot;http://technet.microsoft.com/en-US/library/ee424382(v=ws.10).aspx&quot;&gt;only available on Win8 Enterprise, Server 2012&lt;/a&gt;)&lt;/li&gt;
+	&lt;li&gt;Control Panel is migrating to PC Settings (under Metro)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;b&gt;Windows 8.1 Installation&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;[caption id=”attachment_63” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-63&quot; alt=&quot;Windows 8.1 Preview Download Page&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; Microsoft Store’s page for the Windows 8.1 Preview[/caption]&lt;/p&gt;
+
+&lt;p&gt;Installation was fairly painless – unlike typical Windows updates (8.1 is essentially Service Pack 1 for Windows 8) you do not update the operating system via Windows Update; instead, the update is pushed out via the Windows Store. Currently, this requires a Microsoft Account to sign into… and to download the update. This could be subject to change but with Microsoft’s push to the Metro platform I am unsure if it would be made available in the traditional route.&lt;/p&gt;
+
+&lt;p&gt;Installation took an estimated 45minutes on a virtual machine that was allocated 6GB of RAM. The preview completely reinstalls Windows 8 as well as the 8.1 update meaning you lose all of your applications (Metro and traditional) but not your application settings. This will only apply to the preview and not the final version.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Start Screen Changes&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the largest advantages to Windows 8.1 is the ability to create pre-defined user layouts for the Metro screen and pass them on to other users (via Active Directory or Group Policy). Newly installed applications are also noted that they are “New”. Newly editable are the following:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;Start wallpaper&lt;/li&gt;
+	&lt;li&gt;Tile sizes: small, medium, wide, large&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;[caption id=”attachment_65” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_4_web.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-65&quot; alt=&quot;Editing the Windows 8.1 Start Screen&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_4_web-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; Editing the Windows 8.1 Start Screen[/caption]&lt;/p&gt;
+
+&lt;p&gt;The Metro/Start Screen also has added a few new UI features:&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;Search is built into the start screen (top right)&lt;/li&gt;
+	&lt;li&gt;Arrows to other applications not pinned to the screen&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This will help alleviate confusion of users who were not comfortable with the prior way of finding applications or files.&lt;/p&gt;
+
+&lt;p&gt;[caption id=”attachment_66” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_6.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-66&quot; alt=&quot;New Applications&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_6-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; New Applications[/caption]&lt;/p&gt;
+
+&lt;p&gt;Something else of note - the Control Panel looks to be migrated ever so slowing into &lt;strong&gt;PC Settings&lt;/strong&gt;, as noted in the screenshot below. This will probably come off as a mixed reaction to many but I find that centralizing everything is for the better in the end. Until now, I felt like PC settings was a little out-of-place and was just thrown before release of Windows 8. Now, it feels more like a hub to control your computer’s settings. I imagine that in future revisions of Windows 8 we’ll see the eventual demise of the long-lasting Control Panel.&lt;/p&gt;
+
+&lt;p&gt;[caption id=”attachment_67” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_5.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-67&quot; alt=&quot;Updating &amp;quot;PC Settings&amp;quot;&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_5-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; Updated “PC Settings”[/caption]&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;Group Policy Changes&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;There are quite a few Group Policy changes made in Windows 8. This is a comprehensive list of the new values that can be manipulated via Group Policy and Active Directory (in bold are the values I find interesting):&lt;/p&gt;
+&lt;ul&gt;
+	&lt;li&gt;Allow Internet Explore to use the SPDY/3 network protocol&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Allow Microsoft service to provide enhance suggestions as the user types in the Address bar&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Always automatically restart at the schedule time&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;App switching&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Charms&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Configure Group Policy Caching&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Configure Logon Script Delay&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Default&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Default App&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Default Search&lt;/li&gt;
+	&lt;li&gt;Do now sync start settings&lt;/li&gt;
+	&lt;li&gt;Don’t run antimalware programs against ActiveX controls&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Force a specific background and accent color&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Force a specific Start background&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Force automatic setup for all users&lt;/li&gt;
+	&lt;li&gt;Multimon&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Pin Apps to Start when installed&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Prevent enabling lock screen camera&lt;/li&gt;
+	&lt;li&gt;Prevent enabling lock screen slide show&lt;/li&gt;
+	&lt;li&gt;Restrict delegation of credentials to remote servers&lt;/li&gt;
+	&lt;li&gt;Set the time Quiet Hours begins each day&lt;/li&gt;
+	&lt;li&gt;Set the time Quiet Hours ends each day&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Sign-in last interactive user automatically after a system-imitated restart&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Sort&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Start Screen Layout&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Turn off calls during Quiet Hours&lt;/li&gt;
+	&lt;li&gt;Turn off phone number detection&lt;/li&gt;
+	&lt;li&gt;Turn off Quiet Hours&lt;/li&gt;
+	&lt;li&gt;&lt;strong&gt;Turn off sending UTF-8 query strings for URLs&lt;/strong&gt;&lt;/li&gt;
+	&lt;li&gt;Turn on 64-bit tab processes when running in Enhance Protected Mode on 64-bit version of Windows&lt;/li&gt;
+	&lt;li&gt;WinX&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Final Thoughts&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Overall, there is not a lot that will affect traditional desktop users. I would go as far to say that for those users who only use Desktop applications, there will be no viable reason to upgrade to Windows 8.1. That being said, for those who are migrating to the new interface a lot of features have been added.&lt;/p&gt;
+
+&lt;p&gt;I am excited that as a system administrator I’ll have greater control over how the Start Screen looks and feels for users. However, requiring the use of AppLocker for managing application permissions is still disappointing - if you don’t run Windows 8 Enterprise or Server 2012, you’re in the dark.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 05 Jul 2013 00:00:00 -0500</pubDate>
+        <link>https://code-for-coffee.github.io/2013/07/05/Windows-8.1-Preview.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/07/05/Windows-8.1-Preview.html</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Windows Remote Desktop Connection, VMWare Fusion 5.0, and NAT Forwards</title>
+        <description>&lt;h3&gt;Good news, everyone! This still works in VMWare Fusion 6.0!&lt;/h3&gt;
+
+&lt;p&gt;I decided to put an older Macbook to use for hosting test lab virtual machines; a few of which are running various versions of Windows. After enabling Remote Desktop Connections locally on the virtual machines I made sure to set VMWare Fusion’s network adapter to Bridged (Autodetect). With the built in OS X firewall disabled I should be able to remote into any Windows machine, right? Apparently not! I tried to look around the internet for help since Fusion doesn’t have all of NAT settings forward facing that VMWare Workstation has but came up empty handed with tweaks for Fusion 3 and 4. Well, here is a step-by-step walkthrough on how to allow Remote Desktop through OS X and VMWare Fusion 5.&lt;/p&gt;
+&lt;ol&gt;
+	&lt;li&gt;&lt;span style=&quot;line-height: 13px;&quot;&gt;Install &lt;strong&gt;VMWare Fusion 5&lt;/strong&gt; and a Windows based operating system on a virtual machine.&lt;/span&gt;&lt;/li&gt;
+	&lt;li&gt;Check your virtual machine&#39;s IP settings (ipconfig) verify that DHCP is enabled.&lt;/li&gt;
+	&lt;li&gt;Shut down the virtual machine and select Network Adapter &amp;gt; Bridged Networking &amp;gt; Select &lt;strong&gt;Autodetect&lt;/strong&gt;.&lt;/li&gt;
+	&lt;li&gt;Open Mac OS X &lt;em&gt;System Preferences. &lt;/em&gt;Select &lt;em&gt;Security and Privacy&lt;/em&gt; &amp;gt; &lt;i&gt;Firewall.&lt;/i&gt; &lt;strong&gt;Enable&lt;/strong&gt; the firewall and select &lt;em&gt;Firewall Options&lt;/em&gt;. Select the VMWare Fusion application and &lt;strong&gt;Allow incoming connections&lt;/strong&gt;. Note: if this machine is in your network&#39;s DMZ, you should highly consider enabling stealth mode.&lt;em&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;
+&lt;/span&gt;&lt;/em&gt;&lt;/li&gt;
+	&lt;li&gt;Now, we need to direct Remote Desktop Connections to VMWare. From your Mac (or via an SSH connection), browse to:
+&lt;em&gt;/Library/Preferences/VMWare Fusion/&lt;/em&gt;&lt;/li&gt;
+	&lt;li&gt;Open the &lt;strong&gt;networking&lt;/strong&gt; file: &lt;i&gt;sudo vi networking&lt;/i&gt;. For an example of what the file should look like, &lt;a href=&quot;http://pastebin.com/UJhK2DEn&quot;&gt;here is a link&lt;/a&gt; to the &lt;code&gt;Library/Preferences/VMWare Fusion/networking&lt;/code&gt; file on pastebin.&lt;/li&gt;
+	&lt;li&gt;Look for the &lt;em&gt;[incomingtcp] &lt;/em&gt;section. If you do not find one, create one.&lt;/li&gt;
+	&lt;li&gt;Add the following rule underneath: &lt;em&gt;3389=yourmacsipaddress:3389 &lt;/em&gt;(tip: Insert will allow you to edit lines, &lt;em&gt;:quit&lt;/em&gt; or &lt;em&gt;:exit&lt;/em&gt; will close vi).&lt;/li&gt;
+	&lt;li&gt;Restart VMWare Fusion and launch your virtual machine. From your client machine, you&#39;ll want to connect via Remote Desktop Client to the static IP you set your virtual machine to. Enter in the virtual machine&#39;s credentials and you&#39;re in.&lt;/li&gt;
+	&lt;li&gt;That&#39;s it! You can now use the Windows RDC on various virtual machines hosted on your Mac as long as you give them each specific, static IPs.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Hope this helps. If you have any questions or comments feel free to post them.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Updated 11/29/13: This continues to work in VMWare Fusion 6.0.&lt;/li&gt;
+&lt;li&gt;Update 12/14/13: Added link to pastebin of the &lt;strong&gt;networking&lt;/strong&gt; file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&amp;lt;/em&amp;gt;&lt;/p&gt;
+</description>
+        <pubDate>Wed, 03 Jul 2013 00:00:00 -0500</pubDate>
+        <link>https://code-for-coffee.github.io/2013/07/03/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards.html</link>
+        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/07/03/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards.html</guid>
+        
         
       </item>
     

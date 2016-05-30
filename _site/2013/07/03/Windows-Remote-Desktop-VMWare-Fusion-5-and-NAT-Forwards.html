@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Windows Remote Desktop Connection, VMWare Fusion 5.0, and NAT Forwards</title>
+  <meta name="description" content="Good news, everyone! This still works in VMWare Fusion 6.0!">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <link rel="canonical" href="https://code-for-coffee.github.io/2013/07/03/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards.html">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="https://code-for-coffee.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
+  </a>
+    <ul class="right hide-on-med-and-down">
+      
+        
+      
+        
+      <li><a class="page-link" href="/about/">About</a></li>
+        
+      
+        
+      <li><a class="page-link" href="/contact/">Contact</a></li>
+        
+      
+        
+      <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      
+        
+      
+        
+        <li><a class="page-link" href="/about/">About</a></li>
+        
+      
+        
+        <li><a class="page-link" href="/contact/">Contact</a></li>
+        
+      
+        
+        <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+</div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">Windows Remote Desktop Connection, VMWare Fusion 5.0, and NAT Forwards</h2>
+      <em class="center">Posted on Jul 3, 2013</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <h3>Good news, everyone! This still works in VMWare Fusion 6.0!</h3>
+
+<p>I decided to put an older Macbook to use for hosting test lab virtual machines; a few of which are running various versions of Windows. After enabling Remote Desktop Connections locally on the virtual machines I made sure to set VMWare Fusion’s network adapter to Bridged (Autodetect). With the built in OS X firewall disabled I should be able to remote into any Windows machine, right? Apparently not! I tried to look around the internet for help since Fusion doesn’t have all of NAT settings forward facing that VMWare Workstation has but came up empty handed with tweaks for Fusion 3 and 4. Well, here is a step-by-step walkthrough on how to allow Remote Desktop through OS X and VMWare Fusion 5.</p>
+<ol>
+	<li><span style="line-height: 13px;">Install <strong>VMWare Fusion 5</strong> and a Windows based operating system on a virtual machine.</span></li>
+	<li>Check your virtual machine's IP settings (ipconfig) verify that DHCP is enabled.</li>
+	<li>Shut down the virtual machine and select Network Adapter &gt; Bridged Networking &gt; Select <strong>Autodetect</strong>.</li>
+	<li>Open Mac OS X <em>System Preferences. </em>Select <em>Security and Privacy</em> &gt; <i>Firewall.</i> <strong>Enable</strong> the firewall and select <em>Firewall Options</em>. Select the VMWare Fusion application and <strong>Allow incoming connections</strong>. Note: if this machine is in your network's DMZ, you should highly consider enabling stealth mode.<em><span style="text-decoration: underline;">
+</span></em></li>
+	<li>Now, we need to direct Remote Desktop Connections to VMWare. From your Mac (or via an SSH connection), browse to:
+<em>/Library/Preferences/VMWare Fusion/</em></li>
+	<li>Open the <strong>networking</strong> file: <i>sudo vi networking</i>. For an example of what the file should look like, <a href="http://pastebin.com/UJhK2DEn">here is a link</a> to the <code>Library/Preferences/VMWare Fusion/networking</code> file on pastebin.</li>
+	<li>Look for the <em>[incomingtcp] </em>section. If you do not find one, create one.</li>
+	<li>Add the following rule underneath: <em>3389=yourmacsipaddress:3389 </em>(tip: Insert will allow you to edit lines, <em>:quit</em> or <em>:exit</em> will close vi).</li>
+	<li>Restart VMWare Fusion and launch your virtual machine. From your client machine, you'll want to connect via Remote Desktop Client to the static IP you set your virtual machine to. Enter in the virtual machine's credentials and you're in.</li>
+	<li>That's it! You can now use the Windows RDC on various virtual machines hosted on your Mac as long as you give them each specific, static IPs.</li>
+</ol>
+<p>Hope this helps. If you have any questions or comments feel free to post them.</p>
+
+<p><em></em></p>
+<ul>
+<li>Updated 11/29/13: This continues to work in VMWare Fusion 6.0.</li>
+<li>Update 12/14/13: Added link to pastebin of the <strong>networking</strong> file.</li>
+</ul>
+<p>&lt;/em&gt;</p>
+
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">code for coffee</h5>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver, yet another software engineer and business cat afficiando.</strong></em></p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Links and Social</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Github</a></li>
+          <li><a class="white-text" href="#!">Twitter</a></li>
+          <li><a class="white-text" href="#!">Contact</a></li>
+          <li><a class="white-text" href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Questions? Comments? <a class="orange-text text-lighten-4" href="mailto:james@codeforcoffee.org">Drop me a line</a>.
+      Website designed using <a class="orange-text text-lighten-4" href="http://materializecss.com" target="_blank">Materialize</a>.
+    </div>
+  </div>
+</footer>
+
+  </body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Windows 8.1 Preview - new Features, Group Policy, & Thoughts</title>
+  <meta name="description" content="Last Wednesday Microsoft released the Windows 8.1 Preview for those who felt ambitious enough to try it out. I immediately created a Windows 8 virtual machin...">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <link rel="canonical" href="https://code-for-coffee.github.io/2013/07/05/Windows-8.1-Preview.html">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="https://code-for-coffee.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
+  </a>
+    <ul class="right hide-on-med-and-down">
+      
+        
+      
+        
+      <li><a class="page-link" href="/about/">About</a></li>
+        
+      
+        
+      <li><a class="page-link" href="/contact/">Contact</a></li>
+        
+      
+        
+      <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      
+        
+      
+        
+        <li><a class="page-link" href="/about/">About</a></li>
+        
+      
+        
+        <li><a class="page-link" href="/contact/">Contact</a></li>
+        
+      
+        
+        <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+</div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">Windows 8.1 Preview - new Features, Group Policy, & Thoughts</h2>
+      <em class="center">Posted on Jul 5, 2013</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <p>Last Wednesday Microsoft released the Windows 8.1 Preview for those who felt ambitious enough to try it out. I immediately created a Windows 8 virtual machine and downloaded the update. The following article covers some of the new features, new Group Policy additions, and my thoughts on it as a whole.</p>
+
+<p><b>Quick Notes: </b></p>
+<ul>
+	<li>The Windows 8.1 Update requires 2.44GB of storage.</li>
+	<li>Estimated release date: August, 2013</li>
+	<li>Installed through Windows Store (not Windows Update)</li>
+	<li>Install time: 45-60 minutes</li>
+	<li>Return of the “Start” Icon (sends you to the Metro screen)</li>
+	<li>Group Policy allows you to manipulate the Start Screen</li>
+	<li>Boot-to-desktop (bypass Start Screen)</li>
+	<li>Still no Group Policy security for Metro Apps without <b>AppLocker</b> (<a href="http://technet.microsoft.com/en-US/library/ee424382(v=ws.10).aspx">only available on Win8 Enterprise, Server 2012</a>)</li>
+	<li>Control Panel is migrating to PC Settings (under Metro)</li>
+</ul>
+<p><b>Windows 8.1 Installation</b></p>
+
+<p>[caption id=”attachment_63” align=”alignnone” width=”300”]<a href="http://codeforcoffee.org/wp-content/uploads/2013/07/win8.png"><img class="size-medium wp-image-63" alt="Windows 8.1 Preview Download Page" src="http://codeforcoffee.org/wp-content/uploads/2013/07/win8-300x225.png" width="300" height="225" /></a> Microsoft Store’s page for the Windows 8.1 Preview[/caption]</p>
+
+<p>Installation was fairly painless – unlike typical Windows updates (8.1 is essentially Service Pack 1 for Windows 8) you do not update the operating system via Windows Update; instead, the update is pushed out via the Windows Store. Currently, this requires a Microsoft Account to sign into… and to download the update. This could be subject to change but with Microsoft’s push to the Metro platform I am unsure if it would be made available in the traditional route.</p>
+
+<p>Installation took an estimated 45minutes on a virtual machine that was allocated 6GB of RAM. The preview completely reinstalls Windows 8 as well as the 8.1 update meaning you lose all of your applications (Metro and traditional) but not your application settings. This will only apply to the preview and not the final version.</p>
+
+<p><b>Start Screen Changes</b></p>
+
+<p>One of the largest advantages to Windows 8.1 is the ability to create pre-defined user layouts for the Metro screen and pass them on to other users (via Active Directory or Group Policy). Newly installed applications are also noted that they are “New”. Newly editable are the following:</p>
+<ul>
+	<li>Start wallpaper</li>
+	<li>Tile sizes: small, medium, wide, large</li>
+</ul>
+<p>[caption id=”attachment_65” align=”alignnone” width=”300”]<a href="http://codeforcoffee.org/wp-content/uploads/2013/07/win8_4_web.png"><img class="size-medium wp-image-65" alt="Editing the Windows 8.1 Start Screen" src="http://codeforcoffee.org/wp-content/uploads/2013/07/win8_4_web-300x225.png" width="300" height="225" /></a> Editing the Windows 8.1 Start Screen[/caption]</p>
+
+<p>The Metro/Start Screen also has added a few new UI features:</p>
+<ul>
+	<li>Search is built into the start screen (top right)</li>
+	<li>Arrows to other applications not pinned to the screen</li>
+</ul>
+<p>This will help alleviate confusion of users who were not comfortable with the prior way of finding applications or files.</p>
+
+<p>[caption id=”attachment_66” align=”alignnone” width=”300”]<a href="http://codeforcoffee.org/wp-content/uploads/2013/07/win8_6.png"><img class="size-medium wp-image-66" alt="New Applications" src="http://codeforcoffee.org/wp-content/uploads/2013/07/win8_6-300x225.png" width="300" height="225" /></a> New Applications[/caption]</p>
+
+<p>Something else of note - the Control Panel looks to be migrated ever so slowing into <strong>PC Settings</strong>, as noted in the screenshot below. This will probably come off as a mixed reaction to many but I find that centralizing everything is for the better in the end. Until now, I felt like PC settings was a little out-of-place and was just thrown before release of Windows 8. Now, it feels more like a hub to control your computer’s settings. I imagine that in future revisions of Windows 8 we’ll see the eventual demise of the long-lasting Control Panel.</p>
+
+<p>[caption id=”attachment_67” align=”alignnone” width=”300”]<a href="http://codeforcoffee.org/wp-content/uploads/2013/07/win8_5.png"><img class="size-medium wp-image-67" alt="Updating &quot;PC Settings&quot;" src="http://codeforcoffee.org/wp-content/uploads/2013/07/win8_5-300x225.png" width="300" height="225" /></a> Updated “PC Settings”[/caption]</p>
+
+<p><b>Group Policy Changes</b></p>
+
+<p>There are quite a few Group Policy changes made in Windows 8. This is a comprehensive list of the new values that can be manipulated via Group Policy and Active Directory (in bold are the values I find interesting):</p>
+<ul>
+	<li>Allow Internet Explore to use the SPDY/3 network protocol</li>
+	<li><strong>Allow Microsoft service to provide enhance suggestions as the user types in the Address bar</strong></li>
+	<li><strong>Always automatically restart at the schedule time</strong></li>
+	<li><strong>App switching</strong></li>
+	<li><strong>Charms</strong></li>
+	<li>Configure Group Policy Caching</li>
+	<li><strong>Configure Logon Script Delay</strong></li>
+	<li>Default</li>
+	<li><strong>Default App</strong></li>
+	<li>Default Search</li>
+	<li>Do now sync start settings</li>
+	<li>Don’t run antimalware programs against ActiveX controls</li>
+	<li><strong>Force a specific background and accent color</strong></li>
+	<li><strong>Force a specific Start background</strong></li>
+	<li>Force automatic setup for all users</li>
+	<li>Multimon</li>
+	<li><strong>Pin Apps to Start when installed</strong></li>
+	<li>Prevent enabling lock screen camera</li>
+	<li>Prevent enabling lock screen slide show</li>
+	<li>Restrict delegation of credentials to remote servers</li>
+	<li>Set the time Quiet Hours begins each day</li>
+	<li>Set the time Quiet Hours ends each day</li>
+	<li><strong>Sign-in last interactive user automatically after a system-imitated restart</strong></li>
+	<li>Sort</li>
+	<li><strong>Start Screen Layout</strong></li>
+	<li>Turn off calls during Quiet Hours</li>
+	<li>Turn off phone number detection</li>
+	<li>Turn off Quiet Hours</li>
+	<li><strong>Turn off sending UTF-8 query strings for URLs</strong></li>
+	<li>Turn on 64-bit tab processes when running in Enhance Protected Mode on 64-bit version of Windows</li>
+	<li>WinX</li>
+</ul>
+<p><strong>Final Thoughts</strong></p>
+
+<p>Overall, there is not a lot that will affect traditional desktop users. I would go as far to say that for those users who only use Desktop applications, there will be no viable reason to upgrade to Windows 8.1. That being said, for those who are migrating to the new interface a lot of features have been added.</p>
+
+<p>I am excited that as a system administrator I’ll have greater control over how the Start Screen looks and feels for users. However, requiring the use of AppLocker for managing application permissions is still disappointing - if you don’t run Windows 8 Enterprise or Server 2012, you’re in the dark.</p>
+
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">code for coffee</h5>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver, yet another software engineer and business cat afficiando.</strong></em></p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Links and Social</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Github</a></li>
+          <li><a class="white-text" href="#!">Twitter</a></li>
+          <li><a class="white-text" href="#!">Contact</a></li>
+          <li><a class="white-text" href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Questions? Comments? <a class="orange-text text-lighten-4" href="mailto:james@codeforcoffee.org">Drop me a line</a>.
+      Website designed using <a class="orange-text text-lighten-4" href="http://materializecss.com" target="_blank">Materialize</a>.
+    </div>
+  </div>
+</footer>
+
+  </body>
+
+</html>

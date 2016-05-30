@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Welcome to Jekyll!</title>
-  <meta name="description" content="You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different wa...">
+  <title>Disabling Java update notifications in Windows</title>
+  <meta name="description" content="Java updates - everyone knows about them because you’re prompted to update them all the time. While it is important to keep your system up to date due to zer...">
 
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
@@ -15,16 +15,17 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
   <script type="text/javascript" src="/javascripts/app.js"></script>
-  <link rel="canonical" href="https://code-for-coffee.github.io/jekyll/update/2015/06/01/welcome-to-jekyll.html">
+  <link rel="canonical" href="https://code-for-coffee.github.io/2013/07/03/Disabling-Java-update-notifications-in-Windows.html">
   <link rel="alternate" type="application/rss+xml" title="code for coffee" href="https://code-for-coffee.github.io/feed.xml" />
 </head>
 
 
   <body>
 
-    <nav class="brown darken-4" role="navigation">
-  <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">
-    Welcome to Jekyll!
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
   </a>
     <ul class="right hide-on-med-and-down">
       
@@ -64,7 +65,7 @@
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
   </div>
 </nav>
-
+</div>
 
     <div class="page-content">
       <div class="wrapper">
@@ -76,25 +77,23 @@
         <source srcset="/logo-mobile.png" media="(max-width: 900px)">
         <img src="/logo-mobile.png" alt="Code for Coffee Logo">
       </picture>
-      <h2 class="header center red-text text-darken-4">Welcome to Jekyll!</h2>
-      <em class="center">Posted on Jun 1, 2015</em>
-      <h6 class="header center red-text text-darken-3">This is the default hello-world post from Jeykll.</h6>
+      <h2 class="header center red-text text-darken-4">Disabling Java update notifications in Windows</h2>
+      <em class="center">Posted on Jul 3, 2013</em>
+      <h6 class="header center red-text text-darken-3"></h6>
     </div>
-    <div class="row center">
-      <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+    <div class="row left-align">
+      <p>Java updates - everyone knows about them because you’re prompted to update them all the time. While it is important to keep your system up to date due to zero day exploits and other bugs, most people tend to ignore these updates and just close the notification window. At work, we’ve recently begun automatically pushing Java updates out on our Windows workstations through WSUS with <a href="http://wsuspackagepublisher.codeplex.com/" target="_blank">Wsus Package Publisher</a>; however, the Java update notifications can still appear from time to time. To alleviate this annoyance for our employees, I’ve put together a registry tweak that can be pushed out to any machine that’ll disable the notifications once and for all. It is a simple registry script; just run and close (or script it to run with Powershell once). You can grab the source from my <a href="https://github.com/code-for-coffee/DisableJavaUpdate" target="_blank">Github repo</a>. Alternatively, here are the entries in the registry to update if you want to handle it yourself. The entries you need to add/update are in bold.</p>
 
-<p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
-
-<p>Jekyll also offers powerful support for code snippets:</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
-  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
-<span class="k">end</span>
-<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
-<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
-
-<p>Check out the <a href="http://jekyllrb.com">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://github.com/jekyll/jekyll-help">Jekyll’s dedicated Help repository</a>.</p>
-
+<p><code>[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy]
+"Method"="jchrome"
+"PostStatusUrl"="https://sjremetrics.java.com/b/ss//6"
+"<strong>EnableJavaUpdate"=dword:00000000</strong>
+"<strong>NotifyDownload"=dword:00000001</strong>
+"UpdateSchedule"=dword:00000010
+"Frequency"=dword:01010000
+"UpdateMin"=dword:00000010
+"VisitorId"="2f22e551-8912880f"
+"<strong>NotifyInstall"=dword:00000000</strong></code></p>
 
     </div>
   </div>
@@ -107,7 +106,7 @@
     <div class="row">
       <div class="col l6 s12">
         <h5 class="white-text">code for coffee</h5>
-        <p class="grey-text text-lighten-4"><em>Something witty & hip should go here.</em></p>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver, yet another software engineer and business cat afficiando.</strong></em></p>
       </div>
       <div class="col l6 s12">
         <h5 class="white-text">Links and Social</h5>

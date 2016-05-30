@@ -6,9 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Contact</title>
-  <meta name="description" content="Write an awesome description for your portfolio here!
-">
+  <title>Binding parameters to Web API controller with Backbone.js</title>
+  <meta name="description" content="This is a really quick write-up of an issue that isn’t well documented. One of our work related projects uses Backbone.js on the front end to handle models a...">
 
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
@@ -16,7 +15,7 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
   <script type="text/javascript" src="/javascripts/app.js"></script>
-  <link rel="canonical" href="https://code-for-coffee.github.io/contact/">
+  <link rel="canonical" href="https://code-for-coffee.github.io/2014/06/24/Binding-parameters-to-Web-API-controllers-with-Backbone.js.html">
   <link rel="alternate" type="application/rss+xml" title="code for coffee" href="https://code-for-coffee.github.io/feed.xml" />
 </head>
 
@@ -71,24 +70,31 @@
     <div class="page-content">
       <div class="wrapper">
         <div class="section no-pad-bot" id="index-banner">
-<section class="container center">
-  <br><br>
-  <div class="row">
-    <picture>
-      <source srcset="/logo-mobile.png" media="(max-width: 900px)">
-      <img src="/logo-mobile.png" alt="Code for Coffee Logo">
-    </picture>
-    <h2 class="header red-text text-darken-4">Contact</h2>
-  </div>
+  <div class="container">
+    <br><br>
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">Binding parameters to Web API controller with Backbone.js</h2>
+      <em class="center">Posted on Jun 24, 2014</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <p>This is a really quick write-up of an issue that isn’t well documented. One of our work related projects uses Backbone.js on the front end to handle models and collections and is powered by ASP.NET Web API 2.0. I ran into an issue regarding using the built in model functions <strong>.save()</strong> and <strong>.fetch()</strong>.</p>
 
-</section>
+<p>I found that to pass parameters in (either from a model or somewhere else) when making a <strong>GET</strong> request (such as the <strong>model.fetch()</strong> method) to the controller, you needed to declare the model/parameter with the <strong>[FromUri]</strong> attribute. Example:</p>
+<pre>public testSampleModel Get([FromUri]testSampleModel  model) { ... }</pre>
+<p>How to send in a parameter on a <strong>.fetch()</strong>? Good question - here’s the answer (using jQuery):</p>
+<pre>myModel.fetch({ data: $.param({ paramName: "foobar"}) });</pre>
+<p>To pass parameters/model when making a POST request (such as model.save()), I found that you must declare the model/parameter as either [FromBody] or without an attribute at all. Example:</p>
+<pre>public testSampleModel Get([FromBody]testSampleModel  model) { ... }</pre>
+<p>That’s it - just a quick, informative post.</p>
+
+    </div>
+  </div>
 </div>
-<section class="container center">
-  <div class="row">
-    $$$ plz thx bai
-  </div>
-</section>
-
       </div>
     </div>
 

@@ -1,0 +1,14 @@
+---
+layout: post
+title: Review Visual Studio 2013 Cookbook
+---
+
+Visual Studio has made a significant amount of changes in 2010 and 2012; 2013 is no different. Learning all of the new features from version to version isn't always straightforward. It can also be a daunting task to learn the IDE in and out for new users. <a href="http://www.packtpub.com/visual-studio-2013-cookbook/book">Visual Studio 2013 Cookbook</a> by Jeff Martin and Richard Banks is a great bridge to new users and experienced users alike to the features of Visual Studio's latest release, 2013. Don't be fooled by the name - the book also covers ASP.NET MVC5, Windows Store Apps, Async code, and .NET Platform 4.5.1.
+
+I primarily focus on the web development aspect of ASP.NET (MVC, Web API) and this book's coverage of the platform's latest technology is great. It covers MVC5 fairly well - from getting started to the base template changes with Bootstrap. It also covers Microsoft's support for viewing your page in multiple browsers (hooray). There is also a solid introduction to HTML5/CSS3 as well as how to use Javascript Intellisense (yay). There's also a solid overview of the System.Web.Optimization framework (Bundling and Minification). The introduction to TypeScript is great (mainly because TypeScript is awesome - writing ES6 strictly typed code that compiles into Javascript).
+
+Two chapters that really stood out were the ones that covered how to use the Visual Studio debugger (this is great for new developers) and Team Foundation Server. Knowing how to use the debugging tools in Visual Studio gives you complete insight into bug-fixing and is in my opinion one of the most important tools a developer can have. In regards to the TFS coverage, I've used Subversion and Git in the past but recently began to use TFS. The tutorials had me up to speed in no time using TFS (even though I still prefer Git as my choice of source control).
+
+The Windows Store tutorials will get you started on Microsoft's modern UI in no time; if you're interested in designing tablet/Windows Phone apps, you'll be pleasantly surprised. The chapters covering the new platform changes with ASP.NET are solid, also (such as the C# Async code examples). For those of you who develop Python on Windows (or are curious), there is a great introduction to IronPython.
+
+So, here is my verdict: this is the Visual Studio book that I wish I had available when I started programming using Visual Studio. The topics covered are better written than the Microsoft examples, the screenshots and figures are easy to read, and the amount of topics covered introduce you to new concepts and features in the Microsoft ecosystem. It also serves as a nice upgrade guide to users who may be using Web Forms, Windows Forms, and older versions of ASP.NET MVC. If you have recently upgraded from Visual Studio 2010 or older (and even 2012), this book will help you get accustomed to the new tools available to you.

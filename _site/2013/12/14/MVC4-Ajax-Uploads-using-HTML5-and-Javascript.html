@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>MVC4 AJAX uploads using HTML5/Javascript</title>
+  <meta name="description" content="This is a quick walkthrough showcasing how to use ASP.NET MVC4 to upload files via AJAX. You can take a look at the code on github. This functionality requir...">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <link rel="canonical" href="https://code-for-coffee.github.io/2013/12/14/MVC4-Ajax-Uploads-using-HTML5-and-Javascript.html">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="https://code-for-coffee.github.io/feed.xml" />
+</head>
+
+
+  <body>
+
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
+  </a>
+    <ul class="right hide-on-med-and-down">
+      
+        
+      
+        
+      <li><a class="page-link" href="/about/">About</a></li>
+        
+      
+        
+      <li><a class="page-link" href="/contact/">Contact</a></li>
+        
+      
+        
+      <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      
+        
+      
+        
+        <li><a class="page-link" href="/about/">About</a></li>
+        
+      
+        
+        <li><a class="page-link" href="/contact/">Contact</a></li>
+        
+      
+        
+        <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+  </div>
+</nav>
+</div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">MVC4 AJAX uploads using HTML5/Javascript</h2>
+      <em class="center">Posted on Dec 14, 2013</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <p>This is a quick walkthrough showcasing how to use ASP.NET MVC4 to upload files via AJAX. You can take a look at the code on <a href="https://github.com/code-for-coffee/mvc4-html5-ajax-upload">github</a>. This functionality requires a current version of Firefox, Chrome, or Internet Explorer 10+.</p>
+
+<p>We’ll begin with the controller. Your <code>controller.cs</code> file should have a new <strong>JsonResult</strong> to receive whatever you’re uploading. Inside, you’ll iterate through each Request.File sent to the server using the  <a href="http://msdn.microsoft.com/en-us/library/system.web.httppostedfile">HttpPostedFileBase</a> class.</p>
+
+<p><code></code></p>
+
+<p>[HttpPost]
+public JsonResult Upload()
+{
+for (int i = 0; i &lt; Request.Files.Count; i++) {
+// for each file being sent over…
+HttpPostedFileBase file = Request.Files[i];</p>
+
+<p>// Example of gathering information from each file
+int fileSize = file.ContentLength;
+string fileName = file.FileName;
+string mimeType = file.ContentType;</p>
+
+<p>// Open input stream
+System.IO.Stream fileContent = file.InputStream;</p>
+
+<p>// do stuff here
+// do.stuff.huzzah</p>
+
+<p>}
+// Return JSON
+return Json(“Uploaded “ + Request.Files.Count + “ file(s)”);
+}</p>
+
+<p>&lt;/code&gt;</p>
+
+<p>Now, the fun part: the HTML5. First, you need to create a new <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> object.</p>
+
+<p><code>
+var formdata = new FormData();
+</code></p>
+
+<p>Next, you’ll iterate through each file.</p>
+
+<p><code>for (i = 0; i &lt; uploadedFiles.files.length; i++) {
+}
+</code>
+Inside of your loop, you can append each file to the FormData object.</p>
+
+<p><code></code></p>
+
+<p>formdata.append(uploadedFiles.files[i].name, uploadedFiles.files[i]);
+&lt;/code&gt;</p>
+
+<p>Finally, you can send the files over via a traditional Ajax call.</p>
+
+<p><code>
+var xhr = new XMLHttpRequest();
+xhr.open('POST', ajaxPostPath);
+xhr.send(formdata);
+xhr.onreadystatechange = function () {
+if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
+document.getElementById(idToPlaceResponseText).innerHTML = xhr.responseText;
+}
+</code>
+That’s it! Obviously, you can do some nifty stuff with the files if they’re supported. The code on the github project is designed to upload only files that are an Image MIME type and display a preview inside of an &lt;code&gt;id&lt;/code&gt;.</p>
+
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">code for coffee</h5>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver, yet another software engineer and business cat afficiando.</strong></em></p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Links and Social</h5>
+        <ul>
+          <li><a class="white-text" href="#!">Github</a></li>
+          <li><a class="white-text" href="#!">Twitter</a></li>
+          <li><a class="white-text" href="#!">Contact</a></li>
+          <li><a class="white-text" href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Questions? Comments? <a class="orange-text text-lighten-4" href="mailto:james@codeforcoffee.org">Drop me a line</a>.
+      Website designed using <a class="orange-text text-lighten-4" href="http://materializecss.com" target="_blank">Materialize</a>.
+    </div>
+  </div>
+</footer>
+
+  </body>
+
+</html>
