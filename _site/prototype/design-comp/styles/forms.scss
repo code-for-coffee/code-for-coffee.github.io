@@ -1,0 +1,8 @@
+input {
+  border-radius: .85em;
+  height: 2em;
+  outline: 2px solid rust;
+  :active {
+    outline: 2px solid $cherry;
+  }
+}
