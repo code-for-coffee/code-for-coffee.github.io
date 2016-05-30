@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Code for Coffee</title>
+    <title>code for coffee</title>
     <description>Write an awesome description for your portfolio here!
 </description>
     <link>https://code-for-coffee.github.io/</link>
     <atom:link href="https://code-for-coffee.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 29 May 2016 23:55:52 -0500</pubDate>
-    <lastBuildDate>Sun, 29 May 2016 23:55:52 -0500</lastBuildDate>
+    <pubDate>Mon, 30 May 2016 00:00:34 -0500</pubDate>
+    <lastBuildDate>Mon, 30 May 2016 00:00:34 -0500</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
