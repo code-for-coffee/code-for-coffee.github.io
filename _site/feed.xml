@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 01 Nov 2016 22:54:21 -0500</pubDate>
-    <lastBuildDate>Tue, 01 Nov 2016 22:54:21 -0500</lastBuildDate>
+    <pubDate>Tue, 01 Nov 2016 23:04:20 -0500</pubDate>
+    <lastBuildDate>Tue, 01 Nov 2016 23:04:20 -0500</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -431,8 +431,8 @@ document.getElementById(idToPlaceResponseText).innerHTML = xhr.responseText;
 That’s it! Obviously, you can do some nifty stuff with the files if they’re supported. The code on the github project is designed to upload only files that are an Image MIME type and display a preview inside of an &amp;lt;code&amp;gt;id&amp;lt;/code&amp;gt;.&lt;/p&gt;
 </description>
         <pubDate>Sat, 14 Dec 2013 00:00:00 -0600</pubDate>
-        <link>http://localhost:4000/MVC4-Ajax-Uploads-using-HTML5-and-Javascript</link>
-        <guid isPermaLink="true">http://localhost:4000/MVC4-Ajax-Uploads-using-HTML5-and-Javascript</guid>
+        <link>http://localhost:4000/mvc4-ajax-uploads-using-html5javascript</link>
+        <guid isPermaLink="true">http://localhost:4000/mvc4-ajax-uploads-using-html5javascript</guid>
         
         
       </item>
@@ -597,36 +597,23 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
       </item>
     
       <item>
-        <title>Windows Remote Desktop Connection, VMWare Fusion 5.0, and NAT Forwards</title>
-        <description>&lt;h3&gt;Good news, everyone! This still works in VMWare Fusion 6.0!&lt;/h3&gt;
+        <title>Disabling Java update notifications in Windows</title>
+        <description>&lt;p&gt;Java updates - everyone knows about them because you’re prompted to update them all the time. While it is important to keep your system up to date due to zero day exploits and other bugs, most people tend to ignore these updates and just close the notification window. At work, we’ve recently begun automatically pushing Java updates out on our Windows workstations through WSUS with &lt;a href=&quot;http://wsuspackagepublisher.codeplex.com/&quot; target=&quot;_blank&quot;&gt;Wsus Package Publisher&lt;/a&gt;; however, the Java update notifications can still appear from time to time. To alleviate this annoyance for our employees, I’ve put together a registry tweak that can be pushed out to any machine that’ll disable the notifications once and for all. It is a simple registry script; just run and close (or script it to run with Powershell once). You can grab the source from my &lt;a href=&quot;https://github.com/code-for-coffee/DisableJavaUpdate&quot; target=&quot;_blank&quot;&gt;Github repo&lt;/a&gt;. Alternatively, here are the entries in the registry to update if you want to handle it yourself. The entries you need to add/update are in bold.&lt;/p&gt;
 
-&lt;p&gt;I decided to put an older Macbook to use for hosting test lab virtual machines; a few of which are running various versions of Windows. After enabling Remote Desktop Connections locally on the virtual machines I made sure to set VMWare Fusion’s network adapter to Bridged (Autodetect). With the built in OS X firewall disabled I should be able to remote into any Windows machine, right? Apparently not! I tried to look around the internet for help since Fusion doesn’t have all of NAT settings forward facing that VMWare Workstation has but came up empty handed with tweaks for Fusion 3 and 4. Well, here is a step-by-step walkthrough on how to allow Remote Desktop through OS X and VMWare Fusion 5.&lt;/p&gt;
-&lt;ol&gt;
-	&lt;li&gt;&lt;span style=&quot;line-height: 13px;&quot;&gt;Install &lt;strong&gt;VMWare Fusion 5&lt;/strong&gt; and a Windows based operating system on a virtual machine.&lt;/span&gt;&lt;/li&gt;
-	&lt;li&gt;Check your virtual machine's IP settings (ipconfig) verify that DHCP is enabled.&lt;/li&gt;
-	&lt;li&gt;Shut down the virtual machine and select Network Adapter &amp;gt; Bridged Networking &amp;gt; Select &lt;strong&gt;Autodetect&lt;/strong&gt;.&lt;/li&gt;
-	&lt;li&gt;Open Mac OS X &lt;em&gt;System Preferences. &lt;/em&gt;Select &lt;em&gt;Security and Privacy&lt;/em&gt; &amp;gt; &lt;i&gt;Firewall.&lt;/i&gt; &lt;strong&gt;Enable&lt;/strong&gt; the firewall and select &lt;em&gt;Firewall Options&lt;/em&gt;. Select the VMWare Fusion application and &lt;strong&gt;Allow incoming connections&lt;/strong&gt;. Note: if this machine is in your network's DMZ, you should highly consider enabling stealth mode.&lt;em&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;
-&lt;/span&gt;&lt;/em&gt;&lt;/li&gt;
-	&lt;li&gt;Now, we need to direct Remote Desktop Connections to VMWare. From your Mac (or via an SSH connection), browse to:
-&lt;em&gt;/Library/Preferences/VMWare Fusion/&lt;/em&gt;&lt;/li&gt;
-	&lt;li&gt;Open the &lt;strong&gt;networking&lt;/strong&gt; file: &lt;i&gt;sudo vi networking&lt;/i&gt;. For an example of what the file should look like, &lt;a href=&quot;http://pastebin.com/UJhK2DEn&quot;&gt;here is a link&lt;/a&gt; to the &lt;code&gt;Library/Preferences/VMWare Fusion/networking&lt;/code&gt; file on pastebin.&lt;/li&gt;
-	&lt;li&gt;Look for the &lt;em&gt;[incomingtcp] &lt;/em&gt;section. If you do not find one, create one.&lt;/li&gt;
-	&lt;li&gt;Add the following rule underneath: &lt;em&gt;3389=yourmacsipaddress:3389 &lt;/em&gt;(tip: Insert will allow you to edit lines, &lt;em&gt;:quit&lt;/em&gt; or &lt;em&gt;:exit&lt;/em&gt; will close vi).&lt;/li&gt;
-	&lt;li&gt;Restart VMWare Fusion and launch your virtual machine. From your client machine, you'll want to connect via Remote Desktop Client to the static IP you set your virtual machine to. Enter in the virtual machine's credentials and you're in.&lt;/li&gt;
-	&lt;li&gt;That's it! You can now use the Windows RDC on various virtual machines hosted on your Mac as long as you give them each specific, static IPs.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Hope this helps. If you have any questions or comments feel free to post them.&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Updated 11/29/13: This continues to work in VMWare Fusion 6.0.&lt;/li&gt;
-&lt;li&gt;Update 12/14/13: Added link to pastebin of the &lt;strong&gt;networking&lt;/strong&gt; file.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&amp;lt;/em&amp;gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy]
+&quot;Method&quot;=&quot;jchrome&quot;
+&quot;PostStatusUrl&quot;=&quot;https://sjremetrics.java.com/b/ss//6&quot;
+&quot;&lt;strong&gt;EnableJavaUpdate&quot;=dword:00000000&lt;/strong&gt;
+&quot;&lt;strong&gt;NotifyDownload&quot;=dword:00000001&lt;/strong&gt;
+&quot;UpdateSchedule&quot;=dword:00000010
+&quot;Frequency&quot;=dword:01010000
+&quot;UpdateMin&quot;=dword:00000010
+&quot;VisitorId&quot;=&quot;2f22e551-8912880f&quot;
+&quot;&lt;strong&gt;NotifyInstall&quot;=dword:00000000&lt;/strong&gt;&lt;/code&gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 03 Jul 2013 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards</link>
-        <guid isPermaLink="true">http://localhost:4000/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards</guid>
+        <link>http://localhost:4000/disabling-java-update-notifications</link>
+        <guid isPermaLink="true">http://localhost:4000/disabling-java-update-notifications</guid>
         
         
       </item>

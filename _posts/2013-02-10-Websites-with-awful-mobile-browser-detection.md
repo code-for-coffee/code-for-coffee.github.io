@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Websites with awful mobile browser detection
+title: Websites with awful mobile browser detection (and a fix)
 date: 2013-02-10
 tags: javascript
 ---
