@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Introduction to Handlebars
-date: 2015-05-09
 published: false
 ---
 
