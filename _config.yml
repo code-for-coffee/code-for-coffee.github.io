@@ -10,3 +10,4 @@ github_username:  code-for-coffee
 # Build settings
 markdown: kramdown
 permalink: /:title
+disqus_shortname: codeforcoffee

@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 01 Nov 2016 20:25:06 -0500</pubDate>
-    <lastBuildDate>Tue, 01 Nov 2016 20:25:06 -0500</lastBuildDate>
+    <pubDate>Tue, 01 Nov 2016 22:02:01 -0500</pubDate>
+    <lastBuildDate>Tue, 01 Nov 2016 22:02:01 -0500</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -175,8 +175,8 @@ Config file generated at &quot;../path/to/your/project/karma.conf.js&quot;.&lt;/
 &lt;div id=&quot;LC1&quot; class=&quot;line&quot;&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 24 Apr 2014 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio</link>
-        <guid isPermaLink="true">http://localhost:4000/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio</guid>
+        <link>http://localhost:4000/Setting-Up-Angular-JS-Jasmine-and-Karma-in-Visual-Studio</link>
+        <guid isPermaLink="true">http://localhost:4000/Setting-Up-Angular-JS-Jasmine-and-Karma-in-Visual-Studio</guid>
         
         
       </item>

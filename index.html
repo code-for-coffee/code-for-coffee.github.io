@@ -14,6 +14,7 @@ title: Home
           <img src="/logo-mobile.png" alt="Code for Coffee Logo">
         </picture>
         {% assign headline_post = site.posts.first %}
+        {% assign excerpt = headline_post.excerpt %}
         {% assign headline_content = headline_post.content %}
         {% include headline-post.html %}
       </div>
@@ -22,7 +23,7 @@ title: Home
 
   <section class="container center">
     <div class="row">
-      <h3 class="header center red-text text-darken-4">Older Posts</h3>
+      <h3 class="header center red-text text-darken-4">All Posts</h3>
       {% for post in site.posts %}
       <li>
         <h6>
