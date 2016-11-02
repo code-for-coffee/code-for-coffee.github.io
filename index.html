@@ -7,7 +7,6 @@ title: Home
 <div class="home">
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
-      <br><br>
       <div class='row center'>
         <picture>
           <source srcset="/logo-mobile.png" media="(max-width: 900px)">
@@ -16,7 +15,7 @@ title: Home
       </div>
       <div class="row">
         {% for post in site.posts limit:3  %}
-            <h3 class="header red-text text-darken-4">{{ post.title }}</h3>
+            <h3 class="header red-text text-darken-4"><a class="header red-text text-darken-4" href='{{ post.url | prepend: site.baseurl }}'>{{ post.title }}</a></h3>
             <em class="">Posted on {{ post.date | date: "%b %-d, %Y" }}{% if post.author %} • {{ post.author }}{% endif %}{% if post.meta %} • {{ post.meta }}{% endif %}</em>
             <h6 class="header  red-text text-darken-3">{{ post.description }}</h6>
 
@@ -25,8 +24,6 @@ title: Home
                 {{ post.excerpt }} <a class="header center red-text text-dark-3" href="{{ post.url | prepend: site.baseurl }}"><em>Read more...</em></a>
               </div>
             </article>
-              
-            
         {% endfor %}
       </div>
     </div>

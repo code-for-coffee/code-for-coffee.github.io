@@ -1,3 +1,9 @@
+h1,h2,h3,h4,h5,h6 {
+  color: #6d4c41;
+}
+a,a:link,a:visited,a:active,a:hover {
+  color: #F44336;
+}
 .materialize-red {
   background-color: #e51c23 !important; }
 

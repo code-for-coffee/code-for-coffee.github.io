@@ -39,6 +39,14 @@
 @import "components/date_picker/default.date";
 @import "components/date_picker/default.time";
 
+a,a:visited,a:hover {
+  color: #F44336;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color: #6d4c41;
+}
+
 .gist {
   color:#000;
 }
