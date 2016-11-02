@@ -8,26 +8,37 @@ title: Home
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
-      <div class="row center">
+      <div class='row center'>
         <picture>
           <source srcset="/logo-mobile.png" media="(max-width: 900px)">
           <img src="/logo-mobile.png" alt="Code for Coffee Logo">
         </picture>
-        {% assign headline_post = site.posts.first %}
-        {% assign excerpt = headline_post.excerpt %}
-        {% assign headline_content = headline_post.content %}
-        {% include headline-post.html %}
+      </div>
+      <div class="row">
+        {% for post in site.posts limit:3  %}
+            <h3 class="header red-text text-darken-4">{{ post.title }}</h3>
+            <em class="">Posted on {{ post.date | date: "%b %-d, %Y" }}{% if post.author %} • {{ post.author }}{% endif %}{% if post.meta %} • {{ post.meta }}{% endif %}</em>
+            <h6 class="header  red-text text-darken-3">{{ post.description }}</h6>
+
+            <article class="post-content">
+              <div class="left-align">
+                {{ post.excerpt }} <a class="header center red-text text-dark-3" href="{{ post.url | prepend: site.baseurl }}"><em>Read more...</em></a>
+              </div>
+            </article>
+              
+            
+        {% endfor %}
       </div>
     </div>
   </div>
 
-  <section class="container center">
+  <section class="container">
     <div class="row">
-      <h3 class="header center red-text text-darken-4">All Posts</h3>
+      <h3 class="header red-text text-darken-4">Browse all posts</h3>
       {% for post in site.posts %}
       <li>
         <h6>
-          <a class="header center red-text text-dark-3" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }} on {{ post.date | date: "%b %-d, %Y" }}</a>
+          <a class="header red-text text-dark-3" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }} on {{ post.date | date: "%b %-d, %Y" }}</a>
         </h6>
         <em> {{ post.description | date: "%b %-d, %Y" }}</em>
       </li>
