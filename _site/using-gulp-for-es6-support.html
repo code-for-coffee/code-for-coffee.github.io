@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using Gulp for ES6/Javascript 2015 Support</title>
+  <meta name="description" content="Wouldn’t it be nice if there was a way to convert ES6 to code every browser can support? Of course! Wouldn’t it be cool if you could include module support f...">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <link rel="canonical" href="http://localhost:4000/using-gulp-for-es6-support">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="http://localhost:4000/feed.xml" />
+</head>
+
+
+  <body>
+
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
+  </a>
+<!--     <ul class="right hide-on-med-and-down">
+      
+        
+      
+        
+      <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      
+        
+      
+        
+        <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
+  </div>
+</nav>
+</div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">Using Gulp for ES6/Javascript 2015 Support</h2>
+      <em class="center">Posted on Jan 18, 2016</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <p>Wouldn’t it be nice if there was a way to convert ES6 to code every browser can support? Of course! Wouldn’t it be cool if you could include module support from Node in client side code? Certainly. What could do this sort of magic for us? <em>Gulp Tasks</em>!</p>
+
+<h4 id="goals">Goals</h4>
+
+<p>By the end of this tutorial, you will understand:</p>
+<ul>
+  <li>What Gulp is and what it can do</li>
+  <li>How to install Gulp on your computer</li>
+  <li>How to write a Gulp task and run it</li>
+  <li>How to add use additional modules with Gulp</li>
+</ul>
+
+<h4 id="introducing-gulp">Introducing: Gulp</h4>
+
+<ul>
+  <li>Gulp is a software built on Node.</li>
+  <li>It runs <strong>tasks</strong> that manipulate files on your system.</li>
+  <li>It is an active, open-source project.</li>
+  <li>There are many community-built plugins built to work directly with gulp.</li>
+  <li>It is commonly used for bundling, minificiation, and ES6 support.</li>
+  <li><strong>Grunt</strong> is a popular alternative to Gulp.</li>
+</ul>
+
+<h4 id="installing-gulp">Installing Gulp</h4>
+
+<p>To install <strong>Gulp</strong>, we should have a Node.js environment prepared. If you do not have one, you should visit <a href="Nodejs.org">https://nodejs.org/en/</a> to learn more.</p>
+
+<ol>
+  <li>You’ll want to install gulp globally. You can do this by running the <code class="highlighter-rouge">npm install gulp -g</code> command.</li>
+  <li>This states that we want to use <code class="highlighter-rouge">npm</code> to install the <code class="highlighter-rouge">gulp</code> package globally (for any project to use).</li>
+  <li>Gulp requires that we store our tasks in a <code class="highlighter-rouge">gulpfile.js</code>. This should be in the same directory as your <code class="highlighter-rouge">package.json</code>.</li>
+  <li>We also need to include gulp in our project. To do that, we will run <code class="highlighter-rouge">npm install gulp --save-dev</code>.</li>
+  <li>Now, we should run <code class="highlighter-rouge">gulp</code>!</li>
+  <li>Oh no - we ran into a problem.</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>Using gulpfile ~/path/to/gulpfile.js
+Task <span class="s1">'default'</span> is not <span class="k">in </span>your gulpfile
+Please check the documentation <span class="k">for </span>proper gulpfile formatting
+</code></pre>
+</div>
+
+<p>Let’s solve this problem by defining a Gulp task.</p>
+
+<h4 id="defining-a-gulp-task">Defining a Gulp Task</h4>
+
+<ul>
+  <li>What is a task?</li>
+  <li>A task is something we must do to achieve a result.</li>
+  <li>In Gulp, we create tasks to perform tasks that can transform our code.</li>
+  <li>A task may perform one job; it may also perform many at once.</li>
+</ul>
+
+<p>In our <code class="highlighter-rouge">gulpfile.js</code> we need to include the <code class="highlighter-rouge">gulp</code> module. To do this, we should define a variable: <code class="highlighter-rouge">var gulp = require('gulp');</code> This will allow us to call upon Gulp to <strong>create a task</strong>.</p>
+
+<h5 id="my-first-default-task">My First (Default) Task</h5>
+
+<p>After declaring our <code class="highlighter-rouge">gulp</code> variable, we should create our first task. This will require us to call upon Gulp to define a task. We must also have a name for our task. By <em>default</em>, Gulp requires a <code class="highlighter-rouge">default</code> task. It is the first task that Gulp will look for when reading your <code class="highlighter-rouge">gulpfile.js</code>. Let’s define our first (default) task:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp'</span><span class="p">);</span>
+
+<span class="c1">//define a task with the name of 'default' </span>
+<span class="c1">// and a callback to perform when the task is ran</span>
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'I am the default task. Hear me roar'</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+<p>(<a href="https://github.com/code-for-coffee/gulp_workflows/blob/master/gulpfile_lo3.js">Source</a>)</p>
+
+<p>In your terminal, run <code class="highlighter-rouge">gulp</code>. This will have the library look for a <code class="highlighter-rouge">default</code> task in your <code class="highlighter-rouge">gulpfile.js</code>. It will then execute the callback that you define for your task. The output will appear as follows:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>Starting <span class="s1">'default'</span>...
+I am the default task. Hear me roar
+Finished <span class="s1">'default'</span> after 144 μs
+</code></pre>
+</div>
+
+<h4 id="project-a-gulp-workflow-that-supports-es6-and-modules-for-the-web">Project: A Gulp Workflow that supports ES6 and Modules for the Web</h4>
+
+<p>We’re going to include a few external modules to create a Gulp workflow. Our workflow will support:</p>
+
+<ul>
+  <li>Node-style <code class="highlighter-rouge">require()</code> statements using <strong>Browserify</strong>.</li>
+  <li>Support ES6 (ES2016) and JSX (for React.js) using <strong>Babelify</strong> (and a few Babel plugins).</li>
+  <li>Compile individual modules together using <strong>vinyl-source-stream</strong>.</li>
+</ul>
+
+<p>We need to install a variety of modules. The installation commands are:</p>
+<ul>
+  <li><code class="highlighter-rouge">npm install --save-dev browserify</code></li>
+  <li><code class="highlighter-rouge">npm install --save-dev babelify</code></li>
+  <li><code class="highlighter-rouge">npm install --save-dev babel-preset-es2015 babel-preset-react</code></li>
+  <li><code class="highlighter-rouge">npm install --save-dev vinyl-source-stream</code></li>
+</ul>
+
+<p>We can then add our modules to our <code class="highlighter-rouge">gulpfile.js</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">browserify</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'browserify'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">babelify</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'babelify'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'vinyl-source-stream'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>We’re all set with our dependencies. Now, it is time to create a file structure for our project. We should create a folder called <code class="highlighter-rouge">source</code> for our actual Javascript application. We’ll create an <code class="highlighter-rouge">app.js</code> in that source directory. We should also create a <code class="highlighter-rouge">build</code> folder to contain our final, production-ready Javascript file.</p>
+
+<p><code class="highlighter-rouge">touch source/.gitkeep build/.gitkeep source/app.js</code></p>
+
+<p>You’ll notice that there is currently no file inside of our <code class="highlighter-rouge">build</code> directory other than a <code class="highlighter-rouge">.gitkeep</code>. We should define a task that will use the installed modules to transform our code and make it usable on the front-end. We should update our <code class="highlighter-rouge">gulpfile.js</code>’s <strong>default</strong> task.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">browserify</span><span class="p">(</span><span class="s1">'./source/app.js'</span><span class="p">)</span>
+        <span class="p">.</span><span class="nx">transform</span><span class="p">(</span><span class="s2">"babelify"</span><span class="p">,</span> <span class="p">{</span><span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s2">"es2015"</span><span class="p">,</span> <span class="s2">"react"</span><span class="p">]})</span>
+        <span class="p">.</span><span class="nx">bundle</span><span class="p">()</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">source</span><span class="p">(</span><span class="s1">'build.js'</span><span class="p">))</span>
+        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">'./build/'</span><span class="p">))</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Let’s identify what is going on inside of our <strong>default</strong> task:</p>
+<ul>
+  <li>The task uses <strong>browserify</strong> to include our modules that are required in our <code class="highlighter-rouge">source/app.js</code> file.</li>
+  <li>It then transforms any ES6 (ES2015) and React JSX templates into usable code on the client side. This usually translates our modern Javascript code into ES5 that most current evergreen browsers support.</li>
+  <li>The task then bundles our files together.</li>
+  <li>Next, the task creates a file called <code class="highlighter-rouge">build.js</code>.</li>
+  <li>Gulp finally places the <code class="highlighter-rouge">build.js</code> inside of a destination (<code class="highlighter-rouge">dest</code>) folder of <code class="highlighter-rouge">build/</code>.</li>
+  <li><a href="https://github.com/code-for-coffee/gulp_workflows/blob/master/gulfpile_lo4.js">The full version of this Gulpfile.js may be found here</a>.</li>
+</ul>
+
+<p>Run <code class="highlighter-rouge">gulp</code> in your terminal. Inspect the <code class="highlighter-rouge">build/build.js</code> file. <em>What do you see?</em></p>
+
+<h5 id="verifying-that-everything-works">Verifying that everything works</h5>
+
+<p>Let’s write some ES6. We’ll then use <strong>gulp</strong> to run tasks that will create a file prepared for the client side. To verify everything works, we can run the script generated in the console.</p>
+
+<p>In my <code class="highlighter-rouge">app.js</code>, I want todefine an ES6 class called HelloWorld. The class should have a toString() method that returns ‘Hello, world!’. I will then instantiate a new instance of the class and console log the <code class="highlighter-rouge">toString()</code> method that it contains.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">// define an ES6 class called HelloWorld</span>
+<span class="kr">class</span> <span class="nx">HelloWorld</span> <span class="p">{</span>
+  <span class="c1">// define a toString() method on the class</span>
+  <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">'Hello, world!'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// instantiate a new instance of HelloWorld</span>
+<span class="kd">var</span> <span class="nx">sample</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HelloWorld</span><span class="p">();</span>
+<span class="c1">// console.log sample's toString() method</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sample</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+</code></pre>
+</div>
+<p>(<a href="https://github.com/code-for-coffee/gulp_workflows/blob/master/app.js">Source</a>)</p>
+
+<p>Now, we should run <code class="highlighter-rouge">gulp</code> in the terminal. Upon completion, open the <code class="highlighter-rouge">build/build.js</code> file. It will contain a large amount of obfuscated code such as <code class="highlighter-rouge">(function e(t,n,r){function s(o,u)....</code>. Copy and paste this code into a browser’s Javascript console. Inside the console, you should see <code class="highlighter-rouge">Hello, world!</code>.</p>
+
+<h5 id="tips-and-tricks">Tips and Tricks</h5>
+
+<ul>
+  <li>You will need to re-run the <code class="highlighter-rouge">gulp</code> command every time you make a change.</li>
+  <li>There is <code class="highlighter-rouge">nodemon</code> support for gulp.</li>
+  <li>You can have <code class="highlighter-rouge">gulp</code> <strong>watch</strong> files for changes using <a href="https://www.npmjs.com/package/gulp-watch">gulp-watch</a>.</li>
+</ul>
+
+
+    </div>
+    <div class="row center">
+    <h4>Comments</h4>
+    
+      
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname  = 'codeforcoffee';
+  var disqus_identifier = '/using-gulp-for-es6-support';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">code for coffee</h5>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver. He is an experienced mobile and full stack engineer that specializes in Javascript, Android, Node.js, and ASP.NET. </p><p></p></strong></em></p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Links and Social</h5>
+        <ul>
+          <li><a class="white-text" href="https://github.com/code-for-coffee" target="_blank">Github</a></li>
+          <li><a class="white-text" href="https://twitter.com/code4coffee" target="_blank">Twitter</a></li>
+          <li><a class="white-text" href="https://vimeo.com/codeforcoffee" target="_blank">Vimeo</a></li>
+          <li><a class="white-text" href="http://stackoverflow.com/users/1952160/code4coffee" target="_blank">Stack Overflow</a></li>
+          <li><a class="white-text" href="/contact">Contact</a></li>
+          <li><a class="white-text" href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Questions? Comments? <a class="orange-text text-lighten-4" href="mailto:james@codeforcoffee.org">Drop me a line</a>.
+      This website was designed following Material Guidelines using <a class="orange-text text-lighten-4" href="http://materializecss.com" target="_blank">Materialize</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86725209-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+
+</html>

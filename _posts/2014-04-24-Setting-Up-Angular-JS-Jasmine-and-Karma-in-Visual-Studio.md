@@ -3,7 +3,7 @@ layout: post
 title: Setting up AngularJS, Jasmine, and Karma in Visual Studio
 ---
 
-<h2>Introduction</h2>
+<h4>Introduction</h4>
 I've recently been tasked to research <strong>AngularJS</strong> to use on top of Visual Studio. After reading the official tutorial, unofficial tutorials, and Manning's early access <strong>AngularJS in Action </strong>and <strong>Getting MEAN </strong>(which stands for mongoDB/Express/AngularJS/Node.js), I found that there are too few guides for Windows users. If you're like me, you probably are running into issues installing and running <strong>karma</strong>, would like to run Javascript tests in the convenience of the Test Explorer (or Resharper), and want to let NuGet handle all of your package updating (bower is great, but not for .NET environments). Well, this tutorial is here to help! We'll get you up and running with AngularJS, Jasmine, and Karma.
 
 All of this has been setup/tested on:
@@ -12,7 +12,7 @@ All of this has been setup/tested on:
 	<li>Visual Studio 2013 Professional</li>
 	<li>Google Chrome</li>
 </ul>
-<h2>Getting Started</h2>
+<h4>Getting Started</h4>
 Go ahead and install the following software:
 <ul>
 	<li><a href="http://nodejs.org/">Node.js</a> (Windows installer) - <em>install everything!</em></li>
@@ -26,7 +26,7 @@ Once all of that is setup it is time to set up our project environment. Go ahead
 Now, we need to grab a few Javascript libraries from (hint: if you prefer, you can grab these from NuGet): <a href="https://angularjs.org/">AngularJS</a> (I recommend grabbing the entire ZIP that includes all libraries) and <a href="https://github.com/pivotal/jasmine">Jasmine</a> (you can use another testing framework if you prefer but the official AngularJS examples/tutorials use Jasmine).
 
 Okay - you have all of the tools either installed (or about to be).
-<h2>Setting up the project folder</h2>
+<h4>Setting up the project folder</h4>
 You should have two projects: Your ASP.NET MVC/Web API project and your Tests project. Inside of the ASP.NET project, we're going to add the following folders: <strong>ng-views</strong> and <strong>ng-scripts</strong>.
 
 The ng-views folder will contain all of your Angular-specific views. The ng-scripts folder will contain your controllers, models, directives, and so forth. In the <strong>Tests</strong> project, create an <strong>ng-tests</strong> project. <em>If you installed Angular and Jasmine via NuGet you should be able to skip to the next paragraph. </em>Now, extract your AngularJS archive and copy <strong>all </strong>of the scripts to the ~/<strong>Scripts/Angular/</strong> folder (you'll need to create the subfolder). Unarchive Jasmine and copy the contents of the <strong>lib</strong> folder to <strong>~/Scripts/Jasmine/</strong>. You'll need to update your <strong>/App_Start/BundleConfig.cs</strong> file - do that now by adding the following lines to the RegisterBundles method:
@@ -70,7 +70,7 @@ myModule.controller('MainCtrl', ['$scope',
 ]);</pre>
 <p class="line">Okay, so now we have everything in Visual Studio up ready for AngularJS. Now, on to the fun part.</p>
 
-<h2>Installing Karma on Windows</h2>
+<h4>Installing Karma on Windows</h4>
 Now, we need to install Karma (which is used for end-to-end/integration testing). To do this, open up the DOS prompt (as an adminstrator). Browse to the base of your project directory (where both of your projects are located). Now, run the following commands:
 <pre>npm install -g karma
 npm install -g karma-cli</pre>
@@ -114,7 +114,7 @@ Now, before moving on we need to make sure that Angular is references in the <st
 Once you've saved that, all you need to do is run karma:
 <pre>karma start</pre>
 You'll see the application initialize and an instance of your browser run. Every time you change any of the files that Karma is monitoring the tests will re-run (and show if they're successful or if they fail). If you'd like to familiarize yourself with how Karma configurations work, please view the <a href="http://karma-runner.github.io/0.8/intro/configuration.html">official documentation</a>.
-<h2>Wrap-Up</h2>
+<h4>Wrap-Up</h4>
 Well, now you have everything set up to start your AngularJS project. If you're new to the AngularJS world, here are a few places to get started:
 <ul>
 	<li><a href="https://docs.angularjs.org/tutorial">Official AngularJS Tutorial</a></li>

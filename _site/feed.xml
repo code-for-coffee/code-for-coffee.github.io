@@ -6,9 +6,183 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 01 Nov 2016 23:04:20 -0500</pubDate>
-    <lastBuildDate>Tue, 01 Nov 2016 23:04:20 -0500</lastBuildDate>
+    <pubDate>Tue, 01 Nov 2016 23:09:47 -0500</pubDate>
+    <lastBuildDate>Tue, 01 Nov 2016 23:09:47 -0500</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>Using Gulp for ES6/Javascript 2015 Support</title>
+        <description>&lt;p&gt;Wouldn’t it be nice if there was a way to convert ES6 to code every browser can support? Of course! Wouldn’t it be cool if you could include module support from Node in client side code? Certainly. What could do this sort of magic for us? &lt;em&gt;Gulp Tasks&lt;/em&gt;!&lt;/p&gt;
+
+&lt;h4 id=&quot;goals&quot;&gt;Goals&lt;/h4&gt;
+
+&lt;p&gt;By the end of this tutorial, you will understand:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;What Gulp is and what it can do&lt;/li&gt;
+  &lt;li&gt;How to install Gulp on your computer&lt;/li&gt;
+  &lt;li&gt;How to write a Gulp task and run it&lt;/li&gt;
+  &lt;li&gt;How to add use additional modules with Gulp&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;introducing-gulp&quot;&gt;Introducing: Gulp&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Gulp is a software built on Node.&lt;/li&gt;
+  &lt;li&gt;It runs &lt;strong&gt;tasks&lt;/strong&gt; that manipulate files on your system.&lt;/li&gt;
+  &lt;li&gt;It is an active, open-source project.&lt;/li&gt;
+  &lt;li&gt;There are many community-built plugins built to work directly with gulp.&lt;/li&gt;
+  &lt;li&gt;It is commonly used for bundling, minificiation, and ES6 support.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Grunt&lt;/strong&gt; is a popular alternative to Gulp.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;installing-gulp&quot;&gt;Installing Gulp&lt;/h4&gt;
+
+&lt;p&gt;To install &lt;strong&gt;Gulp&lt;/strong&gt;, we should have a Node.js environment prepared. If you do not have one, you should visit &lt;a href=&quot;Nodejs.org&quot;&gt;https://nodejs.org/en/&lt;/a&gt; to learn more.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;You’ll want to install gulp globally. You can do this by running the &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install gulp -g&lt;/code&gt; command.&lt;/li&gt;
+  &lt;li&gt;This states that we want to use &lt;code class=&quot;highlighter-rouge&quot;&gt;npm&lt;/code&gt; to install the &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt; package globally (for any project to use).&lt;/li&gt;
+  &lt;li&gt;Gulp requires that we store our tasks in a &lt;code class=&quot;highlighter-rouge&quot;&gt;gulpfile.js&lt;/code&gt;. This should be in the same directory as your &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;We also need to include gulp in our project. To do that, we will run &lt;code class=&quot;highlighter-rouge&quot;&gt;npm install gulp --save-dev&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Now, we should run &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt;!&lt;/li&gt;
+  &lt;li&gt;Oh no - we ran into a problem.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Using gulpfile ~/path/to/gulpfile.js
+Task &lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt; is not &lt;span class=&quot;k&quot;&gt;in &lt;/span&gt;your gulpfile
+Please check the documentation &lt;span class=&quot;k&quot;&gt;for &lt;/span&gt;proper gulpfile formatting
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Let’s solve this problem by defining a Gulp task.&lt;/p&gt;
+
+&lt;h4 id=&quot;defining-a-gulp-task&quot;&gt;Defining a Gulp Task&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What is a task?&lt;/li&gt;
+  &lt;li&gt;A task is something we must do to achieve a result.&lt;/li&gt;
+  &lt;li&gt;In Gulp, we create tasks to perform tasks that can transform our code.&lt;/li&gt;
+  &lt;li&gt;A task may perform one job; it may also perform many at once.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In our &lt;code class=&quot;highlighter-rouge&quot;&gt;gulpfile.js&lt;/code&gt; we need to include the &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt; module. To do this, we should define a variable: &lt;code class=&quot;highlighter-rouge&quot;&gt;var gulp = require('gulp');&lt;/code&gt; This will allow us to call upon Gulp to &lt;strong&gt;create a task&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h5 id=&quot;my-first-default-task&quot;&gt;My First (Default) Task&lt;/h5&gt;
+
+&lt;p&gt;After declaring our &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt; variable, we should create our first task. This will require us to call upon Gulp to define a task. We must also have a name for our task. By &lt;em&gt;default&lt;/em&gt;, Gulp requires a &lt;code class=&quot;highlighter-rouge&quot;&gt;default&lt;/code&gt; task. It is the first task that Gulp will look for when reading your &lt;code class=&quot;highlighter-rouge&quot;&gt;gulpfile.js&lt;/code&gt;. Let’s define our first (default) task:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;gulp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'gulp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//define a task with the name of 'default' &lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// and a callback to perform when the task is ran&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;gulp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'I am the default task. Hear me roar'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;(&lt;a href=&quot;https://github.com/code-for-coffee/gulp_workflows/blob/master/gulpfile_lo3.js&quot;&gt;Source&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;In your terminal, run &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt;. This will have the library look for a &lt;code class=&quot;highlighter-rouge&quot;&gt;default&lt;/code&gt; task in your &lt;code class=&quot;highlighter-rouge&quot;&gt;gulpfile.js&lt;/code&gt;. It will then execute the callback that you define for your task. The output will appear as follows:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Starting &lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;...
+I am the default task. Hear me roar
+Finished &lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt; after 144 μs
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;project-a-gulp-workflow-that-supports-es6-and-modules-for-the-web&quot;&gt;Project: A Gulp Workflow that supports ES6 and Modules for the Web&lt;/h4&gt;
+
+&lt;p&gt;We’re going to include a few external modules to create a Gulp workflow. Our workflow will support:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Node-style &lt;code class=&quot;highlighter-rouge&quot;&gt;require()&lt;/code&gt; statements using &lt;strong&gt;Browserify&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;Support ES6 (ES2016) and JSX (for React.js) using &lt;strong&gt;Babelify&lt;/strong&gt; (and a few Babel plugins).&lt;/li&gt;
+  &lt;li&gt;Compile individual modules together using &lt;strong&gt;vinyl-source-stream&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We need to install a variety of modules. The installation commands are:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev browserify&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev babelify&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev babel-preset-es2015 babel-preset-react&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;npm install --save-dev vinyl-source-stream&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We can then add our modules to our &lt;code class=&quot;highlighter-rouge&quot;&gt;gulpfile.js&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;gulp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'gulp'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserify&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'browserify'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;babelify&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'babelify'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'vinyl-source-stream'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We’re all set with our dependencies. Now, it is time to create a file structure for our project. We should create a folder called &lt;code class=&quot;highlighter-rouge&quot;&gt;source&lt;/code&gt; for our actual Javascript application. We’ll create an &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt; in that source directory. We should also create a &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; folder to contain our final, production-ready Javascript file.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;touch source/.gitkeep build/.gitkeep source/app.js&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You’ll notice that there is currently no file inside of our &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; directory other than a &lt;code class=&quot;highlighter-rouge&quot;&gt;.gitkeep&lt;/code&gt;. We should define a task that will use the installed modules to transform our code and make it usable on the front-end. We should update our &lt;code class=&quot;highlighter-rouge&quot;&gt;gulpfile.js&lt;/code&gt;’s &lt;strong&gt;default&lt;/strong&gt; task.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nx&quot;&gt;gulp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;browserify&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./source/app.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;babelify&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;presets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;es2015&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;react&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]})&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;bundle&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;source&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'build.js'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;pipe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;gulp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;dest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'./build/'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Let’s identify what is going on inside of our &lt;strong&gt;default&lt;/strong&gt; task:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The task uses &lt;strong&gt;browserify&lt;/strong&gt; to include our modules that are required in our &lt;code class=&quot;highlighter-rouge&quot;&gt;source/app.js&lt;/code&gt; file.&lt;/li&gt;
+  &lt;li&gt;It then transforms any ES6 (ES2015) and React JSX templates into usable code on the client side. This usually translates our modern Javascript code into ES5 that most current evergreen browsers support.&lt;/li&gt;
+  &lt;li&gt;The task then bundles our files together.&lt;/li&gt;
+  &lt;li&gt;Next, the task creates a file called &lt;code class=&quot;highlighter-rouge&quot;&gt;build.js&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;Gulp finally places the &lt;code class=&quot;highlighter-rouge&quot;&gt;build.js&lt;/code&gt; inside of a destination (&lt;code class=&quot;highlighter-rouge&quot;&gt;dest&lt;/code&gt;) folder of &lt;code class=&quot;highlighter-rouge&quot;&gt;build/&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/code-for-coffee/gulp_workflows/blob/master/gulfpile_lo4.js&quot;&gt;The full version of this Gulpfile.js may be found here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt; in your terminal. Inspect the &lt;code class=&quot;highlighter-rouge&quot;&gt;build/build.js&lt;/code&gt; file. &lt;em&gt;What do you see?&lt;/em&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;verifying-that-everything-works&quot;&gt;Verifying that everything works&lt;/h5&gt;
+
+&lt;p&gt;Let’s write some ES6. We’ll then use &lt;strong&gt;gulp&lt;/strong&gt; to run tasks that will create a file prepared for the client side. To verify everything works, we can run the script generated in the console.&lt;/p&gt;
+
+&lt;p&gt;In my &lt;code class=&quot;highlighter-rouge&quot;&gt;app.js&lt;/code&gt;, I want todefine an ES6 class called HelloWorld. The class should have a toString() method that returns ‘Hello, world!’. I will then instantiate a new instance of the class and console log the &lt;code class=&quot;highlighter-rouge&quot;&gt;toString()&lt;/code&gt; method that it contains.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// define an ES6 class called HelloWorld&lt;/span&gt;
+&lt;span class=&quot;kr&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HelloWorld&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// define a toString() method on the class&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello, world!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// instantiate a new instance of HelloWorld&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;HelloWorld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// console.log sample's toString() method&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sample&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;toString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;(&lt;a href=&quot;https://github.com/code-for-coffee/gulp_workflows/blob/master/app.js&quot;&gt;Source&lt;/a&gt;)&lt;/p&gt;
+
+&lt;p&gt;Now, we should run &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt; in the terminal. Upon completion, open the &lt;code class=&quot;highlighter-rouge&quot;&gt;build/build.js&lt;/code&gt; file. It will contain a large amount of obfuscated code such as &lt;code class=&quot;highlighter-rouge&quot;&gt;(function e(t,n,r){function s(o,u)....&lt;/code&gt;. Copy and paste this code into a browser’s Javascript console. Inside the console, you should see &lt;code class=&quot;highlighter-rouge&quot;&gt;Hello, world!&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h5 id=&quot;tips-and-tricks&quot;&gt;Tips and Tricks&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You will need to re-run the &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt; command every time you make a change.&lt;/li&gt;
+  &lt;li&gt;There is &lt;code class=&quot;highlighter-rouge&quot;&gt;nodemon&lt;/code&gt; support for gulp.&lt;/li&gt;
+  &lt;li&gt;You can have &lt;code class=&quot;highlighter-rouge&quot;&gt;gulp&lt;/code&gt; &lt;strong&gt;watch&lt;/strong&gt; files for changes using &lt;a href=&quot;https://www.npmjs.com/package/gulp-watch&quot;&gt;gulp-watch&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Mon, 18 Jan 2016 00:00:00 -0600</pubDate>
+        <link>http://localhost:4000/using-gulp-for-es6-support</link>
+        <guid isPermaLink="true">http://localhost:4000/using-gulp-for-es6-support</guid>
+        
+        
+      </item>
     
       <item>
         <title>Review Visual Studio 2013 Cookbook</title>
@@ -50,7 +224,7 @@
     
       <item>
         <title>Setting up AngularJS, Jasmine, and Karma in Visual Studio</title>
-        <description>&lt;h2&gt;Introduction&lt;/h2&gt;
+        <description>&lt;h4&gt;Introduction&lt;/h4&gt;
 &lt;p&gt;I’ve recently been tasked to research &lt;strong&gt;AngularJS&lt;/strong&gt; to use on top of Visual Studio. After reading the official tutorial, unofficial tutorials, and Manning’s early access &lt;strong&gt;AngularJS in Action &lt;/strong&gt;and &lt;strong&gt;Getting MEAN &lt;/strong&gt;(which stands for mongoDB/Express/AngularJS/Node.js), I found that there are too few guides for Windows users. If you’re like me, you probably are running into issues installing and running &lt;strong&gt;karma&lt;/strong&gt;, would like to run Javascript tests in the convenience of the Test Explorer (or Resharper), and want to let NuGet handle all of your package updating (bower is great, but not for .NET environments). Well, this tutorial is here to help! We’ll get you up and running with AngularJS, Jasmine, and Karma.&lt;/p&gt;
 
 &lt;p&gt;All of this has been setup/tested on:&lt;/p&gt;
@@ -59,7 +233,7 @@
 	&lt;li&gt;Visual Studio 2013 Professional&lt;/li&gt;
 	&lt;li&gt;Google Chrome&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2&gt;Getting Started&lt;/h2&gt;
+&lt;h4&gt;Getting Started&lt;/h4&gt;
 &lt;p&gt;Go ahead and install the following software:&lt;/p&gt;
 &lt;ul&gt;
 	&lt;li&gt;&lt;a href=&quot;http://nodejs.org/&quot;&gt;Node.js&lt;/a&gt; (Windows installer) - &lt;em&gt;install everything!&lt;/em&gt;&lt;/li&gt;
@@ -73,7 +247,7 @@
 &lt;p&gt;Now, we need to grab a few Javascript libraries from (hint: if you prefer, you can grab these from NuGet): &lt;a href=&quot;https://angularjs.org/&quot;&gt;AngularJS&lt;/a&gt; (I recommend grabbing the entire ZIP that includes all libraries) and &lt;a href=&quot;https://github.com/pivotal/jasmine&quot;&gt;Jasmine&lt;/a&gt; (you can use another testing framework if you prefer but the official AngularJS examples/tutorials use Jasmine).&lt;/p&gt;
 
 &lt;p&gt;Okay - you have all of the tools either installed (or about to be).&lt;/p&gt;
-&lt;h2&gt;Setting up the project folder&lt;/h2&gt;
+&lt;h4&gt;Setting up the project folder&lt;/h4&gt;
 &lt;p&gt;You should have two projects: Your ASP.NET MVC/Web API project and your Tests project. Inside of the ASP.NET project, we’re going to add the following folders: &lt;strong&gt;ng-views&lt;/strong&gt; and &lt;strong&gt;ng-scripts&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;The ng-views folder will contain all of your Angular-specific views. The ng-scripts folder will contain your controllers, models, directives, and so forth. In the &lt;strong&gt;Tests&lt;/strong&gt; project, create an &lt;strong&gt;ng-tests&lt;/strong&gt; project. &lt;em&gt;If you installed Angular and Jasmine via NuGet you should be able to skip to the next paragraph. &lt;/em&gt;Now, extract your AngularJS archive and copy &lt;strong&gt;all &lt;/strong&gt;of the scripts to the ~/&lt;strong&gt;Scripts/Angular/&lt;/strong&gt; folder (you’ll need to create the subfolder). Unarchive Jasmine and copy the contents of the &lt;strong&gt;lib&lt;/strong&gt; folder to &lt;strong&gt;~/Scripts/Jasmine/&lt;/strong&gt;. You’ll need to update your &lt;strong&gt;/App_Start/BundleConfig.cs&lt;/strong&gt; file - do that now by adding the following lines to the RegisterBundles method:&lt;/p&gt;
@@ -117,7 +291,7 @@ myModule.controller('MainCtrl', ['$scope',
 ]);&lt;/pre&gt;
 &lt;p class=&quot;line&quot;&gt;Okay, so now we have everything in Visual Studio up ready for AngularJS. Now, on to the fun part.&lt;/p&gt;
 
-&lt;h2&gt;Installing Karma on Windows&lt;/h2&gt;
+&lt;h4&gt;Installing Karma on Windows&lt;/h4&gt;
 &lt;p&gt;Now, we need to install Karma (which is used for end-to-end/integration testing). To do this, open up the DOS prompt (as an adminstrator). Browse to the base of your project directory (where both of your projects are located). Now, run the following commands:&lt;/p&gt;
 &lt;pre&gt;npm install -g karma
 npm install -g karma-cli&lt;/pre&gt;
@@ -161,7 +335,7 @@ Config file generated at &quot;../path/to/your/project/karma.conf.js&quot;.&lt;/
 &lt;p&gt;Once you’ve saved that, all you need to do is run karma:&lt;/p&gt;
 &lt;pre&gt;karma start&lt;/pre&gt;
 &lt;p&gt;You’ll see the application initialize and an instance of your browser run. Every time you change any of the files that Karma is monitoring the tests will re-run (and show if they’re successful or if they fail). If you’d like to familiarize yourself with how Karma configurations work, please view the &lt;a href=&quot;http://karma-runner.github.io/0.8/intro/configuration.html&quot;&gt;official documentation&lt;/a&gt;.&lt;/p&gt;
-&lt;h2&gt;Wrap-Up&lt;/h2&gt;
+&lt;h4&gt;Wrap-Up&lt;/h4&gt;
 &lt;p&gt;Well, now you have everything set up to start your AngularJS project. If you’re new to the AngularJS world, here are a few places to get started:&lt;/p&gt;
 &lt;ul&gt;
 	&lt;li&gt;&lt;a href=&quot;https://docs.angularjs.org/tutorial&quot;&gt;Official AngularJS Tutorial&lt;/a&gt;&lt;/li&gt;
@@ -592,28 +766,6 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
         <pubDate>Fri, 05 Jul 2013 00:00:00 -0500</pubDate>
         <link>http://localhost:4000/Windows-8.1-Preview</link>
         <guid isPermaLink="true">http://localhost:4000/Windows-8.1-Preview</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Disabling Java update notifications in Windows</title>
-        <description>&lt;p&gt;Java updates - everyone knows about them because you’re prompted to update them all the time. While it is important to keep your system up to date due to zero day exploits and other bugs, most people tend to ignore these updates and just close the notification window. At work, we’ve recently begun automatically pushing Java updates out on our Windows workstations through WSUS with &lt;a href=&quot;http://wsuspackagepublisher.codeplex.com/&quot; target=&quot;_blank&quot;&gt;Wsus Package Publisher&lt;/a&gt;; however, the Java update notifications can still appear from time to time. To alleviate this annoyance for our employees, I’ve put together a registry tweak that can be pushed out to any machine that’ll disable the notifications once and for all. It is a simple registry script; just run and close (or script it to run with Powershell once). You can grab the source from my &lt;a href=&quot;https://github.com/code-for-coffee/DisableJavaUpdate&quot; target=&quot;_blank&quot;&gt;Github repo&lt;/a&gt;. Alternatively, here are the entries in the registry to update if you want to handle it yourself. The entries you need to add/update are in bold.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy]
-&quot;Method&quot;=&quot;jchrome&quot;
-&quot;PostStatusUrl&quot;=&quot;https://sjremetrics.java.com/b/ss//6&quot;
-&quot;&lt;strong&gt;EnableJavaUpdate&quot;=dword:00000000&lt;/strong&gt;
-&quot;&lt;strong&gt;NotifyDownload&quot;=dword:00000001&lt;/strong&gt;
-&quot;UpdateSchedule&quot;=dword:00000010
-&quot;Frequency&quot;=dword:01010000
-&quot;UpdateMin&quot;=dword:00000010
-&quot;VisitorId&quot;=&quot;2f22e551-8912880f&quot;
-&quot;&lt;strong&gt;NotifyInstall&quot;=dword:00000000&lt;/strong&gt;&lt;/code&gt;&lt;/p&gt;
-</description>
-        <pubDate>Wed, 03 Jul 2013 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/disabling-java-update-notifications</link>
-        <guid isPermaLink="true">http://localhost:4000/disabling-java-update-notifications</guid>
         
         
       </item>
