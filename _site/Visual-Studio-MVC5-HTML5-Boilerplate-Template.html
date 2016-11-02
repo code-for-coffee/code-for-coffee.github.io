@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>MVC4 AJAX uploads using HTML5/Javascript</title>
-  <meta name="description" content="This is a quick walkthrough showcasing how to use ASP.NET MVC4 to upload files via AJAX. You can take a look at the code on github. This functionality requir...">
+  <title>Visual Studio MVC4 HTML5 Boilerplate Template</title>
+  <meta name="description" content="I’ve been working with ASP.NET MVC4 lately and decided to throw together a template for Visual Studio. This template works with Visual Studio 2010, 2012, and...">
 
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
@@ -15,8 +15,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
   <script type="text/javascript" src="/javascripts/app.js"></script>
-  <link rel="canonical" href="https://code-for-coffee.github.io/2013/12/14/MVC4-Ajax-Uploads-using-HTML5-and-Javascript.html">
-  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="https://code-for-coffee.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/Visual-Studio-MVC5-HTML5-Boilerplate-Template">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="http://localhost:4000/feed.xml" />
 </head>
 
 
@@ -77,72 +77,24 @@
         <source srcset="/logo-mobile.png" media="(max-width: 900px)">
         <img src="/logo-mobile.png" alt="Code for Coffee Logo">
       </picture>
-      <h2 class="header center red-text text-darken-4">MVC4 AJAX uploads using HTML5/Javascript</h2>
-      <em class="center">Posted on Dec 14, 2013</em>
+      <h2 class="header center red-text text-darken-4">Visual Studio MVC4 HTML5 Boilerplate Template</h2>
+      <em class="center">Posted on Jan 17, 2014</em>
       <h6 class="header center red-text text-darken-3"></h6>
     </div>
     <div class="row left-align">
-      <p>This is a quick walkthrough showcasing how to use ASP.NET MVC4 to upload files via AJAX. You can take a look at the code on <a href="https://github.com/code-for-coffee/mvc4-html5-ajax-upload">github</a>. This functionality requires a current version of Firefox, Chrome, or Internet Explorer 10+.</p>
+      <p>I’ve been working with <strong>ASP.NET MVC4</strong> lately and decided to throw together a template for Visual Studio. This template works with Visual Studio 2010, 2012, and 2013. It provides a great quick start to any web application and includes the following based on <a href="http://www.initializr.com/">Initializr’s</a> HTML5 boilerplate generator:</p>
+<ul>
+	<li>Mobile first, responsive (via normalize.css)</li>
+	<li>Modernizr (2.6.2)</li>
+	<li>Minified jQuery (1.10.1)</li>
+	<li>IE Classes</li>
+	<li>Chrome Frame support (until Google kills it off)</li>
+	<li>Favicon</li>
+	<li>Apple Touch Icons</li>
+</ul>
+<p>You can grab the code on <a href="https://github.com/code-for-coffee/visualstudio-mvc4-html5-boilerplate-template/">github</a>. Install it by placing the contents in your <em>C:\Users\username\Documents\Visual Studio 20xx\Templates\ProjectTemplates\Visual C#&lt;/em&gt; directory.  To get started with the template please take a look at how all of the views are setup.</em></p>
 
-<p>We’ll begin with the controller. Your <code>controller.cs</code> file should have a new <strong>JsonResult</strong> to receive whatever you’re uploading. Inside, you’ll iterate through each Request.File sent to the server using the  <a href="http://msdn.microsoft.com/en-us/library/system.web.httppostedfile">HttpPostedFileBase</a> class.</p>
-
-<p><code></code></p>
-
-<p>[HttpPost]
-public JsonResult Upload()
-{
-for (int i = 0; i &lt; Request.Files.Count; i++) {
-// for each file being sent over…
-HttpPostedFileBase file = Request.Files[i];</p>
-
-<p>// Example of gathering information from each file
-int fileSize = file.ContentLength;
-string fileName = file.FileName;
-string mimeType = file.ContentType;</p>
-
-<p>// Open input stream
-System.IO.Stream fileContent = file.InputStream;</p>
-
-<p>// do stuff here
-// do.stuff.huzzah</p>
-
-<p>}
-// Return JSON
-return Json(“Uploaded “ + Request.Files.Count + “ file(s)”);
-}</p>
-
-<p>&lt;/code&gt;</p>
-
-<p>Now, the fun part: the HTML5. First, you need to create a new <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> object.</p>
-
-<p><code>
-var formdata = new FormData();
-</code></p>
-
-<p>Next, you’ll iterate through each file.</p>
-
-<p><code>for (i = 0; i &lt; uploadedFiles.files.length; i++) {
-}
-</code>
-Inside of your loop, you can append each file to the FormData object.</p>
-
-<p><code></code></p>
-
-<p>formdata.append(uploadedFiles.files[i].name, uploadedFiles.files[i]);
-&lt;/code&gt;</p>
-
-<p>Finally, you can send the files over via a traditional Ajax call.</p>
-
-<p><code>
-var xhr = new XMLHttpRequest();
-xhr.open('POST', ajaxPostPath);
-xhr.send(formdata);
-xhr.onreadystatechange = function () {
-if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
-document.getElementById(idToPlaceResponseText).innerHTML = xhr.responseText;
-}
-</code>
-That’s it! Obviously, you can do some nifty stuff with the files if they’re supported. The code on the github project is designed to upload only files that are an Image MIME type and display a preview inside of an &lt;code&gt;id&lt;/code&gt;.</p>
+<p>Please feel free to report anything that doesn’t work here or on the <a href="https://github.com/code-for-coffee/visualstudio-mvc4-html5-boilerplate-template/issues">github issues page</a>.</p>
 
     </div>
   </div>

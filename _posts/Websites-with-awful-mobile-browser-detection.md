@@ -1,6 +1,8 @@
 ---
 layout: post
 title: Websites with awful mobile browser detection
+date: 2013-02-10
+tags: javascript
 ---
 
 <hgroup>

@@ -9,3 +9,4 @@ twitter_username: code4coffee
 github_username:  code-for-coffee
 # Build settings
 markdown: kramdown
+permalink: /:title

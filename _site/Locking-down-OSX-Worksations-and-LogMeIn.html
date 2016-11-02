@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Disabling Java update notifications in Windows</title>
-  <meta name="description" content="Java updates - everyone knows about them because you’re prompted to update them all the time. While it is important to keep your system up to date due to zer...">
+  <title>Locking down OS X Workstations (and LogMeIn)</title>
+  <meta name="description" content="One of the great things about Mac OS X is Darwin, the Unix back-end of the OS. This article discusses a variety of shell (Terminal) commands and tricks that ...">
 
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
@@ -15,8 +15,8 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
   <script type="text/javascript" src="/javascripts/app.js"></script>
-  <link rel="canonical" href="https://code-for-coffee.github.io/2013/07/03/Disabling-Java-update-notifications-in-Windows.html">
-  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="https://code-for-coffee.github.io/feed.xml" />
+  <link rel="canonical" href="http://localhost:4000/Locking-down-OSX-Worksations-and-LogMeIn">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="http://localhost:4000/feed.xml" />
 </head>
 
 
@@ -77,23 +77,42 @@
         <source srcset="/logo-mobile.png" media="(max-width: 900px)">
         <img src="/logo-mobile.png" alt="Code for Coffee Logo">
       </picture>
-      <h2 class="header center red-text text-darken-4">Disabling Java update notifications in Windows</h2>
-      <em class="center">Posted on Jul 3, 2013</em>
+      <h2 class="header center red-text text-darken-4">Locking down OS X Workstations (and LogMeIn)</h2>
+      <em class="center">Posted on Nov 29, 2013</em>
       <h6 class="header center red-text text-darken-3"></h6>
     </div>
     <div class="row left-align">
-      <p>Java updates - everyone knows about them because you’re prompted to update them all the time. While it is important to keep your system up to date due to zero day exploits and other bugs, most people tend to ignore these updates and just close the notification window. At work, we’ve recently begun automatically pushing Java updates out on our Windows workstations through WSUS with <a href="http://wsuspackagepublisher.codeplex.com/" target="_blank">Wsus Package Publisher</a>; however, the Java update notifications can still appear from time to time. To alleviate this annoyance for our employees, I’ve put together a registry tweak that can be pushed out to any machine that’ll disable the notifications once and for all. It is a simple registry script; just run and close (or script it to run with Powershell once). You can grab the source from my <a href="https://github.com/code-for-coffee/DisableJavaUpdate" target="_blank">Github repo</a>. Alternatively, here are the entries in the registry to update if you want to handle it yourself. The entries you need to add/update are in bold.</p>
+      <p style="text-align: left;">One of the great things about Mac OS X is Darwin, the Unix back-end of the OS. This article discusses a variety of shell (Terminal) commands and tricks that you can use to lock an account's abilities/actions. Finally, the source code can be viewed/forked on <a href="https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts" target="_blank">github</a>. Now, go ahead and open Terminal on a test account.</p>
+<p style="text-align: left;">Disable use of Dashboard</p>
 
-<p><code>[HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\JavaSoft\Java Update\Policy]
-"Method"="jchrome"
-"PostStatusUrl"="https://sjremetrics.java.com/b/ss//6"
-"<strong>EnableJavaUpdate"=dword:00000000</strong>
-"<strong>NotifyDownload"=dword:00000001</strong>
-"UpdateSchedule"=dword:00000010
-"Frequency"=dword:01010000
-"UpdateMin"=dword:00000010
-"VisitorId"="2f22e551-8912880f"
-"<strong>NotifyInstall"=dword:00000000</strong></code></p>
+<blockquote>
+<div id="LC22"><em>defaults write com.apple.dashboard mcx-disabled -bool true</em></div></blockquote>
+<p style="text-align: left;">Disable Dock manipulation (adding/removing items)</p>
+
+<blockquote>
+<div id="LC22"><em>defaults write com.apple.dock contents-immutable -bool true</em></div></blockquote>
+<p style="text-align: left;">Disable Dock manipulation (adding/removing items)</p>
+
+<blockquote>
+<div id="LC22"><em>defaults write com.apple.dock contents-immutable -bool true</em>
+
+<em>killall dock #kills the dock; changes will take effect upon reload</em></div></blockquote>
+
+<p style="text-align: left;">Hide System Files</p>
+
+<blockquote>
+<div id="LC22"><em>defaults write com.apple.finder AppleShowAllFiles FALSE # TRUE will show System files.</em></div></blockquote>
+
+<p style="text-align: left;">Run Simple Finder</p>
+
+<blockquote>
+<div id="LC22"><em>defaults write com.apple.finder InterfaceLevel simple<br />
+killall Finder</em></div></blockquote>
+
+<h3>LogMeIn</h3>
+<p>If you use LogMeIn for remote administration, you will notice that the application will load in your Dock when running. This causes a slight security risk due to how this will show end users some account information. To rid ourselves of this problem, we can remove the following line /Applications/LogMeIn.app/info.plist (right-click the application and select “Show Contents”). You will need to add the <a href="https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts/blob/master/logmeinRevision.xml" target="_blank">these lines</a> to the first child element in the XML file.</p>
+
+<p>You can also remove MenuBar.app from /applicationsupport/launchagents/logmein/ - this will remove the Menu Bar icon.</p>
 
     </div>
   </div>

@@ -4,11 +4,11 @@
     <title>code for coffee</title>
     <description>Write an awesome description for your portfolio here!
 </description>
-    <link>https://code-for-coffee.github.io/</link>
-    <atom:link href="https://code-for-coffee.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 30 May 2016 00:23:38 -0500</pubDate>
-    <lastBuildDate>Mon, 30 May 2016 00:23:38 -0500</lastBuildDate>
-    <generator>Jekyll v3.1.6</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 01 Nov 2016 20:17:30 -0500</pubDate>
+    <lastBuildDate>Tue, 01 Nov 2016 20:17:30 -0500</lastBuildDate>
+    <generator>Jekyll v3.3.0</generator>
     
       <item>
         <title>Review Visual Studio 2013 Cookbook</title>
@@ -23,8 +23,8 @@
 &lt;p&gt;So, here is my verdict: this is the Visual Studio book that I wish I had available when I started programming using Visual Studio. The topics covered are better written than the Microsoft examples, the screenshots and figures are easy to read, and the amount of topics covered introduce you to new concepts and features in the Microsoft ecosystem. It also serves as a nice upgrade guide to users who may be using Web Forms, Windows Forms, and older versions of ASP.NET MVC. If you have recently upgraded from Visual Studio 2010 or older (and even 2012), this book will help you get accustomed to the new tools available to you.&lt;/p&gt;
 </description>
         <pubDate>Mon, 28 Jul 2014 00:00:00 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/2014/07/28/Review-Visual-Studio-2013-Cookbook.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/07/28/Review-Visual-Studio-2013-Cookbook.html</guid>
+        <link>http://localhost:4000/Review-Visual-Studio-2013-Cookbook</link>
+        <guid isPermaLink="true">http://localhost:4000/Review-Visual-Studio-2013-Cookbook</guid>
         
         
       </item>
@@ -42,8 +42,8 @@
 &lt;p&gt;That’s it - just a quick, informative post.&lt;/p&gt;
 </description>
         <pubDate>Tue, 24 Jun 2014 00:00:00 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/2014/06/24/Binding-parameters-to-Web-API-controllers-with-Backbone.js.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/06/24/Binding-parameters-to-Web-API-controllers-with-Backbone.js.html</guid>
+        <link>http://localhost:4000/Binding-parameters-to-Web-API-controllers-with-Backbone.js</link>
+        <guid isPermaLink="true">http://localhost:4000/Binding-parameters-to-Web-API-controllers-with-Backbone.js</guid>
         
         
       </item>
@@ -94,25 +94,25 @@
 &lt;p&gt;Now, with any new Javascript file you create, do the same thing with just the &lt;strong&gt;_references.js&lt;/strong&gt; file to first line of every project. Go ahead and create some baseline files for you &lt;strong&gt;ng-scripts&lt;/strong&gt; and &lt;strong&gt;ng-tests&lt;/strong&gt;; something like the following will do (this will assist in the next step) - if the code you see is foreign to you don’t fret, any tutorial (links to some at the end of this post) will explain them later:&lt;/p&gt;
 
 &lt;p&gt;In &lt;strong&gt;/TestProject/ng-tests/MainCtrlSpec.js&lt;/strong&gt;:&lt;/p&gt;
-&lt;pre id=&quot;LC1&quot; class=&quot;line&quot;&gt;describe(&#39;Controller: MainCtrl&#39;, function() {
-    beforeEach(module(&#39;MyApp&#39;));
+&lt;pre id=&quot;LC1&quot; class=&quot;line&quot;&gt;describe('Controller: MainCtrl', function() {
+    beforeEach(module('MyApp'));
     var MainCtrl, scope;
     beforeEach(inject(function($controller) {
         scope = {};
-        MainCtrl = $controller(&#39;MainCtrl&#39;, {
+        MainCtrl = $controller('MainCtrl', {
             $scope: scope
         });
     }));
-    it(&#39;should have scope defined&#39;, function () {
+    it('should have scope defined', function () {
         expect(scope).toBeDefined();
     });
 });&lt;/pre&gt;
 &lt;p class=&quot;line&quot;&gt;In &lt;strong&gt;/ASPNETProject/ng-scripts/MainCtrl.js&lt;/strong&gt;:&lt;/p&gt;
 
-&lt;pre class=&quot;line&quot;&gt;var myModule = angular.module(&#39;MyApp&#39;, []);
-myModule.controller(&#39;MainCtrl&#39;, [&#39;$scope&#39;,
+&lt;pre class=&quot;line&quot;&gt;var myModule = angular.module('MyApp', []);
+myModule.controller('MainCtrl', ['$scope',
  function ($scope) {
- // I&#39;m a lonely controller :(
+ // I'm a lonely controller :(
  }
 ]);&lt;/pre&gt;
 &lt;p class=&quot;line&quot;&gt;Okay, so now we have everything in Visual Studio up ready for AngularJS. Now, on to the fun part.&lt;/p&gt;
@@ -153,10 +153,10 @@ Config file generated at &quot;../path/to/your/project/karma.conf.js&quot;.&lt;/
 &lt;p&gt;Now, before moving on we need to make sure that Angular is references in the &lt;strong&gt;karma.conf.js&lt;/strong&gt; file. Open it up and make sure that &lt;strong&gt;angular.js&lt;/strong&gt; and &lt;strong&gt;angular-mock.js&lt;/strong&gt; are included (you may need to add other files as time goes on, too). Look for the &lt;strong&gt;files&lt;/strong&gt; array:&lt;/p&gt;
 &lt;pre id=&quot;LC16&quot; class=&quot;line&quot;&gt;// list of files / patterns to load in the browser
     files: [
-      &#39;AngularJumpstart/Scripts/Angular/angular.js&#39;,
-      &#39;AngularJumpstart/Scripts/Angular/angular-mocks.js&#39;,
-      &#39;AngularJumpstart/ng-scripts/**.js&#39;,
-      &#39;AngularJumpstart.Tests/ng-tests/**.js&#39;
+      'AngularJumpstart/Scripts/Angular/angular.js',
+      'AngularJumpstart/Scripts/Angular/angular-mocks.js',
+      'AngularJumpstart/ng-scripts/**.js',
+      'AngularJumpstart.Tests/ng-tests/**.js'
     ],&lt;/pre&gt;
 &lt;p&gt;Once you’ve saved that, all you need to do is run karma:&lt;/p&gt;
 &lt;pre&gt;karma start&lt;/pre&gt;
@@ -175,8 +175,8 @@ Config file generated at &quot;../path/to/your/project/karma.conf.js&quot;.&lt;/
 &lt;div id=&quot;LC1&quot; class=&quot;line&quot;&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 24 Apr 2014 00:00:00 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/2014/04/24/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/04/24/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio.html</guid>
+        <link>http://localhost:4000/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio</link>
+        <guid isPermaLink="true">http://localhost:4000/Setting-Up-Angular.JS-Jasmine-and-Karma-in-Visual-Studio</guid>
         
         
       </item>
@@ -203,7 +203,7 @@ Config file generated at &quot;../path/to/your/project/karma.conf.js&quot;.&lt;/
  public class Squirrel
  {
  public string Name { get; set; }
- public int? Age { get; set; } // squirrels aren&#39;t required tell us their age
+ public int? Age { get; set; } // squirrels aren't required tell us their age
  public int Acorns { get; set; }
  public char Gender { get; set; }
  public string Hobby { get; set; }
@@ -232,7 +232,7 @@ using System.Web.Mvc;&lt;/pre&gt;
  string status = null;
  try { 
  saveSquirrel(incomingSquirrel);
- status = &quot;If you don&#39;t see this, something went wrong.&quot;;
+ status = &quot;If you don't see this, something went wrong.&quot;;
  } catch (Exception e) {
  status = e;
  }
@@ -289,7 +289,7 @@ using System.Web.Mvc;&lt;/pre&gt;
  type: &quot;POST&quot;,
  url: &quot;home/PostSquirrel&quot;,
  traditional: true,
- contentType: &#39;application/json; charset=utf-8&#39;,
+ contentType: 'application/json; charset=utf-8',
  data: JSON.stringify(squirrel),
  success: function (data) { console.log(data) },
  error: function (data) { console.log(data) } 
@@ -309,8 +309,8 @@ using System.Web.Mvc;&lt;/pre&gt;
 &lt;pre&gt;&amp;lt;section&amp;gt;
  &amp;lt;p&amp;gt;If the squirrel cooperates, record their information and send it to our server.&amp;lt;/p&amp;gt;
  
- &amp;lt;p&amp;gt;&amp;lt;input type=&quot;text&quot; required=&quot;required&quot; id=&quot;Name&quot; placeholder=&quot;Enter the squirrel&#39;s name&quot; /&amp;gt;&amp;lt;/p&amp;gt;
- &amp;lt;p&amp;gt;&amp;lt;input type=&quot;number&quot; id=&quot;Age&quot; placeholder=&quot;squirrel&#39;s age (optional)&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ &amp;lt;p&amp;gt;&amp;lt;input type=&quot;text&quot; required=&quot;required&quot; id=&quot;Name&quot; placeholder=&quot;Enter the squirrel's name&quot; /&amp;gt;&amp;lt;/p&amp;gt;
+ &amp;lt;p&amp;gt;&amp;lt;input type=&quot;number&quot; id=&quot;Age&quot; placeholder=&quot;squirrel's age (optional)&quot; /&amp;gt;&amp;lt;/p&amp;gt;
  &amp;lt;p&amp;gt;&amp;lt;input type=&quot;number&quot; required=&quot;required&quot; id=&quot;Name&quot; placeholder=&quot;How many acorns do they own?&quot; /&amp;gt;&amp;lt;/p&amp;gt;
  &amp;lt;p&amp;gt;&amp;lt;input type=&quot;number&quot; required=&quot;required&quot; id=&quot;Name&quot; placeholder=&quot;M or F? (single letter only)&quot; size=&quot;1&quot; /&amp;gt;&amp;lt;/p&amp;gt;
  &amp;lt;p&amp;gt;&amp;lt;input type=&quot;string&quot; required=&quot;required&quot; id=&quot;Hobby&quot; placeholder=&quot;How many acorns do they own?&quot; /&amp;gt;&amp;lt;/p&amp;gt;
@@ -337,8 +337,8 @@ using System.Web.Mvc;&lt;/pre&gt;
 &lt;p&gt; &lt;/p&gt;
 </description>
         <pubDate>Wed, 16 Apr 2014 00:00:00 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/2014/04/16/ASP.NET-MVC-Intro-to-Binding-JSON-objects-to-models.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/04/16/ASP.NET-MVC-Intro-to-Binding-JSON-objects-to-models.html</guid>
+        <link>http://localhost:4000/ASP.NET-MVC-Intro-to-Binding-JSON-objects-to-models</link>
+        <guid isPermaLink="true">http://localhost:4000/ASP.NET-MVC-Intro-to-Binding-JSON-objects-to-models</guid>
         
         
       </item>
@@ -360,8 +360,8 @@ using System.Web.Mvc;&lt;/pre&gt;
 &lt;p&gt;Please feel free to report anything that doesn’t work here or on the &lt;a href=&quot;https://github.com/code-for-coffee/visualstudio-mvc4-html5-boilerplate-template/issues&quot;&gt;github issues page&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Fri, 17 Jan 2014 00:00:00 -0600</pubDate>
-        <link>https://code-for-coffee.github.io/2014/01/17/Visual-Studio-MVC5-HTML5-Boilerplate-Template.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2014/01/17/Visual-Studio-MVC5-HTML5-Boilerplate-Template.html</guid>
+        <link>http://localhost:4000/Visual-Studio-MVC5-HTML5-Boilerplate-Template</link>
+        <guid isPermaLink="true">http://localhost:4000/Visual-Studio-MVC5-HTML5-Boilerplate-Template</guid>
         
         
       </item>
@@ -421,7 +421,7 @@ Inside of your loop, you can append each file to the FormData object.&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;
 var xhr = new XMLHttpRequest();
-xhr.open(&#39;POST&#39;, ajaxPostPath);
+xhr.open('POST', ajaxPostPath);
 xhr.send(formdata);
 xhr.onreadystatechange = function () {
 if (xhr.readyState == 4 &amp;amp;&amp;amp; xhr.status == 200) {
@@ -431,15 +431,15 @@ document.getElementById(idToPlaceResponseText).innerHTML = xhr.responseText;
 That’s it! Obviously, you can do some nifty stuff with the files if they’re supported. The code on the github project is designed to upload only files that are an Image MIME type and display a preview inside of an &amp;lt;code&amp;gt;id&amp;lt;/code&amp;gt;.&lt;/p&gt;
 </description>
         <pubDate>Sat, 14 Dec 2013 00:00:00 -0600</pubDate>
-        <link>https://code-for-coffee.github.io/2013/12/14/MVC4-Ajax-Uploads-using-HTML5-and-Javascript.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/12/14/MVC4-Ajax-Uploads-using-HTML5-and-Javascript.html</guid>
+        <link>http://localhost:4000/MVC4-Ajax-Uploads-using-HTML5-and-Javascript</link>
+        <guid isPermaLink="true">http://localhost:4000/MVC4-Ajax-Uploads-using-HTML5-and-Javascript</guid>
         
         
       </item>
     
       <item>
         <title>Locking down OS X Workstations (and LogMeIn)</title>
-        <description>&lt;p style=&quot;text-align: left;&quot;&gt;One of the great things about Mac OS X is Darwin, the Unix back-end of the OS. This article discusses a variety of shell (Terminal) commands and tricks that you can use to lock an account&#39;s abilities/actions. Finally, the source code can be viewed/forked on &lt;a href=&quot;https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;. Now, go ahead and open Terminal on a test account.&lt;/p&gt;
+        <description>&lt;p style=&quot;text-align: left;&quot;&gt;One of the great things about Mac OS X is Darwin, the Unix back-end of the OS. This article discusses a variety of shell (Terminal) commands and tricks that you can use to lock an account's abilities/actions. Finally, the source code can be viewed/forked on &lt;a href=&quot;https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;. Now, go ahead and open Terminal on a test account.&lt;/p&gt;
 &lt;p style=&quot;text-align: left;&quot;&gt;Disable use of Dashboard&lt;/p&gt;
 
 &lt;blockquote&gt;
@@ -472,8 +472,8 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
 &lt;p&gt;You can also remove MenuBar.app from /applicationsupport/launchagents/logmein/ - this will remove the Menu Bar icon.&lt;/p&gt;
 </description>
         <pubDate>Fri, 29 Nov 2013 00:00:00 -0600</pubDate>
-        <link>https://code-for-coffee.github.io/2013/11/29/Locking-down-OSX-Worksations-and-LogMeIn.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/11/29/Locking-down-OSX-Worksations-and-LogMeIn.html</guid>
+        <link>http://localhost:4000/Locking-down-OSX-Worksations-and-LogMeIn</link>
+        <guid isPermaLink="true">http://localhost:4000/Locking-down-OSX-Worksations-and-LogMeIn</guid>
         
         
       </item>
@@ -490,13 +490,13 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
 
 &lt;p&gt;Next up, &lt;b&gt;live editing (CTRL+ALT+P). &lt;/b&gt;This feature allows you to directly launch into Google Chrome (and only Chrome at this time) and reflects changes that you make in the editor live. Works similarly to Chrome Developer Tools/Firebug, but this allows you to test CSS changes real time from your editor. Adobe intends to update this in the future. There also is the ability to edit colors in the same manner as CSS by right clicking on any color value and selecting edit. This is a pretty nice feature for on-the-fly editing for those of us who aren’t designers.&lt;/p&gt;
 
-&lt;p&gt;[caption id=”attachment_82” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-82&quot; alt=&quot;Edge Code&#39;s color editor&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2-300x136.png&quot; width=&quot;300&quot; height=&quot;136&quot; /&gt;&lt;/a&gt; Edge Code’s color editor[/caption]&lt;/p&gt;
+&lt;p&gt;[caption id=”attachment_82” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-82&quot; alt=&quot;Edge Code's color editor&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2-300x136.png&quot; width=&quot;300&quot; height=&quot;136&quot; /&gt;&lt;/a&gt; Edge Code’s color editor[/caption]&lt;/p&gt;
 
 &lt;p&gt;In the end, I feel like Fox Mulder: &lt;em&gt;I want to believe&lt;/em&gt;. Edge Code seems like a great tool in the making. For making edits to CSS I’d certainly use it if it were fully baked. As for now, I cannot see it replacing Sublime Text for every coding. However, I do see it as a useful tool for making quick edits when finalizing a page (especially if the CSS is fully designed or if I need a color tweak here/there). I’ll certainly keep my eye on the project and hope for the best.&lt;/p&gt;
 </description>
         <pubDate>Sat, 06 Jul 2013 00:00:00 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/2013/07/06/Adobe-Edge-Code-aka-Brackets.io.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/07/06/Adobe-Edge-Code-aka-Brackets.io.html</guid>
+        <link>http://localhost:4000/Adobe-Edge-Code-aka-Brackets.io</link>
+        <guid isPermaLink="true">http://localhost:4000/Adobe-Edge-Code-aka-Brackets.io</guid>
         
         
       </item>
@@ -590,8 +590,8 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
 &lt;p&gt;I am excited that as a system administrator I’ll have greater control over how the Start Screen looks and feels for users. However, requiring the use of AppLocker for managing application permissions is still disappointing - if you don’t run Windows 8 Enterprise or Server 2012, you’re in the dark.&lt;/p&gt;
 </description>
         <pubDate>Fri, 05 Jul 2013 00:00:00 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/2013/07/05/Windows-8.1-Preview.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/07/05/Windows-8.1-Preview.html</guid>
+        <link>http://localhost:4000/Windows-8.1-Preview</link>
+        <guid isPermaLink="true">http://localhost:4000/Windows-8.1-Preview</guid>
         
         
       </item>
@@ -603,17 +603,17 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
 &lt;p&gt;I decided to put an older Macbook to use for hosting test lab virtual machines; a few of which are running various versions of Windows. After enabling Remote Desktop Connections locally on the virtual machines I made sure to set VMWare Fusion’s network adapter to Bridged (Autodetect). With the built in OS X firewall disabled I should be able to remote into any Windows machine, right? Apparently not! I tried to look around the internet for help since Fusion doesn’t have all of NAT settings forward facing that VMWare Workstation has but came up empty handed with tweaks for Fusion 3 and 4. Well, here is a step-by-step walkthrough on how to allow Remote Desktop through OS X and VMWare Fusion 5.&lt;/p&gt;
 &lt;ol&gt;
 	&lt;li&gt;&lt;span style=&quot;line-height: 13px;&quot;&gt;Install &lt;strong&gt;VMWare Fusion 5&lt;/strong&gt; and a Windows based operating system on a virtual machine.&lt;/span&gt;&lt;/li&gt;
-	&lt;li&gt;Check your virtual machine&#39;s IP settings (ipconfig) verify that DHCP is enabled.&lt;/li&gt;
+	&lt;li&gt;Check your virtual machine's IP settings (ipconfig) verify that DHCP is enabled.&lt;/li&gt;
 	&lt;li&gt;Shut down the virtual machine and select Network Adapter &amp;gt; Bridged Networking &amp;gt; Select &lt;strong&gt;Autodetect&lt;/strong&gt;.&lt;/li&gt;
-	&lt;li&gt;Open Mac OS X &lt;em&gt;System Preferences. &lt;/em&gt;Select &lt;em&gt;Security and Privacy&lt;/em&gt; &amp;gt; &lt;i&gt;Firewall.&lt;/i&gt; &lt;strong&gt;Enable&lt;/strong&gt; the firewall and select &lt;em&gt;Firewall Options&lt;/em&gt;. Select the VMWare Fusion application and &lt;strong&gt;Allow incoming connections&lt;/strong&gt;. Note: if this machine is in your network&#39;s DMZ, you should highly consider enabling stealth mode.&lt;em&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;
+	&lt;li&gt;Open Mac OS X &lt;em&gt;System Preferences. &lt;/em&gt;Select &lt;em&gt;Security and Privacy&lt;/em&gt; &amp;gt; &lt;i&gt;Firewall.&lt;/i&gt; &lt;strong&gt;Enable&lt;/strong&gt; the firewall and select &lt;em&gt;Firewall Options&lt;/em&gt;. Select the VMWare Fusion application and &lt;strong&gt;Allow incoming connections&lt;/strong&gt;. Note: if this machine is in your network's DMZ, you should highly consider enabling stealth mode.&lt;em&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;
 &lt;/span&gt;&lt;/em&gt;&lt;/li&gt;
 	&lt;li&gt;Now, we need to direct Remote Desktop Connections to VMWare. From your Mac (or via an SSH connection), browse to:
 &lt;em&gt;/Library/Preferences/VMWare Fusion/&lt;/em&gt;&lt;/li&gt;
 	&lt;li&gt;Open the &lt;strong&gt;networking&lt;/strong&gt; file: &lt;i&gt;sudo vi networking&lt;/i&gt;. For an example of what the file should look like, &lt;a href=&quot;http://pastebin.com/UJhK2DEn&quot;&gt;here is a link&lt;/a&gt; to the &lt;code&gt;Library/Preferences/VMWare Fusion/networking&lt;/code&gt; file on pastebin.&lt;/li&gt;
 	&lt;li&gt;Look for the &lt;em&gt;[incomingtcp] &lt;/em&gt;section. If you do not find one, create one.&lt;/li&gt;
 	&lt;li&gt;Add the following rule underneath: &lt;em&gt;3389=yourmacsipaddress:3389 &lt;/em&gt;(tip: Insert will allow you to edit lines, &lt;em&gt;:quit&lt;/em&gt; or &lt;em&gt;:exit&lt;/em&gt; will close vi).&lt;/li&gt;
-	&lt;li&gt;Restart VMWare Fusion and launch your virtual machine. From your client machine, you&#39;ll want to connect via Remote Desktop Client to the static IP you set your virtual machine to. Enter in the virtual machine&#39;s credentials and you&#39;re in.&lt;/li&gt;
-	&lt;li&gt;That&#39;s it! You can now use the Windows RDC on various virtual machines hosted on your Mac as long as you give them each specific, static IPs.&lt;/li&gt;
+	&lt;li&gt;Restart VMWare Fusion and launch your virtual machine. From your client machine, you'll want to connect via Remote Desktop Client to the static IP you set your virtual machine to. Enter in the virtual machine's credentials and you're in.&lt;/li&gt;
+	&lt;li&gt;That's it! You can now use the Windows RDC on various virtual machines hosted on your Mac as long as you give them each specific, static IPs.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Hope this helps. If you have any questions or comments feel free to post them.&lt;/p&gt;
 
@@ -625,8 +625,8 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
 &lt;p&gt;&amp;lt;/em&amp;gt;&lt;/p&gt;
 </description>
         <pubDate>Wed, 03 Jul 2013 00:00:00 -0500</pubDate>
-        <link>https://code-for-coffee.github.io/2013/07/03/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards.html</link>
-        <guid isPermaLink="true">https://code-for-coffee.github.io/2013/07/03/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards.html</guid>
+        <link>http://localhost:4000/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards</link>
+        <guid isPermaLink="true">http://localhost:4000/Windows-Remote-Desktop-VMWare-Fusion-5-and-NAT-Forwards</guid>
         
         
       </item>
