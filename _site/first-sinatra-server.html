@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>code for coffee .: Your first Sinatra web server with Ruby</title>
+  <meta name="description" content="This tutorial is designed to get you up and running with a Sinatra server with as little work as possible. This tutorial assumes that you have a basic knowle...">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <link rel="canonical" href="http://localhost:4000/first-sinatra-server">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="http://localhost:4000/feed.xml" />
+</head>
+
+
+  <body>
+
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
+  </a>
+<!--     <ul class="right hide-on-med-and-down">
+      
+        
+      
+        
+      <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      
+        
+      
+        
+        <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
+  </div>
+</nav>
+</div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">Your first Sinatra web server with Ruby</h2>
+      <em class="center">Posted on Jun 25, 2015</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <p>This tutorial is designed to get you up and running with a Sinatra server with as little work as possible. This tutorial assumes that you have a basic knowledge of Ruby. However, it does not assume you know how to use Gems. If you haven’t used Ruby yet, that’s okay! Check out the language at http://tryruby.org. Now, it is time to build your first Sinatra based web server.</p>
+
+<h4 id="introducing-sinatra">Introducing Sinatra</h4>
+
+<p>Sinatra is a web framework. It is designed to listen for user requests and to provide responses. It is lightweight and designed to get to the point. As frameworks go, it is highly modular and built to scale. It is also (arguably) the easiest way to write a server in Ruby. Let’s get started by building a web server in Ruby!</p>
+
+<h4 id="prepwork-with-gemfile">1. Prepwork with Gemfile</h4>
+
+<p>You’ll need Sinatra. Time to install it! <code class="highlighter-rouge">gem install sinatra</code>. Next, you need the JSON gem to send responses back via JSON. This also allows us to call <code class="highlighter-rouge">.to_json</code> on hashes (and other data types such as Arrays). You should <code class="highlighter-rouge">gem install json</code>. Finally, you want Bundler - <code class="highlighter-rouge">gem install bundler</code>! This gem allows us to bundle all of your gems together for your application to use.</p>
+
+<p>You need somewhere to store all of the Gems that your application needs - this will be a plaintext file called <code class="highlighter-rouge">Gemfile</code> (no extension). Gemfiles are where you store information about our application’s libraries (aka, gems). Essentially, the Gemfile allows us to specify what gems we want our application to use.</p>
+
+<p><em>Gemfile</em></p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">source</span> <span class="s1">'https://rubygems.org'</span>
+
+<span class="n">gem</span> <span class="s1">'sinatra'</span>
+<span class="n">gem</span> <span class="s1">'json'</span>
+</code></pre>
+</div>
+
+<p>Each time the Gemfile had new Gems added to it, you need to <code class="highlighter-rouge">bundle</code>. Yes, <code class="highlighter-rouge">bundle</code> from terminal in the folder where your app lives. Bundler will then grab all the gems and bundle them together for your app. If you add additional gems, don’t forget to <code class="highlighter-rouge">bundle</code>!</p>
+
+<hr />
+
+<h4 id="configuraiton-with-configru">2. Configuraiton with Config.ru</h4>
+
+<p>You now need a file to tell our application how it should be configured. This tells you what we need to do and what settings your app should use. Since you’re using Sinatra, this will be pretty simple! Create a <code class="highlighter-rouge">config.ru</code> in the same directory as your <code class="highlighter-rouge">Gemfile</code>.</p>
+
+<p><em>config.ru</em></p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'./app'</span>
+<span class="n">run</span> <span class="no">Sinatra</span><span class="o">::</span><span class="no">Application</span>
+</code></pre>
+</div>
+
+<p>What was going on in that file? You required the <code class="highlighter-rouge">app.rb</code> file to be used by using Ruby’s <code class="highlighter-rouge">require</code> statement. This forces a file to be loaded once into our application and run. You then <code class="highlighter-rouge">run Sinatra::Application</code> - or tell Sinatra to start. That’s it!</p>
+
+<h4 id="communicating-with-the-web">3. Communicating with the Web</h4>
+
+<p>Now we’re going to create one more final - our <code class="highlighter-rouge">app.rb</code>. Our final app.rb will look like this.. but we’re going to build it and explain as we go.</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'bundler'</span>
+<span class="no">Bundler</span><span class="p">.</span><span class="nf">require</span><span class="p">()</span>
+
+<span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+  <span class="p">{</span><span class="ss">:name</span> <span class="o">=&gt;</span> <span class="s1">'test'</span><span class="p">}.</span><span class="nf">to_json</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>First, In your <code class="highlighter-rouge">app.rb</code> file, you now need to to require Bundler. It is what bundles your gems.</p>
+
+<p><em>app.rb</em></p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'bundler'</span>
+<span class="no">Bundler</span><span class="p">.</span><span class="nf">require</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<p>Now, you need to let users access resources on your server. But how will you tell them where to go? Sinatra provides <strong>Routers</strong>. These route the user to http://somedomain.com/route/. Or maybe http://somewhere.com/landing/. You’ll define a root route first to access http://localhost/. If this were on a live server, it could be http://somedomain.com/</p>
+
+<p><em>app.rb</em></p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'bundler'</span>
+<span class="no">Bundler</span><span class="p">.</span><span class="nf">require</span><span class="p">()</span>
+
+<span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+  <span class="c1"># some code goes here</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<p>Now that you can have a user access a resource via a route. It is time to expose a resource to them! You’ll use the JSON gem here to return a Hash back to a user as JSON.</p>
+
+<p><em>app.rb</em></p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'bundler'</span>
+<span class="no">Bundler</span><span class="p">.</span><span class="nf">require</span><span class="p">()</span>
+
+<span class="n">get</span> <span class="s1">'/'</span> <span class="k">do</span>
+  <span class="p">{</span><span class="ss">:message</span> <span class="o">=&gt;</span> <span class="s1">'hello, world!'</span><span class="p">}.</span><span class="nf">to_json</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h4 id="did-this-work-lets-run-your-server">4. Did this work? Let’s run your server!</h4>
+
+<p>In terminal, run your app. Did you add any new gems? If so, <code class="highlighter-rouge">bundle</code>! Now, let’s start our server</p>
+
+<blockquote>
+  <p><em>Note</em> This tells the <strong>Rackup</strong> middleware to run our server.</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>bundle <span class="nb">exec </span>rackup
+</code></pre>
+</div>
+
+<p>If everything went to plan, you can view your resource. Sinatra listens for requests on port <strong>9292</strong>. Browse to your resource at http://localhost:9292/. Hopefully everything worked out and you’ll see <code class="highlighter-rouge"><span class="p">{</span><span class="nt">"message"</span><span class="p">:</span><span class="s2">"hello, world!"</span><span class="p">}</span></code>.</p>
+
+<h4 id="conclusion">5. Conclusion</h4>
+
+<ul>
+  <li>You just build a webserver! Congrats! Hopefully this feels awesome and you want to learn more.</li>
+</ul>
+
+<blockquote>
+  <p><strong>Next Steps</strong>: Take a look at the official documentation - http://www.sinatrarb.com/</p>
+</blockquote>
+
+    </div>
+    <div class="row center">
+    <h4>Comments</h4>
+    
+      
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname  = 'codeforcoffee';
+  var disqus_identifier = '/first-sinatra-server';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">code for coffee</h5>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver. He is an experienced mobile and full stack engineer that specializes in Javascript, Android, Node.js, and ASP.NET. </p><p></p></strong></em></p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Links and Social</h5>
+        <ul>
+          <li><a class="white-text" href="https://github.com/code-for-coffee" target="_blank">Github</a></li>
+          <li><a class="white-text" href="https://twitter.com/code4coffee" target="_blank">Twitter</a></li>
+          <li><a class="white-text" href="https://vimeo.com/codeforcoffee" target="_blank">Vimeo</a></li>
+          <li><a class="white-text" href="http://stackoverflow.com/users/1952160/code4coffee" target="_blank">Stack Overflow</a></li>
+          <li><a class="white-text" href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Questions? Comments? <a class="orange-text text-lighten-4" href="mailto:james@codeforcoffee.org">Drop me a line</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86725209-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+
+</html>

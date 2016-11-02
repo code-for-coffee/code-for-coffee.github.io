@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Ruby 101: Gemfile and your first Sinatra web server
+title: Your first Sinatra web server with Ruby
 ---
 
-This tutorial is designed to get you up and running with a Sinatra server with as little work as possible. This tutorial assumes that you have a basic knowledge of Ruby
+This tutorial is designed to get you up and running with a Sinatra server with as little work as possible. This tutorial assumes that you have a basic knowledge of Ruby. However, it does not assume you know how to use Gems. If you haven't used Ruby yet, that's okay! Check out the language at http://tryruby.org. Now, it is time to build your first Sinatra based web server.
 
 
 

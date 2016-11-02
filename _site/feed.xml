@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>code for coffee</title>
-    <description>Write an awesome description for your portfolio here!
+    <description>The professional website of James Traver
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 01 Nov 2016 23:23:52 -0500</pubDate>
-    <lastBuildDate>Tue, 01 Nov 2016 23:23:52 -0500</lastBuildDate>
+    <pubDate>Wed, 02 Nov 2016 15:29:36 -0500</pubDate>
+    <lastBuildDate>Wed, 02 Nov 2016 15:29:36 -0500</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
     
       <item>
@@ -180,6 +180,125 @@ Finished &lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt; after 144 μs
         <pubDate>Mon, 18 Jan 2016 00:00:00 -0600</pubDate>
         <link>http://localhost:4000/using-gulp-for-es6-support</link>
         <guid isPermaLink="true">http://localhost:4000/using-gulp-for-es6-support</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Your first Sinatra web server with Ruby</title>
+        <description>&lt;p&gt;This tutorial is designed to get you up and running with a Sinatra server with as little work as possible. This tutorial assumes that you have a basic knowledge of Ruby. However, it does not assume you know how to use Gems. If you haven’t used Ruby yet, that’s okay! Check out the language at http://tryruby.org. Now, it is time to build your first Sinatra based web server.&lt;/p&gt;
+
+&lt;h4 id=&quot;introducing-sinatra&quot;&gt;Introducing Sinatra&lt;/h4&gt;
+
+&lt;p&gt;Sinatra is a web framework. It is designed to listen for user requests and to provide responses. It is lightweight and designed to get to the point. As frameworks go, it is highly modular and built to scale. It is also (arguably) the easiest way to write a server in Ruby. Let’s get started by building a web server in Ruby!&lt;/p&gt;
+
+&lt;h4 id=&quot;prepwork-with-gemfile&quot;&gt;1. Prepwork with Gemfile&lt;/h4&gt;
+
+&lt;p&gt;You’ll need Sinatra. Time to install it! &lt;code class=&quot;highlighter-rouge&quot;&gt;gem install sinatra&lt;/code&gt;. Next, you need the JSON gem to send responses back via JSON. This also allows us to call &lt;code class=&quot;highlighter-rouge&quot;&gt;.to_json&lt;/code&gt; on hashes (and other data types such as Arrays). You should &lt;code class=&quot;highlighter-rouge&quot;&gt;gem install json&lt;/code&gt;. Finally, you want Bundler - &lt;code class=&quot;highlighter-rouge&quot;&gt;gem install bundler&lt;/code&gt;! This gem allows us to bundle all of your gems together for your application to use.&lt;/p&gt;
+
+&lt;p&gt;You need somewhere to store all of the Gems that your application needs - this will be a plaintext file called &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt; (no extension). Gemfiles are where you store information about our application’s libraries (aka, gems). Essentially, the Gemfile allows us to specify what gems we want our application to use.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Gemfile&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'https://rubygems.org'&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'sinatra'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'json'&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Each time the Gemfile had new Gems added to it, you need to &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle&lt;/code&gt;. Yes, &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle&lt;/code&gt; from terminal in the folder where your app lives. Bundler will then grab all the gems and bundle them together for your app. If you add additional gems, don’t forget to &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle&lt;/code&gt;!&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;configuraiton-with-configru&quot;&gt;2. Configuraiton with Config.ru&lt;/h4&gt;
+
+&lt;p&gt;You now need a file to tell our application how it should be configured. This tells you what we need to do and what settings your app should use. Since you’re using Sinatra, this will be pretty simple! Create a &lt;code class=&quot;highlighter-rouge&quot;&gt;config.ru&lt;/code&gt; in the same directory as your &lt;code class=&quot;highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;config.ru&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'./app'&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;run&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Sinatra&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Application&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;What was going on in that file? You required the &lt;code class=&quot;highlighter-rouge&quot;&gt;app.rb&lt;/code&gt; file to be used by using Ruby’s &lt;code class=&quot;highlighter-rouge&quot;&gt;require&lt;/code&gt; statement. This forces a file to be loaded once into our application and run. You then &lt;code class=&quot;highlighter-rouge&quot;&gt;run Sinatra::Application&lt;/code&gt; - or tell Sinatra to start. That’s it!&lt;/p&gt;
+
+&lt;h4 id=&quot;communicating-with-the-web&quot;&gt;3. Communicating with the Web&lt;/h4&gt;
+
+&lt;p&gt;Now we’re going to create one more final - our &lt;code class=&quot;highlighter-rouge&quot;&gt;app.rb&lt;/code&gt;. Our final app.rb will look like this.. but we’re going to build it and explain as we go.&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'bundler'&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Bundler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'test'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_json&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;First, In your &lt;code class=&quot;highlighter-rouge&quot;&gt;app.rb&lt;/code&gt; file, you now need to to require Bundler. It is what bundles your gems.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;app.rb&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'bundler'&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Bundler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now, you need to let users access resources on your server. But how will you tell them where to go? Sinatra provides &lt;strong&gt;Routers&lt;/strong&gt;. These route the user to http://somedomain.com/route/. Or maybe http://somewhere.com/landing/. You’ll define a root route first to access http://localhost/. If this were on a live server, it could be http://somedomain.com/&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;app.rb&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'bundler'&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Bundler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# some code goes here&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now that you can have a user access a resource via a route. It is time to expose a resource to them! You’ll use the JSON gem here to return a Hash back to a user as JSON.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;app.rb&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'bundler'&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Bundler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/'&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:message&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'hello, world!'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_json&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;did-this-work-lets-run-your-server&quot;&gt;4. Did this work? Let’s run your server!&lt;/h4&gt;
+
+&lt;p&gt;In terminal, run your app. Did you add any new gems? If so, &lt;code class=&quot;highlighter-rouge&quot;&gt;bundle&lt;/code&gt;! Now, let’s start our server&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Note&lt;/em&gt; This tells the &lt;strong&gt;Rackup&lt;/strong&gt; middleware to run our server.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;rackup
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If everything went to plan, you can view your resource. Sinatra listens for requests on port &lt;strong&gt;9292&lt;/strong&gt;. Browse to your resource at http://localhost:9292/. Hopefully everything worked out and you’ll see &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;message&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;hello, world!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;conclusion&quot;&gt;5. Conclusion&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You just build a webserver! Congrats! Hopefully this feels awesome and you want to learn more.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Next Steps&lt;/strong&gt;: Take a look at the official documentation - http://www.sinatrarb.com/&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        <pubDate>Thu, 25 Jun 2015 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/first-sinatra-server</link>
+        <guid isPermaLink="true">http://localhost:4000/first-sinatra-server</guid>
         
         
       </item>
@@ -671,101 +790,6 @@ killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
         <pubDate>Sat, 06 Jul 2013 00:00:00 -0500</pubDate>
         <link>http://localhost:4000/Adobe-Edge-Code-aka-Brackets.io</link>
         <guid isPermaLink="true">http://localhost:4000/Adobe-Edge-Code-aka-Brackets.io</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Windows 8.1 Preview - new Features, Group Policy, &amp; Thoughts</title>
-        <description>&lt;p&gt;Last Wednesday Microsoft released the Windows 8.1 Preview for those who felt ambitious enough to try it out. I immediately created a Windows 8 virtual machine and downloaded the update. The following article covers some of the new features, new Group Policy additions, and my thoughts on it as a whole.&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;Quick Notes: &lt;/b&gt;&lt;/p&gt;
-&lt;ul&gt;
-	&lt;li&gt;The Windows 8.1 Update requires 2.44GB of storage.&lt;/li&gt;
-	&lt;li&gt;Estimated release date: August, 2013&lt;/li&gt;
-	&lt;li&gt;Installed through Windows Store (not Windows Update)&lt;/li&gt;
-	&lt;li&gt;Install time: 45-60 minutes&lt;/li&gt;
-	&lt;li&gt;Return of the “Start” Icon (sends you to the Metro screen)&lt;/li&gt;
-	&lt;li&gt;Group Policy allows you to manipulate the Start Screen&lt;/li&gt;
-	&lt;li&gt;Boot-to-desktop (bypass Start Screen)&lt;/li&gt;
-	&lt;li&gt;Still no Group Policy security for Metro Apps without &lt;b&gt;AppLocker&lt;/b&gt; (&lt;a href=&quot;http://technet.microsoft.com/en-US/library/ee424382(v=ws.10).aspx&quot;&gt;only available on Win8 Enterprise, Server 2012&lt;/a&gt;)&lt;/li&gt;
-	&lt;li&gt;Control Panel is migrating to PC Settings (under Metro)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;b&gt;Windows 8.1 Installation&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;[caption id=”attachment_63” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-63&quot; alt=&quot;Windows 8.1 Preview Download Page&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; Microsoft Store’s page for the Windows 8.1 Preview[/caption]&lt;/p&gt;
-
-&lt;p&gt;Installation was fairly painless – unlike typical Windows updates (8.1 is essentially Service Pack 1 for Windows 8) you do not update the operating system via Windows Update; instead, the update is pushed out via the Windows Store. Currently, this requires a Microsoft Account to sign into… and to download the update. This could be subject to change but with Microsoft’s push to the Metro platform I am unsure if it would be made available in the traditional route.&lt;/p&gt;
-
-&lt;p&gt;Installation took an estimated 45minutes on a virtual machine that was allocated 6GB of RAM. The preview completely reinstalls Windows 8 as well as the 8.1 update meaning you lose all of your applications (Metro and traditional) but not your application settings. This will only apply to the preview and not the final version.&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;Start Screen Changes&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;One of the largest advantages to Windows 8.1 is the ability to create pre-defined user layouts for the Metro screen and pass them on to other users (via Active Directory or Group Policy). Newly installed applications are also noted that they are “New”. Newly editable are the following:&lt;/p&gt;
-&lt;ul&gt;
-	&lt;li&gt;Start wallpaper&lt;/li&gt;
-	&lt;li&gt;Tile sizes: small, medium, wide, large&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;[caption id=”attachment_65” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_4_web.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-65&quot; alt=&quot;Editing the Windows 8.1 Start Screen&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_4_web-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; Editing the Windows 8.1 Start Screen[/caption]&lt;/p&gt;
-
-&lt;p&gt;The Metro/Start Screen also has added a few new UI features:&lt;/p&gt;
-&lt;ul&gt;
-	&lt;li&gt;Search is built into the start screen (top right)&lt;/li&gt;
-	&lt;li&gt;Arrows to other applications not pinned to the screen&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;This will help alleviate confusion of users who were not comfortable with the prior way of finding applications or files.&lt;/p&gt;
-
-&lt;p&gt;[caption id=”attachment_66” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_6.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-66&quot; alt=&quot;New Applications&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_6-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; New Applications[/caption]&lt;/p&gt;
-
-&lt;p&gt;Something else of note - the Control Panel looks to be migrated ever so slowing into &lt;strong&gt;PC Settings&lt;/strong&gt;, as noted in the screenshot below. This will probably come off as a mixed reaction to many but I find that centralizing everything is for the better in the end. Until now, I felt like PC settings was a little out-of-place and was just thrown before release of Windows 8. Now, it feels more like a hub to control your computer’s settings. I imagine that in future revisions of Windows 8 we’ll see the eventual demise of the long-lasting Control Panel.&lt;/p&gt;
-
-&lt;p&gt;[caption id=”attachment_67” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_5.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-67&quot; alt=&quot;Updating &amp;quot;PC Settings&amp;quot;&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/win8_5-300x225.png&quot; width=&quot;300&quot; height=&quot;225&quot; /&gt;&lt;/a&gt; Updated “PC Settings”[/caption]&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;Group Policy Changes&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;There are quite a few Group Policy changes made in Windows 8. This is a comprehensive list of the new values that can be manipulated via Group Policy and Active Directory (in bold are the values I find interesting):&lt;/p&gt;
-&lt;ul&gt;
-	&lt;li&gt;Allow Internet Explore to use the SPDY/3 network protocol&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Allow Microsoft service to provide enhance suggestions as the user types in the Address bar&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Always automatically restart at the schedule time&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;App switching&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Charms&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Configure Group Policy Caching&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Configure Logon Script Delay&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Default&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Default App&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Default Search&lt;/li&gt;
-	&lt;li&gt;Do now sync start settings&lt;/li&gt;
-	&lt;li&gt;Don’t run antimalware programs against ActiveX controls&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Force a specific background and accent color&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Force a specific Start background&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Force automatic setup for all users&lt;/li&gt;
-	&lt;li&gt;Multimon&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Pin Apps to Start when installed&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Prevent enabling lock screen camera&lt;/li&gt;
-	&lt;li&gt;Prevent enabling lock screen slide show&lt;/li&gt;
-	&lt;li&gt;Restrict delegation of credentials to remote servers&lt;/li&gt;
-	&lt;li&gt;Set the time Quiet Hours begins each day&lt;/li&gt;
-	&lt;li&gt;Set the time Quiet Hours ends each day&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Sign-in last interactive user automatically after a system-imitated restart&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Sort&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Start Screen Layout&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Turn off calls during Quiet Hours&lt;/li&gt;
-	&lt;li&gt;Turn off phone number detection&lt;/li&gt;
-	&lt;li&gt;Turn off Quiet Hours&lt;/li&gt;
-	&lt;li&gt;&lt;strong&gt;Turn off sending UTF-8 query strings for URLs&lt;/strong&gt;&lt;/li&gt;
-	&lt;li&gt;Turn on 64-bit tab processes when running in Enhance Protected Mode on 64-bit version of Windows&lt;/li&gt;
-	&lt;li&gt;WinX&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Final Thoughts&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Overall, there is not a lot that will affect traditional desktop users. I would go as far to say that for those users who only use Desktop applications, there will be no viable reason to upgrade to Windows 8.1. That being said, for those who are migrating to the new interface a lot of features have been added.&lt;/p&gt;
-
-&lt;p&gt;I am excited that as a system administrator I’ll have greater control over how the Start Screen looks and feels for users. However, requiring the use of AppLocker for managing application permissions is still disappointing - if you don’t run Windows 8 Enterprise or Server 2012, you’re in the dark.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 05 Jul 2013 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/Windows-8.1-Preview</link>
-        <guid isPermaLink="true">http://localhost:4000/Windows-8.1-Preview</guid>
         
         
       </item>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>code for coffee .: Introducing Modern HTML and CSS for Designers</title>
+  <meta name="description" content="Original target audience was for developers who had been stuck developing for IE8 or older until the release of IE9 and evergreen browsers.">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <link rel="canonical" href="http://localhost:4000/intro-to-modern-html">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="http://localhost:4000/feed.xml" />
+</head>
+
+
+  <body>
+
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
+  </a>
+<!--     <ul class="right hide-on-med-and-down">
+      
+        
+      
+        
+      <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      
+        
+      
+        
+        <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
+  </div>
+</nav>
+</div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">Introducing Modern HTML and CSS for Designers</h2>
+      <em class="center">Posted on Jun 26, 2013</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <p><em>Original target audience was for developers who had been stuck developing for IE8 or older until the release of IE9 and evergreen browsers.</em></p>
+
+<p><code class="highlighter-rouge">&lt;table&gt;&lt;/table&gt;</code>’s have been replaced by <code class="highlighter-rouge">&lt;div&gt;&lt;/div&gt;</code>’s for body layout. This allows for more flexibility in modern browser
+rendering engines (and uses less memory to compute positioning). Tables are now used for data output
+(such as charts, grids, raw data, etc).</p>
+
+<p>To style these divs and give them a meaning, there are a variety of HTML styles that can be applied.
+These are traditionally stored in an external stylesheet inside of the <code class="highlighter-rouge">&lt;head&gt;&lt;/head&gt;</code> HTML tags, ie:</p>
+
+<p><code class="highlighter-rouge">&lt;link rel="style" href="myStylesheet.css"&gt;</code></p>
+
+<p>These stylesheets are composed of selectors. Each selector looks like:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">myDiv</span> <span class="p">{</span>
+  <span class="c">/* some code in here */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>We’ll style the div tags with selectors. Selectors come in three primary varieties: page elements (such as body, a, img),
+classes  (such as <code class="highlighter-rouge">&lt;input class="myInput" type="number" /&gt;</code>, and IDs (<code class="highlighter-rouge">&lt;div id="menu-section"&gt;&lt;/div&gt;</code>).</p>
+
+<p>Page elements represent HTML tags. For example, you can have a selector that covers the entire page with:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You can also style your images (<code class="highlighter-rouge">&lt;img src="myimage.png"&gt;</code>) with:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">img</span> <span class="p">{</span>
+  <span class="nl">border-right</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">black</span><span class="p">;</span>
+  <span class="c">/* there is also border-left, border top, border-bottom */</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Or you can style your anchor (<code class="highlighter-rouge">&lt;a href="mypage.html"&gt;my page&lt;/a&gt;</code>) tags:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">a</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">blue</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">purple</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Wait - before we go any further, notice the <code class="highlighter-rouge">a:hover</code> selector. Notice the “:hover” - that is called a <em>pseudo selector</em>.
+<code class="highlighter-rouge">:visited</code> and <code class="highlighter-rouge">:active</code> on the anchor tag also.</p>
+
+<p>Moving on, there are <em>classes</em> - each CSS class can be added to <em>any</em> HTML tag to give it a specific style. Classes are
+meant to be re-used. You’ll add them to HTML tags like so:</p>
+
+<p><code class="highlighter-rouge">&lt;input type="text" placeholder="enter your username" class="round-edges" /&gt;</code></p>
+
+<p>We’ll style that class like so:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.round-edges</span> <span class="p">{</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">25px</span><span class="p">;</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">.</code> preceding the class name denotes that it is a class to the browser when it reads your CSS. Speaking of which,
+IDs are preceed with “#”; they are also designed to only be used once. You want to use them to specify specific HTML elements.
+One could be for your header section, another for your menu, another for the content, and perhaps one for a footer? You can
+always use as many as you want for targetting specific elements. You’ll add an ID like so:</p>
+
+<div id="body-content" class="round-edges">
+  </div>
+
+<p>To target this with a CSS selector:</p>
+
+<p>#body-content {
+    font-size: 24px;
+    font-weight: bolder;
+  }</p>
+
+<p>And yes, you can use a class at the same time as an ID. Now, what happens if you both the CSS class and the ID have code that
+conflict with each other? Consider:</p>
+
+<p>#body-content{
+    font-size: 20px;
+  }
+  .round-borders {
+    font-size: 24px;
+    border-radius: 25px;
+  }</p>
+
+<p>This is tricky - depending on which CSS selector is declared LAST will be given preferred treatment and their CSS code will be used. So in the above example, the font-size will be 24px because .round-borders is declared AFTER the ID. You can get around this, however. How? Add the <code class="highlighter-rouge">!important</code> flag to the end of a declared selector:</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nf">#hero</span> <span class="p">{</span>
+  <span class="py">font-color</span><span class="p">:</span> <span class="no">blue</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">64px</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bolder</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Whenever the <code class="highlighter-rouge">#hero</code> ID is placed somewhere, it will always override the declared style in any other selector that is attached to your HTML element. Consider it your CSS superhero - however, don’t rely on it too much otherwise you’ll end up with hard to maintain code.</p>
+
+    </div>
+    <div class="row center">
+    <h4>Comments</h4>
+    
+      
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname  = 'codeforcoffee';
+  var disqus_identifier = '/intro-to-modern-html';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">code for coffee</h5>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver. He is an experienced mobile and full stack engineer that specializes in Javascript, Android, Node.js, and ASP.NET. </p><p></p></strong></em></p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Links and Social</h5>
+        <ul>
+          <li><a class="white-text" href="https://github.com/code-for-coffee" target="_blank">Github</a></li>
+          <li><a class="white-text" href="https://twitter.com/code4coffee" target="_blank">Twitter</a></li>
+          <li><a class="white-text" href="https://vimeo.com/codeforcoffee" target="_blank">Vimeo</a></li>
+          <li><a class="white-text" href="http://stackoverflow.com/users/1952160/code4coffee" target="_blank">Stack Overflow</a></li>
+          <li><a class="white-text" href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Questions? Comments? <a class="orange-text text-lighten-4" href="mailto:james@codeforcoffee.org">Drop me a line</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86725209-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+
+</html>
