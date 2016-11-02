@@ -1,6 +1,6 @@
 ---
 layout: post
-title: To the stars: Solar systems beyond our own
+title: "To the stars: Solar Systems beyond our own"
 ---
 
 > Originally Published October, 2014. Last updated 1/28/2016.
