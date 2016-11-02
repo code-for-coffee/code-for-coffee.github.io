@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Where is SQL Server Manager 2012?
+date: 2013-02-11
 ---
 
 <em>...it is hiding in the depths of Microsoft's Evaluation site!</em>
