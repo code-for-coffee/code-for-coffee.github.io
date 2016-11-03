@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>code for coffee .: Categorizing Exoplanets by Type: Part One - Research</title>
+  <meta name="description" content="It is no secret that I am a space nerd. Over the past few months, I have decided to work on an Exoplanet visualization application (based on an Android appli...">
+
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='/stylesheets/style.css' media="screen,projection" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/materialize.min.js"></script>
+  <script type="text/javascript" src="/javascripts/app.js"></script>
+  <link rel="canonical" href="http://localhost:4000/How-to-categorize-confirmed-Exoplanet-types">
+  <link rel="alternate" type="application/rss+xml" title="code for coffee" href="http://localhost:4000/feed.xml" />
+</head>
+
+
+  <body>
+
+    <div class="navbar-fixed">
+<nav class="brown darken-4" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">
+    code for coffee
+  </a>
+<!--     <ul class="right hide-on-med-and-down">
+      
+        
+      
+        
+      <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav">
+      
+        
+      
+        
+        <li><a class="page-link" href="/">Home</a></li>
+        
+      
+    </ul>
+    <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a> -->
+  </div>
+</nav>
+</div>
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <div class="row center">
+      <picture>
+        <source srcset="/logo-mobile.png" media="(max-width: 900px)">
+        <img src="/logo-mobile.png" alt="Code for Coffee Logo">
+      </picture>
+      <h2 class="header center red-text text-darken-4">Categorizing Exoplanets by Type: Part One - Research</h2>
+      <em class="center">Posted on Nov 2, 2016</em>
+      <h6 class="header center red-text text-darken-3"></h6>
+    </div>
+    <div class="row left-align">
+      <p>It is no secret that I am a space nerd. Over the past few months, I have decided to work on an Exoplanet visualization application (based on an Android application prototype that I had designed). I decided that I wanted to see how many planets of what type have been found by Kepler. The goal is to create a module that will allow users to input a CSV file from the <a href="http://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&amp;config=planets">NASA Exoplanet Archive</a> and then render a list of planets by type. This introduced a few interesting challenges. First, Javascript isn’t <a href="http://stackoverflow.com/questions/11695618/dealing-with-float-precision-in-javascript">very precise with floating point values</a>. Second, how will I convert CSV data from NASA into something usable? Finally, how will I figure out what the planet type even is? Once I solve these questions, I can then take that knowledge and build a library/module/tool. However, before we can start, I needed to perform some research. In the firs part of this series of posts, I will outline my research, conclusion and results.</p>
+
+<h4 id="project-outline">Project Outline</h4>
+
+<p>Our user stories are as follows:</p>
+
+<ul>
+  <li>A user instantiates our module with a NASA provided CSV file as an argument</li>
+  <li>A user queries for a list of planets that kepler has detected and is provided an Object</li>
+  <li>A user queries for an official list of planetary types to view and is provided an Object</li>
+  <li>A user queries for a list of solar systems and is provided an Object</li>
+  <li>For any result a user requests, a user may export the results to a prettified JSON file</li>
+</ul>
+
+<p>These sounds like  pretty reasonable user stories. The module itself is not too complex but serves a single purpose: to allow users to convert NASA Exoplanet data into something usable.</p>
+
+<h4 id="getting-the-nasa-data">Getting the NASA data</h4>
+
+<p>NASA provides most of their data in some format or another. The Exoplanet Archive at CalTech provides a <a href="http://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&amp;config=planets">very nice interface</a>. They have provided a lot of data in this exoplanet table. We are able to speculate the mass of an exoplanet based on transits that it makes between our telescopes and its host star. This mass is usually referred to as a ‘Jupiter Mass’ (or, how many Jupiters it would take to achieve the mass of this planet). However, I needed to filter out superfluous data. Before I could determine what data we’ll need, I needed to figure out how planets are categorized. In 2011, <a href="http://phl.upr.edu/library/notes/amassclassificationforbothsolarandextrasolarplanets">Abel Mendez</a> from the University of Puerto Rico at Arecibo published a paper that provides a scale to classify planets by their mass. However, these masses were in relative earth masses; not relative Jupiter masses.</p>
+
+<p><img class="responsive-img" src="/images/EMC.jpg" /></p>
+
+<p>I decided to structure these as JSON and as a Javascript module for future use.</p>
+
+<script src="https://gist.github.com/code-for-coffee/70d06dc8090d7645e728f5fd786d2774.js"></script>
+
+<p>Thankfully, I can easily convert a Jupiter mass to an Earth mass. I do this by comparing how many Earth mases it would take to fill up Jupiter. According to wikipedia, <a href="Jupiter is equivilent to 317.83 Earth masses">https://en.wikipedia.org/wiki/Jupiter_mass</a>:</p>
+
+<p><em>Convert Jupiter mass to Earth Mass</em></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>1 (jupiter mass)       input_value
+______               = ___________
+317.83 (earth mass)    output_value
+</code></pre>
+</div>
+
+<p>In keeping with our user stories, I now know that we can find the planet type and with some math, calculate the available Jupiter mass values that each exoplanet has. I can also check off querying for a list of planet types; I just need to turn that into a data structure. I also need to know which star (or host) that the planet is orbiting around. <a href="http://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&amp;config=planets">Heading back to the exoplanet Archive</a>, I begin to look at each column. I pay attention to a few values that I’ll think will be important: <strong>Row ID</strong>, <strong>Host Name</strong>, <strong>Planet Letter</strong>, <strong>Number of Planets in System</strong>, <strong>Planet Mass (in Jupiter Mass)</strong>. I then <em>select columns</em> and de-select every column but those I mentioned. From there, I select <strong>Download Table</strong>, <em>download currently checked columns</em>, and select <em>download table as CSV</em>.</p>
+
+<p><img class="responsive-img" src="/images/exoplanet_tutorial.png" /></p>
+
+<blockquote>
+  <p><em>Screenshot of the NASA Exoplanet Archive with Columns Filtered</em></p>
+</blockquote>
+
+<p>Awesome! Now I have this wonderful <code class="highlighter-rouge">planets.csv</code> in my downloads folder. Upon inspection, it contains over a thousand rows of precious planets that the human race has discovered. Columns are identified in comments for ease of use/readability (thanks, NASA engineers).</p>
+
+<pre><code class="language-csv"># This file was produced by the NASA Exoplanet Archive  http://exoplanetarchive.ipac.caltech.edu
+# Wed Nov  2 16:07:55 2016
+#
+# COLUMN pl_hostname:    Host Name
+# COLUMN pl_letter:      Planet Letter
+# COLUMN pl_pnum:        Number of Planets in System
+# COLUMN pl_orbper:      Orbital Period [days]
+# COLUMN pl_orbpererr1:  Orbital Period Upper Unc. [days]
+# COLUMN pl_orbpererr2:  Orbital Period Lower Unc. [days]
+# COLUMN pl_orbperlim:   Orbital Period Limit Flag
+# COLUMN pl_bmassj:      Planet Mass or M*sin(i)[Jupiter mass]
+# COLUMN pl_bmassjerr1:  Planet Mass or M*sin(i)Upper Unc. [Jupiter mass]
+# COLUMN pl_bmassjerr2:  Planet Mass or M*sin(i)Lower Unc. [Jupiter mass]
+# COLUMN pl_bmassjlim:   Planet Mass or M*sin(i)Limit Flag
+# COLUMN pl_radj:        Planet Radius [Jupiter radii]
+# COLUMN pl_radjerr1:    Planet Radius Upper Unc. [Jupiter radii]
+# COLUMN pl_radjerr2:    Planet Radius Lower Unc. [Jupiter radii]
+# COLUMN pl_radjlim:     Planet Radius Limit Flag
+#
+rowid,pl_hostname,pl_letter,pl_pnum,pl_orbper,pl_orbpererr1,pl_orbpererr2,pl_orbperlim,pl_bmassj,pl_bmassjerr1,pl_bmassjerr2,pl_bmassjlim,pl_radj,pl_radjerr1,pl_radjerr2,pl_radjlim
+1,11 Com,b,1,326.03000000,0.32000000,-0.32000000,0,19.40000,1.50000,-1.50000,0,,,,
+2,11 UMi,b,1,516.22000000,3.25000000,-3.25000000,0,10.50000,2.47000,-2.47000,0,,,,
+</code></pre>
+
+<blockquote>
+  <p><em>Sample CSV file from the Exoplanet Archive</em></p>
+</blockquote>
+
+<p>Now, I just need to convert my CSV to a JSON file for ease of use with Javascript. After some research, I found a nice <a href="https://www.npmjs.com/package/csvtojson">npm module</a> called <code class="highlighter-rouge">csvtojson</code>. I decided to give it a whirl. After a bit, I threw together the following class to convert my CSV to JSON.</p>
+
+<script src="https://gist.github.com/code-for-coffee/0793992d6a521b813db3ac1aa373df73.js"></script>
+
+<p>To execute and test my code, I just run <code class="highlighter-rouge">node CSVObjectifier.js</code> in the same directory as my CSV file. When I do, I get some weird results… each object looks mangled.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="p">{</span> <span class="s1">'# This file was produced by the NASA Exoplanet Archive  http://exoplanetarchive'</span><span class="err">:</span> <span class="p">{</span> <span class="nl">ipac</span><span class="p">:</span> <span class="p">[</span><span class="nb">Object</span><span class="p">]</span> <span class="p">},</span>
+    <span class="nx">field2</span><span class="err">:</span> <span class="s1">'CoRoT-28'</span><span class="p">,</span>
+    <span class="nx">field3</span><span class="err">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="nx">field4</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">field5</span><span class="err">:</span> <span class="mf">5.20851</span><span class="p">,</span>
+    <span class="nx">field6</span><span class="err">:</span> <span class="mf">0.00038</span><span class="p">,</span>
+    <span class="nx">field7</span><span class="err">:</span> <span class="o">-</span><span class="mf">0.00038</span><span class="p">,</span>
+    <span class="nx">field8</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">field9</span><span class="err">:</span> <span class="mf">0.484</span><span class="p">,</span>
+    <span class="nx">field10</span><span class="err">:</span> <span class="mf">0.087</span><span class="p">,</span>
+    <span class="nx">field11</span><span class="err">:</span> <span class="o">-</span><span class="mf">0.087</span><span class="p">,</span>
+    <span class="nx">field12</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">field13</span><span class="err">:</span> <span class="mf">0.955</span><span class="p">,</span>
+    <span class="nx">field14</span><span class="err">:</span> <span class="mf">0.066</span><span class="p">,</span>
+    <span class="nx">field15</span><span class="err">:</span> <span class="o">-</span><span class="mf">0.066</span><span class="p">,</span>
+    <span class="nx">field16</span><span class="err">:</span> <span class="mi">0</span> <span class="p">},</span>
+</code></pre>
+</div>
+
+<p>I hypothesize that this is because of the comments at the top of our CSV file (they begin with <code class="highlighter-rouge"># ...</code>). To test this hypothesis, I remove the comments to the point where the first line of my CSV file is <code class="highlighter-rouge">rowid,pl_hostname,pl_letter,pl_pnum,pl_orbper,pl_orbpererr1,pl_orbpererr2,pl_orbperlim,pl_bmassj,...</code> and save file. Upon testing, it appears that my hypothesis was validated: each POJO (plain old Javascript object) looks clean.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="p">{</span> <span class="nl">rowid</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nx">pl_hostname</span><span class="err">:</span> <span class="s1">'GJ 163'</span><span class="p">,</span>
+    <span class="nx">pl_letter</span><span class="err">:</span> <span class="s1">'b'</span><span class="p">,</span>
+    <span class="nx">pl_pnum</span><span class="err">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="nx">pl_orbper</span><span class="err">:</span> <span class="mf">8.631</span><span class="p">,</span>
+    <span class="nx">pl_orbpererr1</span><span class="err">:</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="nx">pl_orbpererr2</span><span class="err">:</span> <span class="o">-</span><span class="mf">0.001</span><span class="p">,</span>
+    <span class="nx">pl_orbperlim</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">pl_bmassj</span><span class="err">:</span> <span class="mf">0.035</span><span class="p">,</span>
+    <span class="nx">pl_bmassjerr1</span><span class="err">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="nx">pl_bmassjerr2</span><span class="err">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="nx">pl_bmassjlim</span><span class="err">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">pl_radj</span><span class="err">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="nx">pl_radjerr1</span><span class="err">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="nx">pl_radjerr2</span><span class="err">:</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="nx">pl_radjlim</span><span class="err">:</span> <span class="s1">''</span> <span class="p">},</span>
+  <span class="p">...</span> <span class="mi">3302</span> <span class="nx">more</span> <span class="nx">items</span> <span class="p">]</span>
+</code></pre>
+</div>
+
+<p>My output file looks like a great starting point for any Node.js (or really, anything) to work with!</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">[{</span><span class="nt">"rowid"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">"pl_hostname"</span><span class="p">:</span><span class="s2">"11 Com"</span><span class="p">,</span><span class="nt">"pl_letter"</span><span class="p">:</span><span class="s2">"b"</span><span class="p">,</span><span class="nt">"pl_pnum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">"pl_orbper"</span><span class="p">:</span><span class="mf">326.03</span><span class="p">,</span><span class="nt">"pl_orbpererr1"</span><span class="p">:</span><span class="mf">0.32</span><span class="p">,</span><span class="nt">"pl_orbpererr2"</span><span class="p">:</span><span class="mf">-0.32</span><span class="p">,</span><span class="nt">"pl_orbperlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_bmassj"</span><span class="p">:</span><span class="mf">19.4</span><span class="p">,</span><span class="nt">"pl_bmassjerr1"</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="nt">"pl_bmassjerr2"</span><span class="p">:</span><span class="mf">-1.5</span><span class="p">,</span><span class="nt">"pl_bmassjlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_radj"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr1"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr2"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjlim"</span><span class="p">:</span><span class="s2">""</span><span class="p">},{</span><span class="nt">"rowid"</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="nt">"pl_hostname"</span><span class="p">:</span><span class="s2">"11 UMi"</span><span class="p">,</span><span class="nt">"pl_letter"</span><span class="p">:</span><span class="s2">"b"</span><span class="p">,</span><span class="nt">"pl_pnum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">"pl_orbper"</span><span class="p">:</span><span class="mf">516.22</span><span class="p">,</span><span class="nt">"pl_orbpererr1"</span><span class="p">:</span><span class="mf">3.25</span><span class="p">,</span><span class="nt">"pl_orbpererr2"</span><span class="p">:</span><span class="mf">-3.25</span><span class="p">,</span><span class="nt">"pl_orbperlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_bmassj"</span><span class="p">:</span><span class="mf">10.5</span><span class="p">,</span><span class="nt">"pl_bmassjerr1"</span><span class="p">:</span><span class="mf">2.47</span><span class="p">,</span><span class="nt">"pl_bmassjerr2"</span><span class="p">:</span><span class="mf">-2.47</span><span class="p">,</span><span class="nt">"pl_bmassjlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_radj"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr1"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr2"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjlim"</span><span class="p">:</span><span class="s2">""</span><span class="p">},{</span><span class="nt">"rowid"</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="nt">"pl_hostname"</span><span class="p">:</span><span class="s2">"14 And"</span><span class="p">,</span><span class="nt">"pl_letter"</span><span class="p">:</span><span class="s2">"b"</span><span class="p">,</span><span class="nt">"pl_pnum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">"pl_orbper"</span><span class="p">:</span><span class="mf">185.84</span><span class="p">,</span><span class="nt">"pl_orbpererr1"</span><span class="p">:</span><span class="mf">0.23</span><span class="p">,</span><span class="nt">"pl_orbpererr2"</span><span class="p">:</span><span class="mf">-0.23</span><span class="p">,</span><span class="nt">"pl_orbperlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_bmassj"</span><span class="p">:</span><span class="mf">4.8</span><span class="p">,</span><span class="nt">"pl_bmassjerr1"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_bmassjerr2"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_bmassjlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_radj"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr1"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr2"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjlim"</span><span class="p">:</span><span class="s2">""</span><span class="p">},{</span><span class="nt">"rowid"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="nt">"pl_hostname"</span><span class="p">:</span><span class="s2">"14 Her"</span><span class="p">,</span><span class="nt">"pl_letter"</span><span class="p">:</span><span class="s2">"b"</span><span class="p">,</span><span class="nt">"pl_pnum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">"pl_orbper"</span><span class="p">:</span><span class="mf">1773.4</span><span class="p">,</span><span class="nt">"pl_orbpererr1"</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span><span class="nt">"pl_orbpererr2"</span><span class="p">:</span><span class="mf">-2.5</span><span class="p">,</span><span class="nt">"pl_orbperlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_bmassj"</span><span class="p">:</span><span class="mf">4.64</span><span class="p">,</span><span class="nt">"pl_bmassjerr1"</span><span class="p">:</span><span class="mf">0.19</span><span class="p">,</span><span class="nt">"pl_bmassjerr2"</span><span class="p">:</span><span class="mf">-0.19</span><span class="p">,</span><span class="nt">"pl_bmassjlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_radj"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr1"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr2"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjlim"</span><span class="p">:</span><span class="s2">""</span><span class="p">},{</span><span class="nt">"rowid"</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="nt">"pl_hostname"</span><span class="p">:</span><span class="s2">"16 Cyg B"</span><span class="p">,</span><span class="nt">"pl_letter"</span><span class="p">:</span><span class="s2">"b"</span><span class="p">,</span><span class="nt">"pl_pnum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">"pl_orbper"</span><span class="p">:</span><span class="mf">798.5</span><span class="p">,</span><span class="nt">"pl_orbpererr1"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">"pl_orbpererr2"</span><span class="p">:</span><span class="mi">-1</span><span class="p">,</span><span class="nt">"pl_orbperlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_bmassj"</span><span class="p">:</span><span class="mf">1.68</span><span class="p">,</span><span class="nt">"pl_bmassjerr1"</span><span class="p">:</span><span class="mf">0.15</span><span class="p">,</span><span class="nt">"pl_bmassjerr2"</span><span class="p">:</span><span class="mf">-0.15</span><span class="p">,</span><span class="nt">"pl_bmassjlim"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"pl_radj"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr1"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjerr2"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"pl_radjlim"</span><span class="p">:</span><span class="s2">""</span><span class="p">}]</span><span class="w">
+</span></code></pre>
+</div>
+
+<blockquote>
+  <p><em>The above JSON output is truncated.</em> View the full JSON file <a href="https://gist.github.com/code-for-coffee/7f085a0c885d6fd3f271f1f8c392c224">on Github</a>.</p>
+</blockquote>
+
+<p>Now, I have been able to get the data I need, convert it a bit, and I know I can use it with practically anything now that it is JSON. My object structure even looks pretty!</p>
+
+<h4 id="considering-mathematical-accuracy">Considering Mathematical Accuracy</h4>
+
+<p>Javascript uses 64-bit floating point numbers for the <code class="highlighter-rouge">number</code> type that we use everything with <code class="highlighter-rouge">parseInt()</code> and <code class="highlighter-rouge">parseFloat()</code>. This means that we have an upper limit of a numerical value: <a href="https://en.wikipedia.org/wiki/9223372036854775807">9,223,372,036,854,775,807</a>. Because one of the primary jobs in figuring out a planet’s size requires calculating what appear to be large numbers, we should write a script to see if any numerical values fall beyond this range. We can do so by looping through each object in our JSON. According to the CSV comments, <em>pl_bmassj</em> is our key/column that contains the planet’s mass (see them commented above; I removed them from my CSV for conversion). To test this, I wrote a script that checked each row’s <code class="highlighter-rouge">pl_bmassj</code>.</p>
+
+<script src="https://gist.github.com/code-for-coffee/b8b95ba78579e380db1bb757f3440ced.js"></script>
+
+<p>After running this script, it appears that none of my numbers are too large. This is excellent news (no need to implement a BigDecimal <a href="https://github.com/dtrebbien/BigDecimal.js">style library</a>). However, in my log output I noticed that quite a few rows didn’t have values at all. This is okay; due to <a href="https://en.wikipedia.org/wiki/Methods_of_detecting_exoplanets">our current methods of detecting exoplanets</a>, scientists are not always able to calculate an accurate mass. I should take a note of that and find out how many planets we can categorize vs how many we cannot.</p>
+
+<script src="https://gist.github.com/code-for-coffee/54c8a19218ba4b4fb42314338bf2d296.js"></script>
+
+<p>So about 1/3 of confirmed exoplanets have mass. That data alone is interesting. Given all of the research that I have done so far, I now have a wealth of data and information to sift through. I have found that everything that I need: a way to categorize planets, mass information and the conversions needed, and I have ruled out any need for a large numeric type support in Javascript.</p>
+
+<p>In the next post in this series, I will take this knowledge and put it to use with Node.js. I’ll use the research acquired and begin building out a node module that anyone can use with the intent of putting it online for anyone to use. In the final post of the series, I’ll use the module to render findings on the NASA exoplanet dataset. See you soon!</p>
+
+    </div>
+    <div class="row center">
+    <h4>Comments</h4>
+    
+      
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+  var disqus_shortname  = 'codeforcoffee';
+  var disqus_identifier = '/How-to-categorize-confirmed-Exoplanet-types';
+
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+    
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <footer class="page-footer red darken-4">
+  <div class="container">
+    <div class="row">
+      <div class="col l6 s12">
+        <h5 class="white-text">code for coffee</h5>
+        <p class="grey-text text-lighten-4"><em>This is the professional blog of James Traver. He is an experienced mobile and full stack engineer that specializes in Javascript, Android, Node.js, and ASP.NET. </p><p></p></strong></em></p>
+      </div>
+      <div class="col l6 s12">
+        <h5 class="white-text">Links and Social</h5>
+        <ul>
+          <li><a class="white-text" href="https://github.com/code-for-coffee" target="_blank">Github</a></li>
+          <li><a class="white-text" href="https://twitter.com/code4coffee" target="_blank">Twitter</a></li>
+          <li><a class="white-text" href="https://vimeo.com/codeforcoffee" target="_blank">Vimeo</a></li>
+          <li><a class="white-text" href="http://stackoverflow.com/users/1952160/code4coffee" target="_blank">Stack Overflow</a></li>
+          <li><a class="white-text" href="/feed.xml">RSS Feed</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <div class="container">
+      Questions? Comments? <a class="orange-text text-lighten-4" href="mailto:james@codeforcoffee.org">Drop me a line</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-86725209-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+  </body>
+
+</html>

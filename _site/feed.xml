@@ -6,9 +6,165 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Nov 2016 15:29:36 -0500</pubDate>
-    <lastBuildDate>Wed, 02 Nov 2016 15:29:36 -0500</lastBuildDate>
+    <pubDate>Wed, 02 Nov 2016 21:21:12 -0500</pubDate>
+    <lastBuildDate>Wed, 02 Nov 2016 21:21:12 -0500</lastBuildDate>
     <generator>Jekyll v3.3.0</generator>
+    
+      <item>
+        <title>Categorizing Exoplanets by Type: Part One - Research</title>
+        <description>&lt;p&gt;It is no secret that I am a space nerd. Over the past few months, I have decided to work on an Exoplanet visualization application (based on an Android application prototype that I had designed). I decided that I wanted to see how many planets of what type have been found by Kepler. The goal is to create a module that will allow users to input a CSV file from the &lt;a href=&quot;http://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&amp;amp;config=planets&quot;&gt;NASA Exoplanet Archive&lt;/a&gt; and then render a list of planets by type. This introduced a few interesting challenges. First, Javascript isn’t &lt;a href=&quot;http://stackoverflow.com/questions/11695618/dealing-with-float-precision-in-javascript&quot;&gt;very precise with floating point values&lt;/a&gt;. Second, how will I convert CSV data from NASA into something usable? Finally, how will I figure out what the planet type even is? Once I solve these questions, I can then take that knowledge and build a library/module/tool. However, before we can start, I needed to perform some research. In the firs part of this series of posts, I will outline my research, conclusion and results.&lt;/p&gt;
+
+&lt;h4 id=&quot;project-outline&quot;&gt;Project Outline&lt;/h4&gt;
+
+&lt;p&gt;Our user stories are as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A user instantiates our module with a NASA provided CSV file as an argument&lt;/li&gt;
+  &lt;li&gt;A user queries for a list of planets that kepler has detected and is provided an Object&lt;/li&gt;
+  &lt;li&gt;A user queries for an official list of planetary types to view and is provided an Object&lt;/li&gt;
+  &lt;li&gt;A user queries for a list of solar systems and is provided an Object&lt;/li&gt;
+  &lt;li&gt;For any result a user requests, a user may export the results to a prettified JSON file&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These sounds like  pretty reasonable user stories. The module itself is not too complex but serves a single purpose: to allow users to convert NASA Exoplanet data into something usable.&lt;/p&gt;
+
+&lt;h4 id=&quot;getting-the-nasa-data&quot;&gt;Getting the NASA data&lt;/h4&gt;
+
+&lt;p&gt;NASA provides most of their data in some format or another. The Exoplanet Archive at CalTech provides a &lt;a href=&quot;http://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&amp;amp;config=planets&quot;&gt;very nice interface&lt;/a&gt;. They have provided a lot of data in this exoplanet table. We are able to speculate the mass of an exoplanet based on transits that it makes between our telescopes and its host star. This mass is usually referred to as a ‘Jupiter Mass’ (or, how many Jupiters it would take to achieve the mass of this planet). However, I needed to filter out superfluous data. Before I could determine what data we’ll need, I needed to figure out how planets are categorized. In 2011, &lt;a href=&quot;http://phl.upr.edu/library/notes/amassclassificationforbothsolarandextrasolarplanets&quot;&gt;Abel Mendez&lt;/a&gt; from the University of Puerto Rico at Arecibo published a paper that provides a scale to classify planets by their mass. However, these masses were in relative earth masses; not relative Jupiter masses.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;responsive-img&quot; src=&quot;/images/EMC.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I decided to structure these as JSON and as a Javascript module for future use.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/code-for-coffee/70d06dc8090d7645e728f5fd786d2774.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Thankfully, I can easily convert a Jupiter mass to an Earth mass. I do this by comparing how many Earth mases it would take to fill up Jupiter. According to wikipedia, &lt;a href=&quot;Jupiter is equivilent to 317.83 Earth masses&quot;&gt;https://en.wikipedia.org/wiki/Jupiter_mass&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Convert Jupiter mass to Earth Mass&lt;/em&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;1 (jupiter mass)       input_value
+______               = ___________
+317.83 (earth mass)    output_value
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;In keeping with our user stories, I now know that we can find the planet type and with some math, calculate the available Jupiter mass values that each exoplanet has. I can also check off querying for a list of planet types; I just need to turn that into a data structure. I also need to know which star (or host) that the planet is orbiting around. &lt;a href=&quot;http://exoplanetarchive.ipac.caltech.edu/cgi-bin/TblView/nph-tblView?app=ExoTbls&amp;amp;config=planets&quot;&gt;Heading back to the exoplanet Archive&lt;/a&gt;, I begin to look at each column. I pay attention to a few values that I’ll think will be important: &lt;strong&gt;Row ID&lt;/strong&gt;, &lt;strong&gt;Host Name&lt;/strong&gt;, &lt;strong&gt;Planet Letter&lt;/strong&gt;, &lt;strong&gt;Number of Planets in System&lt;/strong&gt;, &lt;strong&gt;Planet Mass (in Jupiter Mass)&lt;/strong&gt;. I then &lt;em&gt;select columns&lt;/em&gt; and de-select every column but those I mentioned. From there, I select &lt;strong&gt;Download Table&lt;/strong&gt;, &lt;em&gt;download currently checked columns&lt;/em&gt;, and select &lt;em&gt;download table as CSV&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;responsive-img&quot; src=&quot;/images/exoplanet_tutorial.png&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Screenshot of the NASA Exoplanet Archive with Columns Filtered&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Awesome! Now I have this wonderful &lt;code class=&quot;highlighter-rouge&quot;&gt;planets.csv&lt;/code&gt; in my downloads folder. Upon inspection, it contains over a thousand rows of precious planets that the human race has discovered. Columns are identified in comments for ease of use/readability (thanks, NASA engineers).&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-csv&quot;&gt;# This file was produced by the NASA Exoplanet Archive  http://exoplanetarchive.ipac.caltech.edu
+# Wed Nov  2 16:07:55 2016
+#
+# COLUMN pl_hostname:    Host Name
+# COLUMN pl_letter:      Planet Letter
+# COLUMN pl_pnum:        Number of Planets in System
+# COLUMN pl_orbper:      Orbital Period [days]
+# COLUMN pl_orbpererr1:  Orbital Period Upper Unc. [days]
+# COLUMN pl_orbpererr2:  Orbital Period Lower Unc. [days]
+# COLUMN pl_orbperlim:   Orbital Period Limit Flag
+# COLUMN pl_bmassj:      Planet Mass or M*sin(i)[Jupiter mass]
+# COLUMN pl_bmassjerr1:  Planet Mass or M*sin(i)Upper Unc. [Jupiter mass]
+# COLUMN pl_bmassjerr2:  Planet Mass or M*sin(i)Lower Unc. [Jupiter mass]
+# COLUMN pl_bmassjlim:   Planet Mass or M*sin(i)Limit Flag
+# COLUMN pl_radj:        Planet Radius [Jupiter radii]
+# COLUMN pl_radjerr1:    Planet Radius Upper Unc. [Jupiter radii]
+# COLUMN pl_radjerr2:    Planet Radius Lower Unc. [Jupiter radii]
+# COLUMN pl_radjlim:     Planet Radius Limit Flag
+#
+rowid,pl_hostname,pl_letter,pl_pnum,pl_orbper,pl_orbpererr1,pl_orbpererr2,pl_orbperlim,pl_bmassj,pl_bmassjerr1,pl_bmassjerr2,pl_bmassjlim,pl_radj,pl_radjerr1,pl_radjerr2,pl_radjlim
+1,11 Com,b,1,326.03000000,0.32000000,-0.32000000,0,19.40000,1.50000,-1.50000,0,,,,
+2,11 UMi,b,1,516.22000000,3.25000000,-3.25000000,0,10.50000,2.47000,-2.47000,0,,,,
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;Sample CSV file from the Exoplanet Archive&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, I just need to convert my CSV to a JSON file for ease of use with Javascript. After some research, I found a nice &lt;a href=&quot;https://www.npmjs.com/package/csvtojson&quot;&gt;npm module&lt;/a&gt; called &lt;code class=&quot;highlighter-rouge&quot;&gt;csvtojson&lt;/code&gt;. I decided to give it a whirl. After a bit, I threw together the following class to convert my CSV to JSON.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/code-for-coffee/0793992d6a521b813db3ac1aa373df73.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;To execute and test my code, I just run &lt;code class=&quot;highlighter-rouge&quot;&gt;node CSVObjectifier.js&lt;/code&gt; in the same directory as my CSV file. When I do, I get some weird results… each object looks mangled.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'# This file was produced by the NASA Exoplanet Archive  http://exoplanetarchive'&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;ipac&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'CoRoT-28'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field3&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field4&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field5&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;5.20851&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field6&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.00038&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field7&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.00038&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field8&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field9&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.484&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field10&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.087&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field11&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.087&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field12&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field13&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.955&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field14&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.066&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field15&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.066&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;field16&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I hypothesize that this is because of the comments at the top of our CSV file (they begin with &lt;code class=&quot;highlighter-rouge&quot;&gt;# ...&lt;/code&gt;). To test this hypothesis, I remove the comments to the point where the first line of my CSV file is &lt;code class=&quot;highlighter-rouge&quot;&gt;rowid,pl_hostname,pl_letter,pl_pnum,pl_orbper,pl_orbpererr1,pl_orbpererr2,pl_orbperlim,pl_bmassj,...&lt;/code&gt; and save file. Upon testing, it appears that my hypothesis was validated: each POJO (plain old Javascript object) looks clean.&lt;/p&gt;
+
+&lt;div class=&quot;language-js highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;rowid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_hostname&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'GJ 163'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_letter&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'b'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_pnum&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_orbper&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;8.631&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_orbpererr1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_orbpererr2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.001&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_orbperlim&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_bmassj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.035&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_bmassjerr1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_bmassjerr2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_bmassjlim&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_radj&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_radjerr1&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_radjerr2&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;pl_radjlim&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;''&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3302&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;more&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;items&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;My output file looks like a great starting point for any Node.js (or really, anything) to work with!&lt;/p&gt;
+
+&lt;div class=&quot;language-json highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;[{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rowid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_hostname&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;11 Com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_letter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_pnum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbper&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;326.03&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-0.32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbperlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;19.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-1.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rowid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_hostname&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;11 UMi&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_letter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_pnum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbper&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;516.22&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;3.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-3.25&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbperlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;10.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.47&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-2.47&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rowid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_hostname&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;14 And&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_letter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_pnum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbper&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;185.84&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-0.23&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbperlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;4.8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rowid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_hostname&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;14 Her&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_letter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_pnum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbper&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1773.4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;2.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-2.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbperlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;4.64&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-0.19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},{&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rowid&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_hostname&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;16 Cyg B&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_letter&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_pnum&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbper&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;798.5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbpererr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;-1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_orbperlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1.68&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;-0.15&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_bmassjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radj&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjerr2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;pl_radjlim&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}]&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;The above JSON output is truncated.&lt;/em&gt; View the full JSON file &lt;a href=&quot;https://gist.github.com/code-for-coffee/7f085a0c885d6fd3f271f1f8c392c224&quot;&gt;on Github&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Now, I have been able to get the data I need, convert it a bit, and I know I can use it with practically anything now that it is JSON. My object structure even looks pretty!&lt;/p&gt;
+
+&lt;h4 id=&quot;considering-mathematical-accuracy&quot;&gt;Considering Mathematical Accuracy&lt;/h4&gt;
+
+&lt;p&gt;Javascript uses 64-bit floating point numbers for the &lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt; type that we use everything with &lt;code class=&quot;highlighter-rouge&quot;&gt;parseInt()&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;parseFloat()&lt;/code&gt;. This means that we have an upper limit of a numerical value: &lt;a href=&quot;https://en.wikipedia.org/wiki/9223372036854775807&quot;&gt;9,223,372,036,854,775,807&lt;/a&gt;. Because one of the primary jobs in figuring out a planet’s size requires calculating what appear to be large numbers, we should write a script to see if any numerical values fall beyond this range. We can do so by looping through each object in our JSON. According to the CSV comments, &lt;em&gt;pl_bmassj&lt;/em&gt; is our key/column that contains the planet’s mass (see them commented above; I removed them from my CSV for conversion). To test this, I wrote a script that checked each row’s &lt;code class=&quot;highlighter-rouge&quot;&gt;pl_bmassj&lt;/code&gt;.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/code-for-coffee/b8b95ba78579e380db1bb757f3440ced.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;After running this script, it appears that none of my numbers are too large. This is excellent news (no need to implement a BigDecimal &lt;a href=&quot;https://github.com/dtrebbien/BigDecimal.js&quot;&gt;style library&lt;/a&gt;). However, in my log output I noticed that quite a few rows didn’t have values at all. This is okay; due to &lt;a href=&quot;https://en.wikipedia.org/wiki/Methods_of_detecting_exoplanets&quot;&gt;our current methods of detecting exoplanets&lt;/a&gt;, scientists are not always able to calculate an accurate mass. I should take a note of that and find out how many planets we can categorize vs how many we cannot.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/code-for-coffee/54c8a19218ba4b4fb42314338bf2d296.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;So about 1/3 of confirmed exoplanets have mass. That data alone is interesting. Given all of the research that I have done so far, I now have a wealth of data and information to sift through. I have found that everything that I need: a way to categorize planets, mass information and the conversions needed, and I have ruled out any need for a large numeric type support in Javascript.&lt;/p&gt;
+
+&lt;p&gt;In the next post in this series, I will take this knowledge and put it to use with Node.js. I’ll use the research acquired and begin building out a node module that anyone can use with the intent of putting it online for anyone to use. In the final post of the series, I’ll use the module to render findings on the NASA exoplanet dataset. See you soon!&lt;/p&gt;
+</description>
+        <pubDate>Wed, 02 Nov 2016 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/How-to-categorize-confirmed-Exoplanet-types</link>
+        <guid isPermaLink="true">http://localhost:4000/How-to-categorize-confirmed-Exoplanet-types</guid>
+        
+        
+      </item>
     
       <item>
         <title>Using Gulp for ES6/Javascript 2015 Support</title>
@@ -299,6 +455,120 @@ Finished &lt;span class=&quot;s1&quot;&gt;'default'&lt;/span&gt; after 144 μs
         <pubDate>Thu, 25 Jun 2015 00:00:00 -0500</pubDate>
         <link>http://localhost:4000/first-sinatra-server</link>
         <guid isPermaLink="true">http://localhost:4000/first-sinatra-server</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>To the stars: Solar Systems beyond our own</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;Originally Published October, 2014. Last updated 1/28/2016.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Abstract&lt;/li&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Introduction&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;The discovery of new planet types&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;The composition of other star systems&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Planets within their star’s habitable zone and the possibility of liquid water&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Conclusion&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;References&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;abstract&quot;&gt;Abstract&lt;/h4&gt;
+
+&lt;p&gt;In this essay, we present information about planets found outside of our own solar system. Our research touches on types of planets found, new types of solar system compositions that we have discovered. We also discuss planets that have been found that could contain liquid water. This essay’s aim is to expand upon our current knowledge of extrasolar planets (planets found outside of our solar system). Through space programs such as the Kepler program, we are able to find alien worlds and survey them. In the past two decades alone, scientists have been able to discovery over one hundred planets orbiting other stars.&lt;/p&gt;
+
+&lt;h4 id=&quot;introduction&quot;&gt;1. Introduction&lt;/h4&gt;
+
+&lt;p&gt;As the late Carl Sagan (1980) once said, “the surface of the Earth is the shore of the cosmic ocean”. In the past two decades, pioneers in the space sciences community have been looking beyond our own galactic home – to view into other solar systems in a search for other planets.  Research suggests that a variety of unfamiliar exoplanet types and solar systems will likely be discovered due to recent discoveries of new planet types, the identification of unexpected planets orbiting unlikely host stars, and newly found planets that orbit in other solar system’s habitable zones. The findings of scientists have been fantastic, once unimaginable planets and solar systems. They have found worlds that orbit closer to their stars than Mercury orbits our own sol. We have found rocky planets larger than any in our own solar system. We have even found possible hope for finding life outside of our solar system by finding planets where liquid water theoretically could exist.&lt;/p&gt;
+
+&lt;h4 id=&quot;the-discovery-of-new-planet-types&quot;&gt;2. The discovery of new planet types&lt;/h4&gt;
+
+&lt;p&gt;Scientists have often wondered if planets are common in the universe;. Until the 1980s, our telescopes were not capable of detecting extrasolar planets. Exoplanets – planets that are beyond our solar system – are detected by measuring the light from a remote star. As a planet orbits (transits) around their host star, its gravity “tugs” on the star. Scientists then record stars for a long period of time (months to years) through a telescope. Next, we analyze the data that we record; this allows us to detect repeating gravitational anomalies that a planet exerts on a star. Each time an anomaly is detected it is representative of one orbit.&lt;/p&gt;
+
+&lt;p&gt;Our solar system is composed of eight planets – two Jovian gas giants (the gas giants Jupiter and Saturn), four rocky worlds (Mercury, Venus, Earth, and Mars), and two ice giants (Neptune and Uranus). Before we discovered exoplanets scientists were unsure if planets regularly formed around other stars. To our surprise, we have discovered hundreds of planets in just two decades worth of research. We were also unsure of what to results expect; many types of planets were theorized. Based on the results of scanning the night skies, the planets types that we have found are amazing. Scientists have discovered a variety of new planet types in the current sample (which contains 140 known exoplanets).&lt;/p&gt;
+
+&lt;p&gt;Out of the planet types we have found in our samples pool, we are starting to find enough that it is possible to begin categorizing them. Klahr. et al (2002) make a statement regarding the new types of planets we have discovered: “with more than 140 exoplanets known to date, some very interesting trends have already drawn attention in the past few years,” (p 132). Based on our observations, we have discovered that there are Chthonian  planets (theorized to be the eroded core of gas giants), super Earths (rocky worlds with up to four times the mass of our own Earth), and “hot Jupiters” (gas giants that have a higher surface temperature than Saturn or Jupiter.&lt;/p&gt;
+
+&lt;p&gt;So called “Hot Jupiters” (also known as epistellar Jovians) seem to be abundant when searching for exoplanets. This could be attributed to the fact that they have such strong gravity that they remain within close orbit of their parent star. It could also due to a sampling bias – we do not yet have technology that could easily allows for us to find planets further from their parent stars (this should change with the upcoming launch of the James Webb Telescope). Regardless, we have found planets that orbit close enough to their stars that their atmospheres are nearly evaporating. Chthonian planets are theorized to be the remnants of these planets. Cole (2006) points out that data from NASA’s Spitzer Telescope has verified the existence of “hot Jupiters” and that “measurements confirm that each planet is indeed a hot Jupiter with surface temperatures of the order of 1,000 K” (p370).&lt;/p&gt;
+
+&lt;p&gt;It is believed that gas giants are common throughout the universe based on the sample data from our experiments. “For now, however, all that can be said is that bloated planets are not that unusual (Bakos, 2007)”. After sorting through our available data, many planets with one and a half times the radius of Earth (or more) appear to become gas giants. Based on our data it is theorized that any planet beyond that range forms into a gas giant. As Weiss et al note, “above 1.5 R (Earth), the average planet density rapidly decreases with increasing radius, indicating that these planets have a large fraction of volatiles (Weiss et al, 2014)”. There is good news for Earth-like planets, however. We have found what we suspect to be a multi-planet system orbiting around the star Gliese 581. Gliese 581d is notable in that as a planet, “Gliese 581d, can be considered the first confirmed exoplanet that could support Earth-like life, according to a team of scientists in France (CNRS, 2011).&lt;/p&gt;
+
+&lt;h4 id=&quot;the-composition-of-other-star-systems&quot;&gt;3. The composition of other star systems&lt;/h4&gt;
+
+&lt;p&gt;Many planets have been found orbiting host stars that we did not expect to be capable of containing planets. These solar systems are nothing like our own. Imagine a solar system where the only rocky planetoids orbit enormous gas giants. Our closest galactic neighbor – Alpha Centauri – is a binary star system with an orbiting red dwarf (creating an elongated triad of stars). The system is our closest galactic neighbor, it is still 4.39 light years away. It is hard to imagine how planets would form in such an unstable environment. While our own solar system is neat and organized (all of the planets orbit on near the same elliptical plane in our solar system), others star systems may not be. Extrasolar planetary systems are not mirrors of our own; instead we have found wild, unexpected star systems beyond our home.&lt;/p&gt;
+
+&lt;p&gt;With the “recent discovery of a planetary system with five Neptune-mass planets, as well as others including one mass of about 1.4 times that of Earth,” we are now able to fully realize how different alien solar systems are compared to our own (Committee on the Planetary Science Decadal Survey, 2003, p.175). We have found other planets similar in size to Venus and Earth; however they aren’t likely lush, watery worlds like our own planet.  Some of them appear to have unstable planetary orbits, others orbit too close to their parent star to support life as we know it.  Even though the Alpha Centauri contains “the first planet with a mass similar to Earth ever found around a star like the sun (Dumusque et al, 2012),” don’t get too excited: it is orbiting closer to its own star than Mercury is to our sun!&lt;/p&gt;
+
+&lt;p&gt;There are a few star systems that do look like our own. We have found similar planets to our own in configurations similar to our own solar system. Crowell points out it is possible that there are solar systems like ours; in fact “…similar to our own is Epsilon Eridani,” as it contains a Jupiter sized gas giant (Crowell, 2007). Unfortunately, smaller planets are harder to detect around their stars because of the smaller gravitational “tug” that they exert on their parent stars. It is difficult for current generation telescopes to detect planets further away from their stars. This currently limits us to what we can see; there could be entire worlds that we are missing in our surveys of other stars. Based on the small sample size that we have, it is likely that we will still find solar systems that continue to defy our expectations. Consider that “Kepler observed just 0.28 percent of the sky and the telescope was able to peer out to only 3000 light years away, studying less than 5 percent of the stars in its field of view (Becker, 2013)”.&lt;/p&gt;
+
+&lt;h4 id=&quot;planets-within-their-stars-habitable-zone-and-the-possibility-of-liquid-water&quot;&gt;4. Planets within their star’s habitable zone and the possibility of liquid water&lt;/h4&gt;
+
+&lt;p&gt;Even when we discover rocky worlds (planets that might be as small as Mercury to planets with 4 times the mass as Earth) they may not have suitable conditions for life as we know it. That life requires liquid water; for liquid water to exist on the surface of a planet, the planet must orbit close enough to the star to maintain liquid water on the surface of the planet. If you look at our own solar system, Mercury and the Moon both have ice in craters that sunlight never reaches that is locked away inside of ice. Mars’ northern ice cap is composed of liquid water (the southern ice cap contains dry ice). Europa and Enceladus – moons of the great Jovian planets in our solar system – have plumes of water jetting from their frozen surfaces into space; water is trapped underneath ice on these worlds and is spraying into space through what could be oceanic vents.&lt;/p&gt;
+
+&lt;p&gt;It is easy to classify types of worlds that could be habitable based on the planets found in our own solar system. There are “garden worlds” – worlds capable of maintaining liquid water on their surface at all times (like Earth). Ocean worlds are another possibility – worlds where either surface water freezes and allows for seas below the surface (such as Europa and Enceladus). There are finally barren worlds – worlds that could hold liquid water given certain conditions (and where it is found in ice) like Mars.&lt;/p&gt;
+
+&lt;p&gt;In our search for planets in other solar systems, we have found a handful that theoretically could be capable of maintaining liquid water due to their orbits resting within their host star’s habitable zones. First, there are planets like Mars – planets that under the right conditions could host liquid water. They might require a thicker atmosphere, plate tectonics, or even a stable orbit – but it is possible based on our observations that they could harbor liquid water. This is important if we want to find life (or to find a suitable planet to migrate to in the future of our species). We have also found planets that could be similar to our own Earth if geological conditions are right. “The geophysics of GJ581d is unknown, but if a similar mechanism were present there, its atmospheric CO2 would stabilize above the level needed to maintain a liquid water cycle by negative feedback (Wordsworth, 2011)”.&lt;/p&gt;
+
+&lt;p&gt;It is also possible that planets may only have a window where they can support liquid water. Perhaps as their star begins to heat up and expand, the planet begins drying up and the water on the world evaporates away. Or perhaps the gravitational tug of another planet displaces it further away from its star, freezing its surface. Based on these possibilities, it is possible that some planets in their habitable zones may have a shorter life span than our own Earth’s for liquid water (and life) to exist. “Compared to larger and more massive CO2-rich planets which may evolve to class II type habitable planets, smaller size planets like Mars cool down faster and water may condense earlier compared to an Earth-size and mass planet (Lammer, 2009)”.  Looking at our own solar system, it is theorized that Venus may have once had liquid water (as it is in Sol, our star’s, habitable zone). Some speculate that it evaporated and caused the runaway greenhouse effect that is evident today.&lt;/p&gt;
+
+&lt;h4 id=&quot;conclusion&quot;&gt;5. Conclusion&lt;/h4&gt;
+
+&lt;p&gt;In just a few decades, the science community has gone from knowing nothing about extrasolar planets to realizing how abundant planets are in our own galaxy. We have found that there are solar systems that contain more ice giants (like Neptune and Uranus) than our own. We know that there are planets as large as Jupiter orbiting so close to their host stars that their atmospheres are close to evaporating away. We even know that there is a chance that a few planets could support liquid water – a requirement for the only known types of life in the universe. Our research into the unknown has allowed us to find solar systems that are nothing like our own, planets that orbit within their star’s habitable zones, and discovered planet types that we never knew existed. As scientific techniques (and technology) improve over the years to come, we are sure to find even more amazing things in other star systems.&lt;/p&gt;
+
+&lt;h4 id=&quot;references&quot;&gt;References&lt;/h4&gt;
+
+&lt;p&gt;Sagan, Carl (1980). Cosmos. Random House. ISBN 978-0-375-50832-5, 2002.&lt;/p&gt;
+
+&lt;p&gt;Cole, George H. A. (2006). Wandering Stars: About Planets and Exo-Planets : An 
+Introductory Notebook. London, GBR: Imperial College Press, 2006.&lt;/p&gt;
+
+&lt;p&gt;Klahr, Hubert, Brandner, Wolfgang, Jakosky, Bruce. Planet Formation: Observations, Experiments, and Theory. West Nyack, NY: Cambridge University Press, 2002.&lt;/p&gt;
+
+&lt;p&gt;Committee on the Planetary Science Decadal Survey. Vision and Voyages for Planetary Science in the Decade 2013-2022. Washington, DC: National Academies Press, 2003.&lt;/p&gt;
+
+&lt;p&gt;CNRS (Délégation Paris Michel-Ange). (2011, May 16). First habitable exoplanet? Climate simulation reveals new candidate that could support Earth-like life. ScienceDaily. Retrieved August 26, 2014 from www.sciencedaily.com/releases/2011/05/110516080124.htm&lt;/p&gt;
+
+&lt;p&gt;Dumusque, X., Pepe, F., Lovis, C., Ségransan, D., Sahlmann, J., Benz, W., Bouchy, F., Mayor, M., Queloz, D., Santos, N., Udry, S. (2012, October 17). An Earth-mass planet orbiting α Centauri B. Nature, 491.&lt;/p&gt;
+
+&lt;p&gt;Crowell, Lawrence B. Can Star Systems Be Explored? The Physics of Star Probes. River Edge, NJ: World Scientific, 2007.&lt;/p&gt;
+
+&lt;p&gt;Weiss, Lauren M. and Marcy, Geoffrey W. The Mass-Radius Relation for 65 Exoplanets Smaller than 4 Earth Radii. The Astrophysics Journal (Feburary 2014).&lt;/p&gt;
+
+&lt;p&gt;Becker, Adam (2013, September 25). How Many Earths? New Scientist. Retrieved on February 24th, 2014 from http://exoplanets.newscientistapps.com.&lt;/p&gt;
+
+&lt;p&gt;Bakos, G. A. et al (2007). HAT-P-1b: A Large-Radius, Low Density Exoplanet Transiting One Member of a Stellar Binary. The Astrophysical Journal vol. 656.&lt;/p&gt;
+
+&lt;p&gt;Wordsworth, Robin D. et al (2011). Gliese 581d is the First Discovered Terrestrial-Mass Exoplanet in the Habitable Zone. The Astrophysical Journal vol 733.&lt;/p&gt;
+
+&lt;p&gt;Lammer, H. et al (2009). What makes a planet habitable? Astronomy and Astrophysics Review, vol. 17.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 26 Oct 2014 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/to-the-stars-solar-systems</link>
+        <guid isPermaLink="true">http://localhost:4000/to-the-stars-solar-systems</guid>
         
         
       </item>
@@ -726,70 +996,6 @@ That’s it! Obviously, you can do some nifty stuff with the files if they’re 
         <pubDate>Sat, 14 Dec 2013 00:00:00 -0600</pubDate>
         <link>http://localhost:4000/mvc4-ajax-uploads-using-html5javascript</link>
         <guid isPermaLink="true">http://localhost:4000/mvc4-ajax-uploads-using-html5javascript</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Locking down OS X Workstations (and LogMeIn)</title>
-        <description>&lt;p style=&quot;text-align: left;&quot;&gt;One of the great things about Mac OS X is Darwin, the Unix back-end of the OS. This article discusses a variety of shell (Terminal) commands and tricks that you can use to lock an account's abilities/actions. Finally, the source code can be viewed/forked on &lt;a href=&quot;https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts&quot; target=&quot;_blank&quot;&gt;github&lt;/a&gt;. Now, go ahead and open Terminal on a test account.&lt;/p&gt;
-&lt;p style=&quot;text-align: left;&quot;&gt;Disable use of Dashboard&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.dashboard mcx-disabled -bool true&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
-&lt;p style=&quot;text-align: left;&quot;&gt;Disable Dock manipulation (adding/removing items)&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.dock contents-immutable -bool true&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
-&lt;p style=&quot;text-align: left;&quot;&gt;Disable Dock manipulation (adding/removing items)&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.dock contents-immutable -bool true&lt;/em&gt;
-
-&lt;em&gt;killall dock #kills the dock; changes will take effect upon reload&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
-
-&lt;p style=&quot;text-align: left;&quot;&gt;Hide System Files&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.finder AppleShowAllFiles FALSE # TRUE will show System files.&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
-
-&lt;p style=&quot;text-align: left;&quot;&gt;Run Simple Finder&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;div id=&quot;LC22&quot;&gt;&lt;em&gt;defaults write com.apple.finder InterfaceLevel simple&lt;br /&gt;
-killall Finder&lt;/em&gt;&lt;/div&gt;&lt;/blockquote&gt;
-
-&lt;h3&gt;LogMeIn&lt;/h3&gt;
-&lt;p&gt;If you use LogMeIn for remote administration, you will notice that the application will load in your Dock when running. This causes a slight security risk due to how this will show end users some account information. To rid ourselves of this problem, we can remove the following line /Applications/LogMeIn.app/info.plist (right-click the application and select “Show Contents”). You will need to add the &lt;a href=&quot;https://github.com/code-for-coffee/OSX-Linux_Bash_Scripts/blob/master/logmeinRevision.xml&quot; target=&quot;_blank&quot;&gt;these lines&lt;/a&gt; to the first child element in the XML file.&lt;/p&gt;
-
-&lt;p&gt;You can also remove MenuBar.app from /applicationsupport/launchagents/logmein/ - this will remove the Menu Bar icon.&lt;/p&gt;
-</description>
-        <pubDate>Fri, 29 Nov 2013 00:00:00 -0600</pubDate>
-        <link>http://localhost:4000/Locking-down-OSX-Worksations-and-LogMeIn</link>
-        <guid isPermaLink="true">http://localhost:4000/Locking-down-OSX-Worksations-and-LogMeIn</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Adobe Edge Code review (aka Brackets): I want to believe</title>
-        <description>&lt;p&gt;WYSIWYG editors: if not for them, I may have never become interested in development at all. As a kid, I tinkered with Visual Basic 3.0, Netscape’s Composer, and eventually Macromedia Dreamweaver. After years of exposure to various projects, languages, and environments I all but abandoned these types of editors and eventually fell into love with &lt;a href=&quot;http://www.sublimetext.com/&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Sublime Text&lt;/strong&gt;&lt;/a&gt;. Recently, I became aware of Adobe’s new Edge set of tools - more importantly, &lt;a href=&quot;https://creative.adobe.com/products/code?promoid=KFKML&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Edge Code&lt;/strong&gt;&lt;/a&gt; (which happens to be based off an open source project called Brackets that is written in Javascript). Wait, Adobe + Open Source? I was intrigued. This review is based on the Adobe Creative Cloud version of Edge Code and not Brackets itself.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Installation is annoying&lt;/strong&gt;. If you don’t have an Adobe Creative Cloud account, get the open source version of &lt;strong&gt;&lt;a href=&quot;http://brackets.io/&quot; target=&quot;_blank&quot;&gt;Brackets&lt;/a&gt;&lt;/strong&gt;. Creating a Creative Cloud trial account in itself requires having to register, then downloading followed by updating the Creative Cloud client, and then installing Edge Code itself. Brackets is pretty straightforward: download and install. Once up and running however the editor looks semi clean.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;One of the best features of Edge Code&lt;/strong&gt; is the working sidebar; you select a folder and you can edit the files directly from the folder. Color coding for markup is clean and neat. You’re greeted with a quick tutorial of how the editor works. The first feature that you’re alerted to in the quick tutorial is the ability to edit CSS directly in the editor. To me, this feature seems &lt;em&gt;amazing&lt;/em&gt; - sort of like the Chrome Developer Tools/Firebug merged into a text editor. So, I give it a shot and select the H3 tag and in the editor and select CTRl+E as the editor suggests. Bam, there’s the CSS for the element. Sounds too good to be true? It sort of is - as I learned when I tried to edit the paragraph tag, nothing happens. If your linked CSS file(s) do not define an element then nothing happens. So, if you pre-define all of your CSS styles out this feature is amazing. Arguably, perhaps I should be doing this for all projects but there are many times where I just begin coding and adding CSS in later.&lt;/p&gt;
-
-&lt;p&gt;[caption id=”attachment_81” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code1.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-81&quot; alt=&quot;Editing CSS in-line is awesome.. if only it always worked&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code1-300x124.png&quot; width=&quot;300&quot; height=&quot;124&quot; /&gt;&lt;/a&gt; Editing CSS in-line is awesome.. if only it always worked[/caption]&lt;/p&gt;
-
-&lt;p&gt;Next up, &lt;b&gt;live editing (CTRL+ALT+P). &lt;/b&gt;This feature allows you to directly launch into Google Chrome (and only Chrome at this time) and reflects changes that you make in the editor live. Works similarly to Chrome Developer Tools/Firebug, but this allows you to test CSS changes real time from your editor. Adobe intends to update this in the future. There also is the ability to edit colors in the same manner as CSS by right clicking on any color value and selecting edit. This is a pretty nice feature for on-the-fly editing for those of us who aren’t designers.&lt;/p&gt;
-
-&lt;p&gt;[caption id=”attachment_82” align=”alignnone” width=”300”]&lt;a href=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2.png&quot;&gt;&lt;img class=&quot;size-medium wp-image-82&quot; alt=&quot;Edge Code's color editor&quot; src=&quot;http://codeforcoffee.org/wp-content/uploads/2013/07/edge_code2-300x136.png&quot; width=&quot;300&quot; height=&quot;136&quot; /&gt;&lt;/a&gt; Edge Code’s color editor[/caption]&lt;/p&gt;
-
-&lt;p&gt;In the end, I feel like Fox Mulder: &lt;em&gt;I want to believe&lt;/em&gt;. Edge Code seems like a great tool in the making. For making edits to CSS I’d certainly use it if it were fully baked. As for now, I cannot see it replacing Sublime Text for every coding. However, I do see it as a useful tool for making quick edits when finalizing a page (especially if the CSS is fully designed or if I need a color tweak here/there). I’ll certainly keep my eye on the project and hope for the best.&lt;/p&gt;
-</description>
-        <pubDate>Sat, 06 Jul 2013 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/Adobe-Edge-Code-aka-Brackets.io</link>
-        <guid isPermaLink="true">http://localhost:4000/Adobe-Edge-Code-aka-Brackets.io</guid>
         
         
       </item>
