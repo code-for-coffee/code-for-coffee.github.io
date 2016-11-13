@@ -16,11 +16,12 @@ Next, you'll need to perform a search (or jump to line **1132** as of writing) f
 Finally, edit the boolean value of `playerEntry.TeamPullDown:SetHide(false);` to `true` and save. That's it. Restart Civlization 6 and head to the multiplayer lobby.
 
 Some notes:
-* You'll have teams enabled but the first team started with `0`, not `1`. This is likely due to array logic.
-* You can only specify between team `0` or team `1`.
-* There is no column header that states you will be selecting a team (see screenshot above).
-* This _should_ not get you banned from Steam.
-* This will not make your multiplayer game incompatible with someone who has not made this edit.
-* Players without this enabled may not know they are teamed if only the host has this modification enabled (we have not tested this).
+
+- You'll have teams enabled but the first team started with `0`, not `1`. This is likely due to array logic.
+- You can only specify between team `0` or team `1`.
+- There is no column header that states you will be selecting a team (see screenshot above).
+- This _should_ not get you banned from Steam.
+- This will not make your multiplayer game incompatible with someone who has not made this edit.
+- Players without this enabled may not know they are teamed if only the host has this modification enabled (we have not tested this).
 
 During team game, my friend and I noticed we were able to immediately see each other on the diplomacy screen. The entire game worked fine and we played a good 50-100 turns into our game. However, like the rest of Civilization 6's gameplay, many features are not unlocked immediately. We noticed that we could declare friendship between our civilizations earlier than expected. However, we had to perform deals to open borders and so forth. We were unable to share our maps, either (though we suspect that would be unlocked in a later era). As of writing, our multiplayer game had just reached the medieval era so there could be a lot left to discover. I'll update this post if/as we discover more. 
