@@ -3,9 +3,9 @@ layout: post
 title: "Enabling Team Multiplayer in Civilization 6"
 ---
 
-<img class="responsive-img" src="/images/civ6-team-multiplayer.png">
-
 Civilization 6 did not ship with theability to team up during multiplayer. However, various internet searches yielded a few results in luascript files. I've decided to document this process and provide screenshots of what to expect. Before you begin, make sure you've closed Civilization 6.
+
+<img class="responsive-img" src="/images/civ6-team-multiplayer.png">
 
 First, find where the copy of Civilization was installed to. Here's a sample Windows path (note: Mac OS users, find the `.app` for Civilization and then ctrl/right-click to `View Package Contents` to see the internal folder structure): `D:\Steam\steamapps\common\Sid Meier's Civilization VI\`. Inside are a set of folders that will contain a script for the multiplayer game staging room: `Base\Assets\UI\FrontEnd\Multiplayer\StagingRoom.lua`. Open this file in a plain text editor (Sublime Text, Atom, TextMate, Notepad, ..).
 
