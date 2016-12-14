@@ -55,7 +55,11 @@ After completing this installation, note that Bash has a shortcut to to `C:\Wind
 * We'll install Git and some essential build tools for Linux. Run these commands:
 
 ```
+# update apt's repositories
+apt update
+# instsall git
 apt install git
+# install build tools
 apt install build-essential
 ```
 
@@ -128,7 +132,7 @@ Once that is installed, we'll install MySQL.
 
 ```bash
 # install a C library that Ruby uses to build the mysql2 gem with
-sudo apt-get install libmysqlclient-dev
+sudo apt install libmysqlclient-dev
 # install mysql
 sudo apt install mysql-server
 ```
