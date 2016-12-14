@@ -32,27 +32,21 @@ After completing this installation, note that Bash has a shortcut to to `C:\Wind
 
 #### Install Bash
 
-* Open **Control Panel**.
-* Search for `Windows Features` and select `Turn Windows Features On/Off`. This may be alternatively found under the Programs and Features category.
-* Enable (or verify) that **Windows Subsystem for Linux** is enabled and restart if prompted.
+In Windows, open **Control Panel**. Search for `Windows Features` and select `Turn Windows Features On/Off`; this may be alternatively found under the Programs and Features category. Next, _enable_ (or verify) that **Windows Subsystem for Linux** is enabled and restart if prompted.
 
 #### Enable Command Line access
 
-* Open Powershell with Administrative access.
-* _You may do this by right-clicking on Powershell and running as administrator_.
-* Inside of Powershell, run the following command:
-* `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
-* You may be prompted to accept a EULA or install additional features. Say `y` (yes).
-* You will need to create a Linux user. This is saved in the traditional user area.
-* Name your user and add a password. Linux newbies - you won't be able to see the keys for your password; just hit enter when done.
-* Follow any additional prompts if required.
+Open Powershell with Administrative access. You may do this by right-clicking on Powershell and running as administrator. Inside of Powershell's terminal, run the following command:
+
+```ps
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux`
+```
+
+You may be prompted to accept a EULA or install additional features. Say `y` (yes). You will need to create a Linux user. Linux geeks: these are saved in the same system location as Ubuntu. You'll need to name your user and add a password. Follow any additional prompts if required. Linux newbies - you won't be able to see the keys for your password; just hit enter when done.
 
 #### Creating a Bash Shortcut
 
-* Search for the **Bash** application your computer.
-* Right-click and select **Pin to Start** or **Create Shortcut**
-*  From here on out, all commands will be ran inside of Ubuntu Bash.
-* We'll install Git and some essential build tools for Linux. Run these commands:
+Next, search for the **Ubuntu Bash** application your computer. Right-click and select **pin to Start** or **create shortcut** on the icon. From here on out, all commands will be ran inside of Ubuntu Bash. Next, we'll install Git and some essential build tools for Linux.
 
 ```
 # update apt's repositories
@@ -88,28 +82,47 @@ You should see you node version 6 or higher and npm version 3 or higher.
 
 ## 3. Installing MongoDB 3.x
 
-MongoDB requires that you add a link to their repositories. It is not hosted publically on `apt`. First, we'll grab that repository, add it to `apt`, and update `apt` so we can install the parts of MySQL that we need.
+MongoDB requires that you add a link to their repositories. It is not hosted publically on `apt`. First, we'll grab that repository, add it to `apt`, and update `apt` so we can install the parts of MySQL that we need. First, create the directories for your MongoDB databases:
 
+```
+sudo mkdir /data
+sudo mkdir /data/db
+```
 
-* Create directories for your MongoDB databases:
-* `sudo mkdir /data`
-* `sudo mkdir /data/db`
-* Import the public key used by the package management system
-* `sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927`
-* Create a list file for MongoDB
-* `echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list`
-* Reload local package database
-* `sudo apt update`
-* Install MongoDB Specifically
-* `sudo apt install mongodb-org`
-* Install all components of MongoDB
-* `sudo apt install mongodb-org-server`
-* `sudo apt install mongodb-org-shell`
-* `mongodb-org-mongos`
-* `sudo apt install mongodb-org-tools`
-* To start your server:
-* `sudo service mongodb start`
-* Alternatively, you can run the `sudo mongod` command.
+Now, you'll need to import the public key used by the package management system from MongoDB. 
+
+```
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+```
+Next, create a list file for MongoDB:
+
+```
+echp "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+```
+
+You can now reload local package database to include the MongoDB repositories.
+
+```
+sudo apt update
+```
+
+Finally, you can install MongoDB:
+
+```
+sudo apt install mongodb-org
+sudo apt install mongodb-org-server
+sudo apt install mongodb-org-shell
+sudo apt install mongodb-org-mongos
+sudo apt install mongodb-org-tools
+```
+
+To start your server:
+
+```
+sudo service mongodb start
+```
+
+Alternatively, you can run the `sudo mongod` command.
 
 To login to MongoDB, you may do so with `mongo`. 
 
