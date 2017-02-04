@@ -5,7 +5,7 @@ date: 2017-02-04
 tags: javascript, yarn, packages, node, node modules, modules, yarn init, yarn install, yarn add, yarn offline, offline modules, what is yarn, yarn tutorial, yarn intro, yarn add
 ---
 
-You've probably heard about the new _hawtness_ that is Yarn. These are both pretty cool tools that allow Javascript developers to get their work done correctly. In this tutorial, you'll be introduced to the Yarn package manager and how to offline cache yuor commonly/favourite node libraries. This tutorial expects that you have experience using the **bash/\*nix** command line and have a basic familiarity with *git*.
+You've probably heard about the new _hawtness_ that is Yarn. This is a really cool tool that allows Javascript developers to get their work done quickly and solves a few problems that `npm` doesn't. In this tutorial, you'll be introduced to the Yarn package manager and how to offline cache yuor commonly/favourite node libraries. This tutorial expects that you have experience using the **bash/\*nix** command line and have a basic familiarity with *git*.
 
 #### Goals
 
