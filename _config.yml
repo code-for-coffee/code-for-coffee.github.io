@@ -11,3 +11,4 @@ github_username:  code-for-coffee
 markdown: kramdown
 permalink: /:title
 disqus_shortname: codeforcoffee
+exclude: [structz/]
