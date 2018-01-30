@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/codeforcoffee
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://codeforcoffee.org
+  * I am codeforcoffee (https://keybase.io/codeforcoffee) on keybase.
+  * I have a public key ASBsXI2tUc1uUwMrDbn9MW0-6X_9d7ihX7GdN5zlnp7i0wo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120c858af8939cc58b386bcdc7967b4d799d40212cfd646000028f313021ca45d6a0a",
+      "host": "keybase.io",
+      "kid": "01206c5c8dad51cd6e53032b0db9fd316d3ee97ffd77b8a15fb19d379ce59e9ee2d30a",
+      "uid": "505e5f990638da418b3b6927de8b1019",
+      "username": "codeforcoffee"
+    },
+    "merkle_root": {
+      "ctime": 1517341534,
+      "hash": "8f5220a61765a9bf9b8781c0e9070bf1299b2b6ff4c4c2c86266da77375e4088f0b8273e7929a4f208559ed20c32ce5f91bc9aeeccedc5c96d03aaf80defa302",
+      "hash_meta": "8b149118169b07e6684000cad5614ecf54b14c2e67d1358a6f82d10e4405bdcb",
+      "seqno": 2006816
+    },
+    "service": {
+      "hostname": "codeforcoffee.org",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.39"
+  },
+  "ctime": 1517341546,
+  "expire_in": 504576000,
+  "prev": "4d2f3ef02baf358c53dff9310034246d02d15861cef8fa6838edc093149399a4",
+  "seqno": 16,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgbFyNrVHNblMDKw25/TFtPul//Xe4oV+xnTec5Z6e4tMKp3BheWxvYWTFA057ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwYzg1OGFmODkzOWNjNThiMzg2YmNkYzc5NjdiNGQ3OTlkNDAyMTJjZmQ2NDYwMDAwMjhmMzEzMDIxY2E0NWQ2YTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwNmM1YzhkYWQ1MWNkNmU1MzAzMmIwZGI5ZmQzMTZkM2VlOTdmZmQ3N2I4YTE1ZmIxOWQzNzljZTU5ZTllZTJkMzBhIiwidWlkIjoiNTA1ZTVmOTkwNjM4ZGE0MThiM2I2OTI3ZGU4YjEwMTkiLCJ1c2VybmFtZSI6ImNvZGVmb3Jjb2ZmZWUifSwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE1MTczNDE1MzQsImhhc2giOiI4ZjUyMjBhNjE3NjVhOWJmOWI4NzgxYzBlOTA3MGJmMTI5OWIyYjZmZjRjNGMyYzg2MjY2ZGE3NzM3NWU0MDg4ZjBiODI3M2U3OTI5YTRmMjA4NTU5ZWQyMGMzMmNlNWY5MWJjOWFlZWNjZWRjNWM5NmQwM2FhZjgwZGVmYTMwMiIsImhhc2hfbWV0YSI6IjhiMTQ5MTE4MTY5YjA3ZTY2ODQwMDBjYWQ1NjE0ZWNmNTRiMTRjMmU2N2QxMzU4YTZmODJkMTBlNDQwNWJkY2IiLCJzZXFubyI6MjAwNjgxNn0sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJjb2RlZm9yY29mZmVlLm9yZyIsInByb3RvY29sIjoiaHR0cDoifSwidHlwZSI6IndlYl9zZXJ2aWNlX2JpbmRpbmciLCJ2ZXJzaW9uIjoxfSwiY2xpZW50Ijp7Im5hbWUiOiJrZXliYXNlLmlvIGdvIGNsaWVudCIsInZlcnNpb24iOiIxLjAuMzkifSwiY3RpbWUiOjE1MTczNDE1NDYsImV4cGlyZV9pbiI6NTA0NTc2MDAwLCJwcmV2IjoiNGQyZjNlZjAyYmFmMzU4YzUzZGZmOTMxMDAzNDI0NmQwMmQxNTg2MWNlZjhmYTY4MzhlZGMwOTMxNDkzOTlhNCIsInNlcW5vIjoxNiwidGFnIjoic2lnbmF0dXJlIn2jc2lnxEA4umfzwbij6bFveVwlo+mhi7j5Vle2bVH3726h/O/tPO3EnYLWUwG4lhF+04/jPbbmzDda4Hs/JKGUd/pEK9EEqHNpZ190eXBlIKRoYXNogqR0eXBlCKV2YWx1ZcQgppazScouGHkUBh+yl58Dz3CIb1G/nTQiWOdi9QFYdE6jdGFnzQICp3ZlcnNpb24B
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/codeforcoffee
+
+==================================================================
